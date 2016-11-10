@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedBot", "SchedBot\SchedB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedBot.Tests", "SchedBot.Tests\SchedBot.Tests.csproj", "{B9ED5617-C16A-452C-A381-768857DFE012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedbotDTOs", "..\..\..\..\Desktop\SchedbotDTOs\SchedbotDTOs.csproj", "{0F77343C-A57D-4DD5-96F2-1E4CEBBB8816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedbotDTOs", "SchedbotDTOs\SchedbotDTOs.csproj", "{0F77343C-A57D-4DD5-96F2-1E4CEBBB8816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
