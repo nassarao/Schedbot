@@ -13,7 +13,7 @@ var Login = function() {
                 password: {
                     required: true
                 },
-                remember: {
+                 remember: {
                     required: false
                 }
             },
