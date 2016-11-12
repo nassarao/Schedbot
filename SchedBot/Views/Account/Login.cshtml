@@ -1,4 +1,5 @@
 ﻿@using SchedBot.Models
+@using SchedBot.Helpers
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
@@ -6,59 +7,14 @@
     Layout = null;
 }
 
-@*<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>*@
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            @*}
-        </section>
+@*
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>*@
+    *@
 
 
 <!DOCTYPE html>
@@ -77,30 +33,21 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/uniform.default.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="~/Content/select2.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="~/Content/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="~/Content/plugins.min.css" rel="stylesheet" type="text/css" />
-    <!-- END THEME GLOBAL STYLES -->
-    <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="~/Content/login.min.css" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL STYLES -->
-    <!-- BEGIN THEME LAYOUT STYLES -->
-    <!-- END THEME LAYOUT STYLES -->
+
+    @*Added global css files to bundler*@
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Login/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+   
+ 
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <!-- END HEAD -->
+@if (ViewData.ModelState["errors"] != null)
+{
+    @SchedBot.Helpers.HtmlHelper.AlertError(@ViewData.ModelState["errors"].Errors);
+}
 
 <body class="login">
     <!-- BEGIN LOGO -->
@@ -113,7 +60,9 @@
     <!-- BEGIN LOGIN -->
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
-        <form class="login-form" action="index.html" method="post">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
             <h3 class="form-title font-green">Sign In</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
@@ -122,25 +71,41 @@
             <div class="form-group">
                 <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                 <label class="control-label visible-ie8 visible-ie9">Email</label>
-                <input class="form-control form-control-solid placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" name="email" />
+                <!--<input class="form-control form-control-solid placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" name="email" />-->
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-solid placeholder-no-fix", placeholder = "Email", type = "email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">Password</label>
-                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />
+                @*<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />*@
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn green uppercase">Login</button>
-                <label class="rememberme check">
+                <input type="submit" value="Log in" class="btn green uppercase" />
+                @*<button type="submit" class="btn green uppercase">Login</button>*@
+                @*<label class="rememberme check">
                     <input type="checkbox" name="remember" value="1" />Remember
-                </label>
-                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
-            </div>
+                </label>*@
+               
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                  
+                    @*<a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>*@
+
+                    @Html.ActionLink("Forgot password?", "ForgotPassword")
+</div>
             <div class="create-account">
-                <p>
-                    <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>
+
+                <p class="uppercase">
+                    @Html.ActionLink("Create an Account", "Register")
                 </p>
+                @*<p>
+                    <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>
+                </p>*@
             </div>
-        </form>
+        }
         <!-- END LOGIN FORM -->
         <!-- BEGIN FORGOT PASSWORD FORM -->
         <form class="forget-form" action="index.html" method="post">
@@ -221,10 +186,13 @@
     <script src="~/Scripts/select2.full.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="~/Scripts/app.min.js" type="text/javascript"></script>
+
+    @* TODO: This hid the Remember me check box. Investigate farther what else this script does  *@
+    @*<script src="~/Scripts/app.min.js" type="text/javascript"></script>*@ 
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="~/Scripts/login.min.js" type="text/javascript"></script>
+    @*TODO: This is verification of the login screen is not needed because ASP>NEt will handle verification. Check if this does anything else*@
+    @*<script src="~/Scripts/login.min.js" type="text/javascript"></script>*@
     <!-- END PAGE LEVEL SCRIPTS -->
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <!-- END THEME LAYOUT SCRIPTS -->
