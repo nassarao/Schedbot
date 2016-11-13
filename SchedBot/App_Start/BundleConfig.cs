@@ -33,12 +33,22 @@ namespace SchedBot
                       "~/Content/bootstrap-switch.css",
                       "~/Content/components.css",
                       "~/Content/plugins.css",
-                      "~/Content/Site.css"));
+                      "~/Content/layout.css",
+                      "~/Content/grey.min.css",
+                      "~/Content/custom.min.css",
+                      "~/Content/fullcalendar.css"));
 
-            bundles.Add(new StyleBundle ("~/Content/Login/css").Include(
-                 "~/Content/login.css",
-                 "~/Content/select2.css",
-                 "~/Content/select2-bootstrap.css"
+            bundles.Add(new StyleBundle ("~/Content/Login/css", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css",
+                      "~/Content/simple-line-icons.css",
+                      "~/Content/uniform.default.css",
+                      "~/Content/bootstrap-switch.css",
+                      "~/Content/components.css",
+                      "~/Content/plugins.css",
+                      "~/Content/login.css",
+                      "~/Content/select2.css",
+                      "~/Content/select2-bootstrap.css"
                 ));
         }
 

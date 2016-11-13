@@ -35,7 +35,6 @@
     <meta content="" name="author" />
 
     @*Added global css files to bundler*@
-    @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Login/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -60,7 +59,7 @@
     <!-- BEGIN LOGIN -->
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
         {
             @Html.AntiForgeryToken()
             <h3 class="form-title font-green">Sign In</h3>
@@ -78,7 +77,7 @@
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">Password</label>
                 @*<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />*@
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix", placeholder = "Password", type="password" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
             </div>
