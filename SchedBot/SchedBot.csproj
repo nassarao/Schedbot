@@ -195,12 +195,24 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-timepicker.css" />
+    <Content Include="Content\bootstrap-timepicker.min.css" />
+    <Content Include="Content\clockface.css" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\daterangepicker.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\Simple-Line-Icons.dev.svg" />
     <Content Include="Content\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\select2-bootstrap.css" />
     <Compile Include="Areas\Management\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
+    <Compile Include="Areas\Management\Controllers\SchedulesController.cs" />
+    <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -320,10 +332,16 @@
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap-datepaginator\bootstrap-datepaginator.min.css" />
     <Content Include="Scripts\bootstrap-datepaginator\bootstrap-datepaginator.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-hover-dropdown.js" />
     <Content Include="Scripts\bootstrap-hover-dropdown.min.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-switch.min.js" />
+    <Content Include="Scripts\bootstrap-timepicker.js" />
+    <Content Include="Scripts\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap-datepaginator\README.md" />
@@ -352,6 +370,9 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\calendar.min.js" />
+    <Content Include="Scripts\clockface.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\daterangepicker.min.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\demo.min.js" />
     <Content Include="Scripts\fullcalendar.js" />
@@ -423,7 +444,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Models\" />
+    <Folder Include="Areas\Management\Views\Requests\" />
+    <Folder Include="Areas\Management\Views\Schedules\" />
     <Folder Include="Areas\Management\Views\Shared\" />
+    <Folder Include="Areas\Management\Views\Shifts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

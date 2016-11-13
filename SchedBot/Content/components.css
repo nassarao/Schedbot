@@ -24583,6 +24583,11 @@ body[ng-controller] .modal {
     color: #32c5d2!important
 }
 
+.portlet.box.schedBot{
+    background-color: #14B9D6!important;
+    color: #FFFFFF!important
+}
+
 .font-schedBot{
     color: #14B9D6!important
 }
