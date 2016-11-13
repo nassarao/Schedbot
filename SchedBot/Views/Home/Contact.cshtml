@@ -1,17 +1,83 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "SchedBot - Schedules";
+    ViewBag.Current = "Schedules";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@*@Styles.Render("~/Content/Schedules/css")*@
+
+<link href="~/Content/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/clockface.css" rel="stylesheet" type="text/css" />
+
+<div class="col-md-12 col-sm-12">
+    <div class="portlet box grey-mint">
+        <div class="portlet-title">
+            <div class="caption">Schedule</div>
+        </div>
+        <div class="portlet-body table-responsive">
+            <div class="col-md-12 col-sm-12 margin-bottom-15 well">
+                <div class="col-md-3">
+                    <input type="checkbox"> Auto Schedule On
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="input-group" id="defaultrange" name="daterange" >
+                            <input type="text" class="form-control" name="daterange"/>
+                            <span class="input-group-btn"><button class="btn btn-default date-range-toggle"><i class="fa fa-calendar"></i></button></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-outline yellow-lemon">View Schedule</button>
+                </div>
+            </div>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Employee</th>
+                        <th class="col-md-2">Day</th>
+                        <th class="col-md-2">Time Start</th>
+                        <th class="col-md-2">Time End</th>
+                        <th class="col-md-2">Shift Name</th>
+                        <th class="col-md-2 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">Mark Jones</td>
+                        <td class="col-md-2">Monday</td>
+                        <td class="col-md-2">8:30 a.m.</td>
+                        <td class="col-md-2">4:30 p.m.</td>
+                        <td class="col-md-2">Line Cook</td>
+                        <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">Trevor Smith</td>
+                        <td class="col-md-2">Monday</td>
+                        <td class="col-md-2">10:00 a.m.</td>
+                        <td class="col-md-2">6:00 p.m.</td>
+                        <td class="col-md-2">Dish Washer</td>
+                        <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/moment.min.js" type="text/javascript"></script>
+<script src="~/Scripts/daterangepicker.js" type="text/javascript"></script>
+@*<script src="~/Scripts/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="~/Scripts/clockface.js" type="text/javascript"></script>*@
+@*<script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>*@
+
+@*@Scripts.Render("~/Scripts/Schedules")*@
+<script>
+    $('input[name="daterange"]').daterangepicker();
+</script>
