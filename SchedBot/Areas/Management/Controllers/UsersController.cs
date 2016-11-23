@@ -12,112 +12,107 @@ using SchedbotDTOs;
 
 namespace SchedBot.Areas.Management.Controllers
 {
-    public class ShiftsController : Controller
+    public class UsersController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
 
-        // GET: Management/Shifts
+        // GET: Management/Users
         public async Task<ActionResult> Index()
         {
-            var shifts = db.Shifts.Include(s => s.ShiftType);
-            return View(await shifts.ToListAsync());
+            return View(await db.Users.ToListAsync());
         }
 
-        // GET: Management/Shifts/Details/5
+        // GET: Management/Users/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shift shift = await db.Shifts.FindAsync(id);
-            if (shift == null)
+            User user = await db.Users.FindAsync(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(shift);
+            return View(user);
         }
 
-        // GET: Management/Shifts/Create
+        // GET: Management/Users/Create
         public ActionResult Create()
         {
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name");
             return View();
         }
 
-        // POST: Management/Shifts/Create
+        // POST: Management/Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ShiftID,Date,ShiftTime,ShiftTypeId")] Shift shift)
+        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Address,City,State,ZipCode")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Shifts.Add(shift);
+                db.Users.Add(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
-            return View(shift);
+            return View(user);
         }
 
-        // GET: Management/Shifts/Edit/5
+        // GET: Management/Users/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shift shift = await db.Shifts.FindAsync(id);
-            if (shift == null)
+            User user = await db.Users.FindAsync(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
-            return View(shift);
+            return View(user);
         }
 
-        // POST: Management/Shifts/Edit/5
+        // POST: Management/Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ShiftID,Date,ShiftTime,ShiftTypeId")] Shift shift)
+        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Address,City,State,ZipCode")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(shift).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
-            return View(shift);
+            return View(user);
         }
 
-        // GET: Management/Shifts/Delete/5
+        // GET: Management/Users/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shift shift = await db.Shifts.FindAsync(id);
-            if (shift == null)
+            User user = await db.Users.FindAsync(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(shift);
+            return View(user);
         }
 
-        // POST: Management/Shifts/Delete/5
+        // POST: Management/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Shift shift = await db.Shifts.FindAsync(id);
-            db.Shifts.Remove(shift);
+            User user = await db.Users.FindAsync(id);
+            db.Users.Remove(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

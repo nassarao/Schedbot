@@ -1,0 +1,8 @@
+﻿Making migrations is really easy.
+If you want to update the database simply create the change in the DTOs.
+Make the necessary update to SchedbotContext if needed
+run commands in Tools>NugetPackageManger>Package Manager Console
+first command: Add-Migration AddUser
+	 (Adduser is just a name for the migration)
+Second: Update-Database
+	 command to apply the new migration to the database

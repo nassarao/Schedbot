@@ -1,0 +1,42 @@
+﻿@model SchedbotDTOs.Shift
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Shift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShiftID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
