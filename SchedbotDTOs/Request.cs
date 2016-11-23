@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedbotDTOs
 {
-    public class RequestDTO
+    public class Request
     {
         public int RequestId { get; set; }
 
@@ -18,11 +18,11 @@ namespace SchedbotDTOs
 
         //Foreign key
         public int RequestTypeId{ get; set; }
-        public virtual RequestTypeDTO RequestType { get; set; }
+        public virtual RequestType RequestType { get; set; }
     }
 
     
-    public class RequestTypeDTO
+    public class RequestType
     {
         public int RequestTypeId { get; set; }
 

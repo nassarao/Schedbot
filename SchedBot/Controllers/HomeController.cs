@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchedbotDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,15 @@ namespace SchedBot.Controllers
        
         public ActionResult Index()
         {
+            using (var db = new SchedBotContext())
+            {
+
+                User user = new User { FirstName = "Ahamd"};
+                db.Users.Add(user);
+                db.SaveChanges();
+
+              
+            }
             return View();
         }
 

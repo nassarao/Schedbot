@@ -213,11 +213,15 @@
     <Content Include="Content\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\multi-select.css" />
     <Content Include="Content\select2-bootstrap.css" />
-    <Compile Include="Areas\Management\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Management\Controllers\AvailabilitiesController.cs" />
+    <Compile Include="Areas\Management\Controllers\AvailableShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
-    <Compile Include="Areas\Management\Controllers\SchedulesController.cs" />
+    <Compile Include="Areas\Management\Controllers\RequestTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
+    <Compile Include="Areas\Management\Controllers\ShiftTypesController.cs" />
+    <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Management\Models\UserModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -225,10 +229,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="Migrations\201611230225072_InitialCreate.cs" />
+    <Compile Include="Migrations\201611230225072_InitialCreate.Designer.cs">
+      <DependentUpon>201611230225072_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611230313234_Initial.cs" />
+    <Compile Include="Migrations\201611230313234_Initial.Designer.cs">
+      <DependentUpon>201611230313234_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedBotContext.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +345,7 @@
     <Content Include="fonts\Simple-Line-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Migrations\Migration Instructions.txt" />
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\app.js" />
@@ -376,6 +391,41 @@
     <Content Include="Areas\Management\Views\web.config" />
     <Content Include="Areas\Management\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Management\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Availabilities\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Availabilities\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Availabilities\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Availabilities\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Availabilities\Index.cshtml" />
+    <Content Include="Areas\Management\Views\AvailableShifts\Create.cshtml" />
+    <Content Include="Areas\Management\Views\AvailableShifts\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\AvailableShifts\Details.cshtml" />
+    <Content Include="Areas\Management\Views\AvailableShifts\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\AvailableShifts\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\Index.cshtml" />
+    <Content Include="Areas\Management\Views\RequestTypes\Create.cshtml" />
+    <Content Include="Areas\Management\Views\RequestTypes\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\RequestTypes\Details.cshtml" />
+    <Content Include="Areas\Management\Views\RequestTypes\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\RequestTypes\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\Index.cshtml" />
+    <Content Include="Areas\Management\Views\ShiftTypes\Create.cshtml" />
+    <Content Include="Areas\Management\Views\ShiftTypes\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\ShiftTypes\Details.cshtml" />
+    <Content Include="Areas\Management\Views\ShiftTypes\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\ShiftTypes\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\calendar.min.js" />
@@ -462,11 +512,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Management\Models\" />
-    <Folder Include="Areas\Management\Views\Requests\" />
     <Folder Include="Areas\Management\Views\Schedules\" />
     <Folder Include="Areas\Management\Views\Shared\" />
-    <Folder Include="Areas\Management\Views\Shifts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -475,6 +522,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SchedbotDTOs\SchedbotDTOs.csproj">
+      <Project>{0f77343c-a57d-4dd5-96f2-1e4cebbb8816}</Project>
+      <Name>SchedbotDTOs</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611230225072_InitialCreate.resx">
+      <DependentUpon>201611230225072_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611230313234_Initial.resx">
+      <DependentUpon>201611230313234_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
