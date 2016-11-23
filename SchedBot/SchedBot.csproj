@@ -467,7 +467,6 @@
     <Folder Include="Areas\Management\Views\Schedules\" />
     <Folder Include="Areas\Management\Views\Shared\" />
     <Folder Include="Areas\Management\Views\Shifts\" />
-    <Folder Include="Views\Requests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
