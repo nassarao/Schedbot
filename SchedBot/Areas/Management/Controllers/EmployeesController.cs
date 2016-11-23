@@ -13,5 +13,6 @@ namespace SchedBot.Areas.Management.Controllers
         {
             return View();
         }
+
     }
 }

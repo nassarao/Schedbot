@@ -1,4 +1,4 @@
-﻿
+﻿@model SchedBot.Models.RegisterViewModel
 @{
     ViewBag.Title = "Index";
     ViewBag.Current = "Employees";
@@ -6,9 +6,11 @@
 
 <div>
     <div class="col-md-12 col-sm-12 margin-bottom-20">
-        <button class="btn green-meadow btn-outline sbold"><i class="fa fa-plus"></i>&nbsp; Add Employee</button>
+        <button class="btn green-meadow btn-outline sbold" id="addEmployee"><i class="fa fa-plus"></i>&nbsp; Add Employee</button>
     </div>
     <div class="col-md-12 col-sm-12">
+        <div id='addEmployee' class='modal fade in' data-toggle="modal" data-target="#addEmployeeModal" >
+        </div>
         <div class="portlet box grey-mint">
             <div class="portlet-title">
                 <div class="caption">Manage Employees</div>
@@ -63,4 +65,91 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+    <div class="modal fade" id="addEmployeeModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+@using (Html.BeginForm("Register", "Account", new {area = "" } , FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+{
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                    <h4 class="modal-title" id="addEmployeeHeader">Add Employee</h4>
+                </div>
+                <div class="modal-body">
+                    
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="First Name" autofocus/>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control col-md-6" placeholder="Last Name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type="email"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default" value="Register" />
+                            </div>
+                        </div>*@
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success pull-right" value="Add Employee" />
+                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
+                </div>
+            </div>
+                    }
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
 </div>
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(document).ready(function () {
+        $('#addEmployee').click(function () {
+            var url = $('#addEmployeeModal').data('url');
+
+            $.get(url, function (data) {
+                $('#addModalContainer').html(data);
+
+                $('#addEmployeeModal').modal('show');
+            });
+        });
+    });
+</script>
