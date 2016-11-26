@@ -1,4 +1,6 @@
-﻿using SchedbotDTOs;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using SchedBot.Models;
+using SchedbotDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,9 @@ namespace SchedBot.Controllers
        
         public ActionResult Index()
         {
+
+            
+
             using (var db = new SchedBotContext())
             {
 

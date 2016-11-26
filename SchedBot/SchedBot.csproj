@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44334</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -436,6 +436,7 @@
     <Content Include="Scripts\components-multi-select.min.js" />
     <Content Include="Scripts\daterangepicker.js" />
     <Content Include="Scripts\daterangepicker.min.js" />
+    <Content Include="Scripts\daterangepicker2.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\demo.min.js" />
     <Content Include="Scripts\fullcalendar.js" />
@@ -555,7 +556,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>11705</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:11705/</IISUrl>
+          <IISUrl>https://localhost:44334/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
