@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201611230313234_Initial.Designer.cs">
       <DependentUpon>201611230313234_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611261925502_JobRole.cs" />
+    <Compile Include="Migrations\201611261925502_JobRole.Designer.cs">
+      <DependentUpon>201611261925502_JobRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -536,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611230313234_Initial.resx">
       <DependentUpon>201611230313234_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611261925502_JobRole.resx">
+      <DependentUpon>201611261925502_JobRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
