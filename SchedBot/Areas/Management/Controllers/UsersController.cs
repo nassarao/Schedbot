@@ -9,6 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using SchedBot;
 using SchedbotDTOs;
+using SchedBot.Areas.Management.Models;
+using SchedBot.Controllers;
+using Microsoft.AspNet.Identity.Owin;
+using SchedBot.Models;
 
 namespace SchedBot.Areas.Management.Controllers
 {
@@ -19,7 +23,9 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Users
         public async Task<ActionResult> Index()
         {
-            return View(await db.Users.ToListAsync());
+            UserIndexViewModel userIndexVM = new UserIndexViewModel();
+            userIndexVM.UserDTOs = await db.Users.ToListAsync();
+            return View(userIndexVM);
         }
 
         // GET: Management/Users/Details/5
@@ -48,16 +54,32 @@ namespace SchedBot.Areas.Management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Address,City,State,ZipCode")] User user)
+        public async Task<ActionResult> Create(UserIndexViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.Users.Add(vm.NewUser);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
 
-            return View(user);
+                var user = new ApplicationUser { UserName = vm.RegisterVM.Email, Email = vm.RegisterVM.Email };
+                ApplicationUserManager userManger = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var result= await userManger.CreateAsync(user, vm.RegisterVM.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Details","Users", new { id = vm.NewUser.UserId, area="Management" });
+                }
+                else
+                {
+                    db.Users.Remove(vm.NewUser);
+                    foreach (var item in result.Errors)
+                    {
+                    ModelState.AddModelError("errors", item);
+                    }
+                }
+            
+            }
+            ModelState.AddModelError("errors", "Bad Model returned");
+            return RedirectToAction("Index");
         }
 
         // GET: Management/Users/Edit/5

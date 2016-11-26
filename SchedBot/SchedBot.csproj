@@ -221,7 +221,7 @@
     <Compile Include="Areas\Management\Controllers\ShiftTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
-    <Compile Include="Areas\Management\Models\UserModel.cs" />
+    <Compile Include="Areas\Management\Models\UserIndexViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
