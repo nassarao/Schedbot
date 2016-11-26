@@ -15,6 +15,8 @@ namespace SchedBot
         public DbSet<Request> Requests { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<JobRole> JobRoles{ get; set; }
+        public DbSet<User_JobRole> User_JobRoles{ get; set; }
 
         public System.Data.Entity.DbSet<SchedbotDTOs.AvailableShifts> AvailableShifts { get; set; }
 

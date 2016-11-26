@@ -15,5 +15,6 @@ namespace SchedbotDTOs
         public string City { get; set; }
         public string State { get; set; }
         public int ZipCode { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
