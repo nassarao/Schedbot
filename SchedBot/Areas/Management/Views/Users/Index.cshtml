@@ -159,30 +159,70 @@
 
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary("", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <input class="form-control" placeholder="First Name" autofocus />
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control col-md-6" placeholder="Last Name" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Basic Employee Info</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <input class="form-control" placeholder="First Name" autofocus />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control col-md-6" placeholder="Last Name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <input type="tel" class="form-control" placeholder="Phone Number" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" placeholder="Address" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="City" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" placeholder="State" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control col-md-6" placeholder="Zip Code" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-10">
-                                <input type="text" placeholder="Employee Email Address" class="form-control"/>
-                                @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })*@
+                        <div class="row margin-top-10">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Login Info</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Employee Email Address" class="form-control" />
+                                        @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control" placeholder="Password" />
+                                        @*@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })*@
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="password" class="form-control" placeholder="Confirm Password" />
+                                        @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })*@
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-5">
-                                <input type="password" class="form-control" placeholder="Password"/>
-                                @*@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })*@
-                            </div>
-                            <div class="col-md-5">
-                                <input type="password" class="form-control" placeholder="Confirm Password" />
-                                @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })*@
-                            </div>
-                        </div>
+                        
+                        
                         @*<div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" class="btn btn-default" value="Register" />
