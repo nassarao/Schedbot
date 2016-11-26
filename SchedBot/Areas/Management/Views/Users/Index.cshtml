@@ -33,10 +33,10 @@
     </tr>
     @foreach (var item in Model)
     {
-        var fullName = item.FirstName + item.LastName;
+        
         <tr>
             <td>
-                @Html.Display(fullName)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
