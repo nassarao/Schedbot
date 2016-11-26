@@ -17,7 +17,8 @@ namespace SchedBot.Areas.Management
             context.MapRoute(
                 "Management_default",
                 "Management/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "SchedBot.Areas.Management.Controllers" }
             );
         }
     }

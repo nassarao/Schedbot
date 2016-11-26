@@ -34,6 +34,13 @@ namespace SchedBot
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                 "Requests", // Route name
+                 "{controller}/{action}/{id}", // URL with parameters
+                 new { controller = "Requests", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
+                 new string[] { "SchedBot.Controllers" }
+);
         }
     }
 }

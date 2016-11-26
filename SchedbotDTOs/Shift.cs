@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchedbotDTOs
 {
-    public class ShiftDTO
+    public class Shift
     {
 
         public int ShiftID { get; set; }
@@ -17,12 +17,13 @@ namespace SchedbotDTOs
 
         //Foreign Key
         public int ShiftTypeId { get; set; }
-        public virtual ShiftTypeDTO ShiftType { get; set; }
+        public virtual ShiftType ShiftType { get; set; }
 
     }
 
-    public class ShiftTypeDTO
+    public class ShiftType
     {
+       
         public int ShiftTypeId { get; set; }
 
         public string Name { get; set; }

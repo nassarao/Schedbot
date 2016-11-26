@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SchedbotDTOs
 {
-    public class AvailabilityDTO
+    public class Availability
     {
 
-        public int AvilabilityId { get; set; }
+        public int AvailabilityId { get; set; }
 
         public int Sunday { get; set; }
         public int Monday { get; set; }
@@ -24,7 +24,7 @@ namespace SchedbotDTOs
         // public virtual AccountDTO Account { get; set; }
     }
 
-    public class AvailableShiftsDTO
+    public class AvailableShifts
     {
         //this will be populated with AM,PM,Third,Both etc...
         public int AvailableShiftsId { get; set; }

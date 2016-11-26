@@ -1,0 +1,230 @@
+﻿@model IEnumerable<SchedbotDTOs.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var fullName = item.FirstName + item.LastName;
+        <tr>
+            <td>
+                @Html.Display(fullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+
+
+
+
+@* Below is the real html...................................................................................................................  *@
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Current = "Employees";
+}
+
+<div>
+    <div class="col-md-12 col-sm-12 margin-bottom-20">
+        <button class="btn green-meadow btn-outline sbold" id="addEmployee"><i class="fa fa-plus"></i>&nbsp; Add Employee</button>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div id='addEmployee' class='modal fade in' data-toggle="modal" data-target="#addEmployeeModal">
+        </div>
+        <div class="portlet box grey-mint">
+            <div class="portlet-title">
+                <div class="caption">Manage Employees</div>
+            </div>
+            <div class="portlet-body table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th class="text-center" colspan="7">Availability</th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">Name</th>
+                            <th class="col-md-2">Phone</th>
+                            <th class="col-md-1 text-center">Sun</th>
+                            <th class="col-md-1 text-center">Mon</th>
+                            <th class="col-md-1 text-center">Tues</th>
+                            <th class="col-md-1 text-center">Wed</th>
+                            <th class="col-md-1 text-center">Thurs</th>
+                            <th class="col-md-1 text-center">Fri</th>
+                            <th class="col-md-1 text-center">Sat</th>
+                            <th class="col-md-1 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-md-2">Andrew Barker</td>
+                            <td class="col-md-2">(513)555-5555</td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2">Ahmad Nassar</td>
+                            <td class="col-md-2">(513)777-7777</td>
+                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+                            <td class="col-md-1 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- *************************************** Add Modal ************************************************ -->
+    
+    <div class="modal fade" id="addEmployeeModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                        <h4 class="modal-title" id="addEmployeeHeader">Add Employee</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="First Name" autofocus />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control col-md-6" placeholder="Last Name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="text" placeholder="Employee Email Address" class="form-control"/>
+                                @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <input type="password" class="form-control" placeholder="Password"/>
+                                @*@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })*@
+                            </div>
+                            <div class="col-md-5">
+                                <input type="password" class="form-control" placeholder="Confirm Password" />
+                                @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })*@
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" class="btn btn-default" value="Register" />
+                                </div>
+                            </div>*@
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success pull-right" value="Add Employee" />
+                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(document).ready(function () {
+        $('#addEmployee').click(function () {
+            var url = $('#addEmployeeModal').data('url');
+
+            $.get(url, function (data) {
+                $('#addModalContainer').html(data);
+
+                $('#addEmployeeModal').modal('show');
+            });
+        });
+    });
+</script>
