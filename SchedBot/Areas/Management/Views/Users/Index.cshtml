@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SchedbotDTOs.User>
+﻿@using SchedBot.Areas.Management.Models
+@model UserIndexViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,26 +13,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayName("First Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayName("Last Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayName("Phone Number")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayName("Address")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State)
+            @Html.DisplayName("City")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
+            @Html.DisplayName("State")
+        </th>
+        <th>
+            @Html.DisplayName("ZipCode")
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.UserDTOs)
     {
         
         <tr>
@@ -40,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
@@ -148,7 +155,7 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Create","Users", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 <div class="modal-content">
                     <div class="modal-header">
@@ -168,29 +175,38 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <input class="form-control" placeholder="First Name" autofocus />
+                                        @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name"  })
+                                     
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control col-md-6" placeholder="Last Name" />
+                                        @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                             
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <input type="tel" class="form-control" placeholder="Phone Number" />
+                                        @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel" })
+
+
+                                        
                                     </div>
                                     <div class="col-md-6">
-                                        <input class="form-control" placeholder="Address" />
+                                        @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address" })
+
+
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="City" />
+                                        @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City" }) 
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="form-control" placeholder="State" />
+                                        @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State" })
+
                                     </div>
                                     <div class="col-md-4">
-                                        <input class="form-control col-md-6" placeholder="Zip Code" />
+                                        @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code" })
+
                                     </div>
                                 </div>
                             </div>
@@ -204,18 +220,18 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Employee Email Address" class="form-control" />
-                                        @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })*@
+                                        
+                                        @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <input type="password" class="form-control" placeholder="Password" />
-                                        @*@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })*@
+                                       
+                                        @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", @placeholder = "Password" })
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="password" class="form-control" placeholder="Confirm Password" />
-                                        @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })*@
+                                       
+                                        @Html.PasswordFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
                                     </div>
                                 </div>
                             </div>

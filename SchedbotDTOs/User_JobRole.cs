@@ -11,6 +11,7 @@ namespace SchedbotDTOs
 
         public int User_JobRoleId { get; set; }
         public int JobRoleId { get; set; }
+        public int UserId { get; set; }
 
         public virtual JobRole JobRole { get; set; }
         public virtual User User { get; set; }
