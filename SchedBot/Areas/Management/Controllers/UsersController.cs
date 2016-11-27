@@ -58,6 +58,8 @@ namespace SchedBot.Areas.Management.Controllers
         {
             if (ModelState.IsValid)
             {
+                vm.NewUser.Email = vm.RegisterVM.Email;
+
                 db.Users.Add(vm.NewUser);
                 await db.SaveChangesAsync();
 
