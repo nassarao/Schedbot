@@ -215,11 +215,13 @@
     <Content Include="Content\select2-bootstrap.css" />
     <Compile Include="Areas\Management\Controllers\AvailabilitiesController.cs" />
     <Compile Include="Areas\Management\Controllers\AvailableShiftsController.cs" />
+    <Compile Include="Areas\Management\Controllers\JobRolesController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Areas\Management\Models\UserIndexViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -244,6 +246,10 @@
     <Compile Include="Migrations\201611261931470_JobRoleandPhoneNumber.cs" />
     <Compile Include="Migrations\201611261931470_JobRoleandPhoneNumber.Designer.cs">
       <DependentUpon>201611261931470_JobRoleandPhoneNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611270057120_addedUserIdToUser_JobRoles.cs" />
+    <Compile Include="Migrations\201611270057120_addedUserIdToUser_JobRoles.Designer.cs">
+      <DependentUpon>201611270057120_addedUserIdToUser_JobRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -434,6 +440,16 @@
     <Content Include="Areas\Management\Views\ShiftTypes\Details.cshtml" />
     <Content Include="Areas\Management\Views\ShiftTypes\Edit.cshtml" />
     <Content Include="Areas\Management\Views\ShiftTypes\Index.cshtml" />
+    <Content Include="Areas\Management\Views\JobRoles\Create.cshtml" />
+    <Content Include="Areas\Management\Views\JobRoles\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\JobRoles\Details.cshtml" />
+    <Content Include="Areas\Management\Views\JobRoles\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\JobRoles\Index.cshtml" />
+    <Content Include="Areas\Management\Views\User_JobRole\Create.cshtml" />
+    <Content Include="Areas\Management\Views\User_JobRole\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\User_JobRole\Details.cshtml" />
+    <Content Include="Areas\Management\Views\User_JobRole\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\User_JobRole\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\calendar.min.js" />
@@ -550,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611261931470_JobRoleandPhoneNumber.resx">
       <DependentUpon>201611261931470_JobRoleandPhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611270057120_addedUserIdToUser_JobRoles.resx">
+      <DependentUpon>201611270057120_addedUserIdToUser_JobRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
