@@ -206,7 +206,12 @@
                                     </a>
                                 </li>*@
                                 <li>
-                                    @Html.ActionLink("Log out","LogOff","Account")
+                                    @using (Html.BeginForm("LogOff","../Account"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                       <input type="submit" value="Log out" class="btn btn-primary"/>
+                                    }
+                              
                                 </li>
                             </ul>
                         </li>
