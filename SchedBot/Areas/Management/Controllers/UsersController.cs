@@ -132,7 +132,7 @@ namespace SchedBot.Areas.Management.Controllers
 
         // POST: Management/Users/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             User user = await db.Users.FindAsync(id);
