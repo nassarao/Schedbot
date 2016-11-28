@@ -132,7 +132,9 @@
                 <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = item.UserId })"><span class="fa fa-search"></span></a>
                 @*<button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button>*@
                 @*<a class="btn btn-outline red" href="@Url.Action("Delete", "Users", new { id = item.UserId })"><span class="fa fa-trash"></span></a>*@
-                <button class="btn btn-outline red" id="deleteEmployee" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>
+              
+                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@item.LastName" data-firstName="@item.FirstName" data-id="@item.UserId"><i class="fa fa-trash"></i></button>
+                @*<button class="btn btn-outline red deleteEmployee" id="deleteEmployee_@item.UserId" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>*@
             </span>
         </td>
     </tr>
@@ -275,15 +277,20 @@
 
     <!-- ************************************* Delete Modal ***************************************** -->
 
-    <div class="modal fade" id="employeeDeleteModal" role="dialog">
+    @*<div class="modal fade" id="employeeDeleteModal" role="dialog">
         <div class="modal-dialog">
 
+
             <!-- Modal content-->
-            @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Delete", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
+                @Html.AntiForgeryToken()
                 <div class="modal-content">
                     <div class="modal-header">
-                        @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                       
+
+
+                        @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
                         <h4 class="modal-title" id="employeeDeleteHeader">Delete Employee</h4>
                     </div>
                     <div class="modal-body">
@@ -301,14 +308,33 @@
             }
 
         </div>
+    </div>*@
+
+
+    @* -------------------------------------------------------------------------- *@
+    <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you would like to remove <span id="employeeName"></span> from the list of employees?</p>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                    <button id="btnContinueDelete" type="button" class="btn btn-danger">Delete Employee</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ************************************* Delete End ***************************************** -->
+
+
+
+
     </div>
-
-    <!-- ************************************* Delete End ***************************************** -->
-
-
-
-
-</div>
 
 
 
@@ -323,7 +349,7 @@
 
         });
 
-        $('#deleteEmployee').click(function () {
+        $('.deleteEmployee').click(function () {
             console.info("Made inside delete click...");
             $('#employeeDeleteModal').modal('show');
 
@@ -333,7 +359,38 @@
             console.log("user in modal: ", firstName, lastName, userId);
             $('#employeeName').html("<b>" + firstName + " " + lastName + "</b>");
 
+            
+
         });
 
+    });
+
+    var item_to_delete;
+    var name;
+    $(".deleteItem").click(function (e) {
+        item_to_delete = $(this).data('id');
+        var firstName = $(this).data('firstname');
+        var lastName = $(this).data('lastname');
+        name = firstName + " " + lastName;
+        $('#employeeName').html("<b>" + firstName + " " + lastName + "</b>");
+
+
+    });
+    $('#btnContinueDelete').click(function () {
+        //window.location = "Delete/" + item_to_delete;
+        
+        $.ajax({
+            url: '@Url.Action("Delete", "Users")',
+            type:"POST",        
+            data: {id : item_to_delete},
+            success: function (response) {
+                $('#basic').modal('toggle');
+               // alert("Successfully deleted user: " + name);
+                location.reload();
+            },
+            error: function (response) {
+                alert("Failed to delete user: " + name);
+            }
+        });
     });
 </script>

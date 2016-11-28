@@ -184,6 +184,8 @@ namespace SchedBot.Controllers
 
         }
 
+ 
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

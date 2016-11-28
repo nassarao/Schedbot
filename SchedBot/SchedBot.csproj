@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201611270057120_addedUserIdToUser_JobRoles.Designer.cs">
       <DependentUpon>201611270057120_addedUserIdToUser_JobRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611272314213_UserEmail.cs" />
+    <Compile Include="Migrations\201611272314213_UserEmail.Designer.cs">
+      <DependentUpon>201611272314213_UserEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -569,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611270057120_addedUserIdToUser_JobRoles.resx">
       <DependentUpon>201611270057120_addedUserIdToUser_JobRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611272314213_UserEmail.resx">
+      <DependentUpon>201611272314213_UserEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
