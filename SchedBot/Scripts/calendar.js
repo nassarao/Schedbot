@@ -116,7 +116,93 @@ var AppCalendar = function() {
                         $(this).remove();
                     }
                 },
-                events: []
+                events: [{
+                    title: 'Adam - Server',
+                    start: new Date(y, m, d+1, 11, 15),
+                    end: new Date(y, m, d+1, 15, 45),
+                    backgroundColor: App.getBrandColor('yellow'),
+                    allDay: false,
+                }, {
+                    title: 'Andrew - Manager',
+                    start: new Date(y, m, d+1, 9, 30),
+                    end: new Date(y, m, d+1, 17, 30),
+                    allDay: false,
+                }, {
+                    title: 'Ahmad - Cook',
+                    start: new Date(y, m, d+1, 8, 00),
+                    end: new Date(y, m, d+1, 13, 30),
+                    backgroundColor: App.getBrandColor('green'),
+                    allDay: false,
+                }, {
+                    title: 'Adam - Server',
+                    start: new Date(y, m, d+2, 11, 15),
+                    end: new Date(y, m, d+2, 15, 45),
+                    backgroundColor: App.getBrandColor('yellow'),
+                    allDay: false,
+                }, {
+                    title: 'Andrew - Manager',
+                    start: new Date(y, m, d+2, 9, 30),
+                    end: new Date(y, m, d+2, 17, 30),
+                    allDay: false,
+                }, {
+                    title: 'Ahmad - Cook',
+                    start: new Date(y, m, d+2, 8, 00),
+                    end: new Date(y, m, d+2, 13, 30),
+                    backgroundColor: App.getBrandColor('green'),
+                    allDay: false,
+                }, {
+                    title: 'Adam - Server',
+                    start: new Date(y, m, d+3, 11, 15),
+                    end: new Date(y, m, d+3, 15, 45),
+                    backgroundColor: App.getBrandColor('yellow'),
+                    allDay: false,
+                }, {
+                    title: 'Andrew - Manager',
+                    start: new Date(y, m, d+3, 9, 30),
+                    end: new Date(y, m, d+3, 17, 30),
+                    allDay: false,
+                }, {
+                    title: 'Ahmad - Cook',
+                    start: new Date(y, m, d+3, 8, 00),
+                    end: new Date(y, m, d+3, 13, 30),
+                    backgroundColor: App.getBrandColor('green'),
+                    allDay: false,
+                }, {
+                    title: 'Adam - Server',
+                    start: new Date(y, m, d+4, 11, 15),
+                    end: new Date(y, m, d+4, 15, 45),
+                    backgroundColor: App.getBrandColor('yellow'),
+                    allDay: false,
+                }, {
+                    title: 'Andrew - Manager',
+                    start: new Date(y, m, d+4, 9, 30),
+                    end: new Date(y, m, d+4, 17, 30),
+                    allDay: false,
+                }, {
+                    title: 'Ahmad - Cook',
+                    start: new Date(y, m, d+4, 8, 00),
+                    end: new Date(y, m, d+4, 13, 30),
+                    backgroundColor: App.getBrandColor('green'),
+                    allDay: false,
+                },
+                {
+                    title: 'Adam - Server',
+                    start: new Date(y, m, d+5, 11, 15),
+                    end: new Date(y, m, d+5, 15, 45),
+                    backgroundColor: App.getBrandColor('yellow'),
+                    allDay: false,
+                }, {
+                    title: 'Andrew - Manager',
+                    start: new Date(y, m, d+5, 9, 30),
+                    end: new Date(y, m, d+5, 17, 30),
+                    allDay: false,
+                }, {
+                    title: 'Ahmad - Cook',
+                    start: new Date(y, m, d+5, 8, 00),
+                    end: new Date(y, m, d+5, 13, 30),
+                    backgroundColor: App.getBrandColor('green'),
+                    allDay: false,
+                } ]
             });
 
         }
