@@ -16,17 +16,6 @@ namespace SchedBot.Controllers
         public ActionResult Index()
         {
 
-            
-
-            using (var db = new SchedBotContext())
-            {
-
-                User user = new User { FirstName = "Ahamd"};
-                db.Users.Add(user);
-                db.SaveChanges();
-
-              
-            }
             return View();
         }
 
