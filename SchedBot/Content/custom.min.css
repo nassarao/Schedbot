@@ -1,1 +1,46 @@
-﻿/* here you can put your own css to customize and override the theme */
+﻿.card {
+    position: relative;
+    display: block;
+    margin-bottom: .75rem;
+    margin-top: 1rem;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+.card-outline-primary {
+    background-color: transparent;
+    border-color: #0275d8;
+}
+
+.card-outline-danger {
+    background-color: transparent;
+    border-color: #e73d4a;
+}
+.card-blockquote {
+    padding: 0;
+    margin-bottom: 0;
+    border-left: 0;
+    font-size: 1rem;
+}
+blockquote {
+    margin: 0 0 1rem;
+}
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+.bd-example > .card {
+    max-width: 20rem;
+}
+.text-xs-center {
+    text-align: center!important;
+}
+.info-message{
+    font-size: 1rem!important;
+    color:#e73d4a;
+    padding-left:50px; 
+}
+.info-message-text{
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+}
