@@ -65,20 +65,22 @@ namespace SchedBot.Areas.Management.Controllers
 
                 var user = new ApplicationUser { UserName = vm.RegisterVM.Email, Email = vm.RegisterVM.Email };
                 ApplicationUserManager userManger = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var result= await userManger.CreateAsync(user, vm.RegisterVM.Password);
+                var result = await userManger.CreateAsync(user, vm.RegisterVM.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Details","Users", new { id = vm.NewUser.UserId, area="Management" });
+                    vm.NewUser.AccountId = user.Id;
+                   await db.SaveChangesAsync();
+                    return RedirectToAction("Details", "Users", new { id = vm.NewUser.UserId, area = "Management" });
                 }
                 else
                 {
                     db.Users.Remove(vm.NewUser);
                     foreach (var item in result.Errors)
                     {
-                    ModelState.AddModelError("errors", item);
+                        ModelState.AddModelError("errors", item);
                     }
                 }
-            
+
             }
             ModelState.AddModelError("errors", "Bad Model returned");
             return RedirectToAction("Index");
@@ -132,13 +134,63 @@ namespace SchedBot.Areas.Management.Controllers
 
         // POST: Management/Users/Delete/5
         [HttpPost, ActionName("Delete")]
-       // [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             User user = await db.Users.FindAsync(id);
             db.Users.Remove(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public bool SaveAvailability(FormCollection collection)
+        {
+            foreach (var item in collection.AllKeys)
+            {
+                string[] name = item.Split('-');
+                switch (name[0])
+                {
+                    case "sun":
+                       
+                        break;
+                    case "mon":
+                        break;
+                    case "tue":
+                        break;
+                    case "wed":
+                        break;
+                    case "thu":
+                        break;
+                    case "fri":
+                        break;
+                    case "sat":
+                        break;
+
+                }
+            }
+
+
+            return true;
+        }
+
+        private int amPmBoth(string data)
+        {
+            switch (data)
+            {
+                case "am":
+                    return 1;
+
+                case "pm":
+                    return 2;
+
+                case "both":
+                    return 3;
+
+                default:
+                    return 0;
+            }
         }
 
         protected override void Dispose(bool disposing)
