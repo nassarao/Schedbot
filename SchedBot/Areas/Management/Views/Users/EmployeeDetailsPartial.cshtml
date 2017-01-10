@@ -1,12 +1,16 @@
 ﻿@model SchedbotDTOs.User
 
+@using (Html.BeginForm("Edit", "Users"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserId)
 <div class="col-md-12 col-sm-12">
     <div class="portlet light">
         <div class="portlet-title">
             <div class="caption font-schedBot">Employee Details</div>
         </div>
         <div class="portlet-body">
-            <form class="form-horizontal">
+            
                 <div class="form-group">
                     <label class="control-label col-md-2">Name:</label>
                     <div class="col-md-5">
@@ -60,7 +64,8 @@
                     </div>
                 </div>
                 <button class="btn btn-block btn-outline green-meadow sbold" type="submit">Save Details</button>
-            </form>
+            
         </div>
     </div>
 </div>
+}

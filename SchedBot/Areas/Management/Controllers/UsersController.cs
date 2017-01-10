@@ -106,7 +106,7 @@ namespace SchedBot.Areas.Management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Address,City,State,ZipCode")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Address,City,State,ZipCode,Email,PhoneNumber")] User user)
         {
             if (ModelState.IsValid)
             {
