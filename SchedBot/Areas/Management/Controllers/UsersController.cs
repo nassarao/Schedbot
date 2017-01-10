@@ -150,10 +150,13 @@ namespace SchedBot.Areas.Management.Controllers
             foreach (var item in collection.AllKeys)
             {
                 string[] name = item.Split('-');
-                switch (name[0])
+                string dayOfWeek = name[0];
+                string shift = name[1];
+
+                switch (dayOfWeek)
                 {
                     case "sun":
-                       
+                        amPmBoth(shift);
                         break;
                     case "mon":
                         break;

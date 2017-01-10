@@ -1,0 +1,66 @@
+﻿@model SchedbotDTOs.User
+
+<div class="col-md-12 col-sm-12">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-schedBot">Employee Details</div>
+        </div>
+        <div class="portlet-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Name:</label>
+                    <div class="col-md-5">
+                   
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Phone:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @type = "tel", @maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Address:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">City:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">State:</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @maxlength = "2" } })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="control-label col-md-2">Zip:</label>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "5", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <button class="btn btn-block btn-outline green-meadow sbold" type="submit">Save Details</button>
+            </form>
+        </div>
+    </div>
+</div>
