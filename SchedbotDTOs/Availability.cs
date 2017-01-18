@@ -18,10 +18,7 @@ namespace SchedbotDTOs
         public int Thursday { get; set; }
         public int Friday { get; set; }
         public int Saturday { get; set; }
-
-        //todo: Uncomment this depending how we link our account tables
-        //public int AccountId { get; set; }
-        // public virtual AccountDTO Account { get; set; }
+        
     }
 
     public class AvailableShifts

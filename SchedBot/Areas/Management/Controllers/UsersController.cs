@@ -58,23 +58,25 @@ namespace SchedBot.Areas.Management.Controllers
         {
             if (ModelState.IsValid)
             {
-                vm.NewUser.Email = vm.RegisterVM.Email;
 
-                db.Users.Add(vm.NewUser);
-                await db.SaveChangesAsync();
 
                 var user = new ApplicationUser { UserName = vm.RegisterVM.Email, Email = vm.RegisterVM.Email };
                 ApplicationUserManager userManger = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var result = await userManger.CreateAsync(user, vm.RegisterVM.Password);
                 if (result.Succeeded)
                 {
+                    vm.NewUser.Email = vm.RegisterVM.Email;
+                    vm.NewUser.Availability = new Availability();
                     vm.NewUser.AccountId = user.Id;
-                   await db.SaveChangesAsync();
-                    return RedirectToAction("Details", "Users", new { id = vm.NewUser.UserId, area = "Management" });
+                    db.Users.Add(vm.NewUser);
+                    await db.SaveChangesAsync();
+
+                    return RedirectToAction("Edit", "Users", new { id = vm.NewUser.UserId, area = "Management" });
                 }
                 else
                 {
-                    db.Users.Remove(vm.NewUser);
+                    //db.Availability.Remove(vm.NewUser.Availability);
+                    //db.Users.Remove(vm.NewUser);
                     foreach (var item in result.Errors)
                     {
                         ModelState.AddModelError("errors", item);
@@ -83,7 +85,7 @@ namespace SchedBot.Areas.Management.Controllers
 
             }
             ModelState.AddModelError("errors", "Bad Model returned");
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Management/Users");
         }
 
         // GET: Management/Users/Edit/5
@@ -145,37 +147,54 @@ namespace SchedBot.Areas.Management.Controllers
 
 
         [HttpPost]
-        public bool SaveAvailability(FormCollection collection)
+        public async Task<ActionResult> SaveAvailability(FormCollection collection)
         {
+            int UserId = int.Parse(collection["UserId"]);
+            User user = db.Users.Find(UserId);
+
+
+
             foreach (var item in collection.AllKeys)
             {
-                string[] name = item.Split('-');
-                string dayOfWeek = name[0];
-                string shift = name[1];
-
-                switch (dayOfWeek)
+                if (!item.Equals("UserId"))
                 {
-                    case "sun":
-                        amPmBoth(shift);
-                        break;
-                    case "mon":
-                        break;
-                    case "tue":
-                        break;
-                    case "wed":
-                        break;
-                    case "thu":
-                        break;
-                    case "fri":
-                        break;
-                    case "sat":
-                        break;
+                    string[] name = item.Split('-');
 
+                    string dayOfWeek = name[0];
+                    string shift = name[1];
+
+                    switch (dayOfWeek)
+                    {
+                        case "sun":
+                            user.Availability.Sunday = amPmBoth(shift);
+                            break;
+                        case "mon":
+                            user.Availability.Monday = amPmBoth(shift);
+                            break;
+                        case "tue":
+                            user.Availability.Tuesday = amPmBoth(shift);
+                            break;
+                        case "wed":
+                            user.Availability.Wednesday = amPmBoth(shift);
+                            break;
+                        case "thu":
+                            user.Availability.Thursday = amPmBoth(shift);
+                            break;
+                        case "fri":
+                            user.Availability.Friday = amPmBoth(shift);
+                            break;
+                        case "sat":
+                            user.Availability.Saturday = amPmBoth(shift);
+                            break;
+
+                    }
                 }
             }
 
+            db.Entry(user).State = EntityState.Modified;
+            await db.SaveChangesAsync();
 
-            return true;
+            return RedirectToAction("Index", "Management/Users");
         }
 
         private int amPmBoth(string data)

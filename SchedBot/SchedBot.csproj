@@ -260,6 +260,26 @@
     <Compile Include="Migrations\201612232050209_AccountForeignKeyString.Designer.cs">
       <DependentUpon>201612232050209_AccountForeignKeyString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701100037139_AvailabilityUserID.cs" />
+    <Compile Include="Migrations\201701100037139_AvailabilityUserID.Designer.cs">
+      <DependentUpon>201701100037139_AvailabilityUserID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701100047149_UserneedAvilabilityFix.cs" />
+    <Compile Include="Migrations\201701100047149_UserneedAvilabilityFix.Designer.cs">
+      <DependentUpon>201701100047149_UserneedAvilabilityFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701111846561_hopethisFixesSomething.cs" />
+    <Compile Include="Migrations\201701111846561_hopethisFixesSomething.Designer.cs">
+      <DependentUpon>201701111846561_hopethisFixesSomething.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701111848175_removeFK.cs" />
+    <Compile Include="Migrations\201701111848175_removeFK.Designer.cs">
+      <DependentUpon>201701111848175_removeFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701111849534_AvailabilityFkOnUser.cs" />
+    <Compile Include="Migrations\201701111849534_AvailabilityFkOnUser.Designer.cs">
+      <DependentUpon>201701111849534_AvailabilityFkOnUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -588,6 +608,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612232050209_AccountForeignKeyString.resx">
       <DependentUpon>201612232050209_AccountForeignKeyString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701100037139_AvailabilityUserID.resx">
+      <DependentUpon>201701100037139_AvailabilityUserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701100047149_UserneedAvilabilityFix.resx">
+      <DependentUpon>201701100047149_UserneedAvilabilityFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701111846561_hopethisFixesSomething.resx">
+      <DependentUpon>201701111846561_hopethisFixesSomething.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701111848175_removeFK.resx">
+      <DependentUpon>201701111848175_removeFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701111849534_AvailabilityFkOnUser.resx">
+      <DependentUpon>201701111849534_AvailabilityFkOnUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

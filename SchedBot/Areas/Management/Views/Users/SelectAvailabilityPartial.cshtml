@@ -1,5 +1,8 @@
-﻿@using (Html.BeginForm("SaveAvailability", "Users"))
+﻿@model SchedbotDTOs.User
+
+@using (Html.BeginForm("SaveAvailability", "Users"))
 {
+    @Html.HiddenFor(model => model.UserId)
     <div class="col-md-7 col-sm-12">
         <div class="col-md-12 col-sm-12">
             <div class="portlet light">
