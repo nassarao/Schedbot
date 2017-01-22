@@ -1,4 +1,6 @@
-﻿<div class="col-md-12 col-sm-12">
+﻿@model IEnumerable<SchedbotDTOs.JobRole>
+
+<div class="col-md-12 col-sm-12">
     <div class="portlet light">
         <div class="portlet-title">
             <div class="caption font-schedBot">Employee Roles</div>
@@ -17,28 +19,19 @@
                             <div class="table table-responsive table-striped table-hover col-md-12">
                                 <table class="col-md-12 table-responsive table-striped table-hover">
                                     <tbody>
-                                        <tr>
-                                            <td class="col-md-9">Dish Washer</td>
-                                            @*<td class="col-md-3"><span class="btn-group btn-group-xs"><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>*@
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-9">Cook</td>
-                                            @*<td class="col-md-3"><span class="btn-group btn-group-xs"><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>*@
-                                        </tr>
+                                      @foreach (var item in Model)
+                                      {
+                                          <tr>@item.Name</tr><br />
+                                      }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                            <label class="control-label col-md-2">Admin:</label>
-                            <div class="col-md-10">
-                                <input type="checkbox" />
-                            </div>
-                        </div>*@
+                 
                 </div>
 
-                @*<button class="btn btn-block btn-outline green-meadow sbold">Save Roles</button>*@
+             
             </form>
         </div>
     </div>

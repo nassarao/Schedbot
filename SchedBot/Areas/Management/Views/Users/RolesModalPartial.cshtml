@@ -1,9 +1,11 @@
-﻿<div class="modal fade" id="updateRolesModal" role="dialog">
+﻿@model SchedBot.Areas.Management.Models.UserEditViewModel
+<div class="modal fade" id="updateRolesModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+        @using (Html.BeginForm("SaveRoles", "Users"))
+        {
+            @Html.HiddenFor(model => model.user.UserId)
             <div class="modal-content">
                 <div class="modal-header">
                     @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
@@ -11,60 +13,41 @@
                 </div>
                 <div class="modal-body">
 
-                    @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <div class="col-md-7">
-                                    <label class="control-label">Dish Washer:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="margin-top-15" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-7">
-                                    <label class="control-label">Server:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="margin-top-15" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-7">
-                                    <label class="control-label">Cook:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="margin-top-15" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-7">
-                                    <label class="control-label">Drive Thru:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="margin-top-15" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-7">
-                                    <label class="control-label">Manager:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="checkbox" class="margin-top-15" />
-                                </div>
+                                @{
+                                    bool hasmatch = false;
+                                    foreach (var item in Model.jobRoles)
+                                    {
+                                        <div class="col-md-7">
+                                            @Html.Label(item.Name)
+                                        </div>
+                                        <div class="col-md-2">
+                                            @foreach (var uj in Model.user_jobRoles)
+                                            {
+                                                if (item.JobRoleId == uj.JobRoleId)
+                                                {
+                                                    hasmatch = true;
+                                                    @Html.CheckBox(item.JobRoleId.ToString(), true)
+                                                    break;
+                                                }
+
+
+                                            }
+                                            @if (!hasmatch)
+                                            {
+                                                @Html.CheckBox(item.JobRoleId.ToString(), false)
+                                            }
+                                            @* <input type="checkbox" name="@item.JobRoleId" class="margin-top-15" />*@
+                                        </div>
+                                    }
+                                }
+
                             </div>
                         </div>
                     </div>
-
-
-
-                    @*<div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" class="btn btn-default" value="Register" />
-                            </div>
-                        </div>*@
 
                 </div>
                 <div class="modal-footer">
@@ -72,7 +55,7 @@
                     <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
                 </div>
             </div>
-        }
+                                    }
 
     </div>
 </div>

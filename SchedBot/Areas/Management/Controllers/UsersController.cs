@@ -100,7 +100,12 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 return HttpNotFound();
             }
-            return View(user);
+            UserEditViewModel vm = new UserEditViewModel();
+            vm.user = user;
+            vm.jobRoles = db.JobRoles.ToList();
+
+            vm.user_jobRoles = db.User_JobRoles.Where(x => x.UserId == user.UserId).Select(x => x.JobRole).ToList();
+            return View(vm);
         }
 
         // POST: Management/Users/Edit/5
@@ -144,7 +149,28 @@ namespace SchedBot.Areas.Management.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+          [HttpPost]
+          public async Task<ActionResult> SaveRoles(FormCollection collection)
+        {
+            int UserId = int.Parse(collection["user.UserId"]);
+            User user = db.Users.Find(UserId);
+          
+            foreach (var item in collection.AllKeys)
+            {
+                if (!item.Equals("user.UserId")){
+                    User_JobRole uj = new User_JobRole()
+                    {
+                        JobRoleId = int.Parse(item),
+                        UserId = user.UserId
+                    };
+                   
+                    db.User_JobRoles.Add(uj);
+                }
+            }
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Users");
 
+        }
 
         [HttpPost]
         public async Task<ActionResult> SaveAvailability(FormCollection collection)
@@ -194,7 +220,7 @@ namespace SchedBot.Areas.Management.Controllers
             db.Entry(user).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Management/Users");
+            return RedirectToAction("Index", "Users");
         }
 
         private int amPmBoth(string data)
