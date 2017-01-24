@@ -1,0 +1,26 @@
+﻿<div class="modal fade" id="requestApproveModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                    <h4 class="modal-title" id="requestApproveHeader">Approve Request</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Are you sure you would like to approve this request?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Approve Request" />
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

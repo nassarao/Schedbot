@@ -1,0 +1,40 @@
+﻿
+<div class="modal fade" id="requestDetailsModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                    <h4 class="modal-title" id="requestDetailsHeader">Request Details</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label"><b>Original Date:</b> </label><span>&nbsp; 11/28/2016 4:00 pm</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label"><b>Trade Date:</b> </label><span>&nbsp; 11/29/2016 10:30 am</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label"><b>Reason:</b> </label>
+                        </div>
+                        <div class="col-md-12">
+                            <span>I have a presentation on my senior design project Monday night.</span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 15px;">Close</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
