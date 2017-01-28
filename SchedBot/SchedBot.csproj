@@ -217,7 +217,6 @@
     <Compile Include="Areas\Management\Controllers\AvailableShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\JobRolesController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
-    <Compile Include="Areas\Management\Controllers\RequestTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
@@ -283,6 +282,10 @@
     <Compile Include="Migrations\201701282053276_UserIdOnRequest.cs" />
     <Compile Include="Migrations\201701282053276_UserIdOnRequest.Designer.cs">
       <DependentUpon>201701282053276_UserIdOnRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701282119592_RequestsReceivingUser.cs" />
+    <Compile Include="Migrations\201701282119592_RequestsReceivingUser.Designer.cs">
+      <DependentUpon>201701282119592_RequestsReceivingUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -628,6 +631,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701282053276_UserIdOnRequest.resx">
       <DependentUpon>201701282053276_UserIdOnRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701282119592_RequestsReceivingUser.resx">
+      <DependentUpon>201701282119592_RequestsReceivingUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -35,7 +35,11 @@
                 <tbody>
                     @foreach (var item in Model.Requests)
                     {
-                        <td></td>
+                        <td>@item.RequestType</td>
+                        <td>@item.SendingUser</td>
+                        <td>@item.Status</td>
+
+                        
                     }
                     @*<tr>
                         <td class="col-md-2">Trade</td>

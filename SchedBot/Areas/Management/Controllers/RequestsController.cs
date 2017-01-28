@@ -22,10 +22,8 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> Index()
         {
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.ToList();
-            vm.RequestTypes = db.RequestTypes.ToList();
-
-          
+            vm.Requests = db.Requests.Include("RequestType").ToList();
+           
             return View(vm);
         }
 
@@ -44,63 +42,9 @@ namespace SchedBot.Areas.Management.Controllers
             return View(request);
         }
 
-        // GET: Management/Requests/Create
-        public ActionResult Create()
-        {
-            ViewBag.RequestTypeId = new SelectList(db.RequestTypes, "RequestTypeId", "Name");
-            return View();
-        }
 
-        // POST: Management/Requests/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "RequestId,Reason,Status,StatusExplanation,RequestTypeId")] Request request)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Requests.Add(request);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.RequestTypeId = new SelectList(db.RequestTypes, "RequestTypeId", "Name", request.RequestTypeId);
-            return View(request);
-        }
-
-        // GET: Management/Requests/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Request request = await db.Requests.FindAsync(id);
-            if (request == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RequestTypeId = new SelectList(db.RequestTypes, "RequestTypeId", "Name", request.RequestTypeId);
-            return View(request);
-        }
-
-        // POST: Management/Requests/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "RequestId,Reason,Status,StatusExplanation,RequestTypeId")] Request request)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(request).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RequestTypeId = new SelectList(db.RequestTypes, "RequestTypeId", "Name", request.RequestTypeId);
-            return View(request);
-        }
+     
 
         // GET: Management/Requests/Delete/5
         public async Task<ActionResult> Delete(int? id)

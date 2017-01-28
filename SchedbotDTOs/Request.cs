@@ -16,22 +16,15 @@ namespace SchedbotDTOs
 
         public string StatusExplanation { get; set; }
 
-        //Foreign key
-        public int RequestTypeId{ get; set; }
-        public virtual RequestType RequestType { get; set; }
+        public string RequestType{ get; set; }
+    
 
         //Foreign Key
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
-    }
+        public int SendingUserId { get; set; }
+        public virtual User SendingUser { get; set; }
 
-    
-    public class RequestType
-    {
-        public int RequestTypeId { get; set; }
+        public int ReceivingUserId { get; set; }
+        public virtual User ReceivingUser { get; set; }
 
-        public string Name { get; set; }
-
-        public string Description { get; set; }
     }
 }

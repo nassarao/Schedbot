@@ -20,7 +20,6 @@ namespace SchedBot
 
         public System.Data.Entity.DbSet<SchedbotDTOs.AvailableShifts> AvailableShifts { get; set; }
 
-        public System.Data.Entity.DbSet<SchedbotDTOs.RequestType> RequestTypes { get; set; }
 
         public System.Data.Entity.DbSet<SchedbotDTOs.ShiftType> ShiftTypes { get; set; }
     }
