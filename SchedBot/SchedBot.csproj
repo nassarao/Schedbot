@@ -280,10 +280,15 @@
     <Compile Include="Migrations\201701111849534_AvailabilityFkOnUser.Designer.cs">
       <DependentUpon>201701111849534_AvailabilityFkOnUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701282053276_UserIdOnRequest.cs" />
+    <Compile Include="Migrations\201701282053276_UserIdOnRequest.Designer.cs">
+      <DependentUpon>201701282053276_UserIdOnRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Areas\Management\Models\RequestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchedBotContext.cs" />
     <Compile Include="Startup.cs" />
@@ -620,6 +625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701111849534_AvailabilityFkOnUser.resx">
       <DependentUpon>201701111849534_AvailabilityFkOnUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701282053276_UserIdOnRequest.resx">
+      <DependentUpon>201701282053276_UserIdOnRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

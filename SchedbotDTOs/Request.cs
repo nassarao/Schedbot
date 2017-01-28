@@ -19,6 +19,10 @@ namespace SchedbotDTOs
         //Foreign key
         public int RequestTypeId{ get; set; }
         public virtual RequestType RequestType { get; set; }
+
+        //Foreign Key
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 
     

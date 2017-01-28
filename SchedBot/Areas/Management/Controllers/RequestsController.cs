@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using SchedBot;
 using SchedbotDTOs;
+using SchedBot.Models;
+using SchedBot.Areas.Management.Models;
 
 namespace SchedBot.Areas.Management.Controllers
 {
@@ -19,8 +21,12 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Requests
         public async Task<ActionResult> Index()
         {
-            var requests = db.Requests.Include(r => r.RequestType);
-            return View(await requests.ToListAsync());
+            RequestViewModel vm = new RequestViewModel();
+            vm.Requests = db.Requests.ToList();
+            vm.RequestTypes = db.RequestTypes.ToList();
+
+          
+            return View(vm);
         }
 
         // GET: Management/Requests/Details/5
