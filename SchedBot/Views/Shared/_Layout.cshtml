@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
- 
-@{ 
+
+@{
     var userName = User.Identity.GetUserName();
 }
 
@@ -92,13 +92,13 @@
                                     @using (Html.BeginForm("LogOff", "Account", new { Area = "" }))
                                     {
                                         @Html.AntiForgeryToken()
-                                       
-                                       <input type="submit" value="Log out" class="btn btn-link hidden" hidden id="logOutSubmit"/>
-                                       
+
+                                        <input type="submit" value="Log out" class="btn btn-link hidden" hidden id="logOutSubmit" />
+
                                     }
 
                                     <a id="logOutBtn">Log Out</a>
-                              
+
                                 </li>
                             </ul>
                         </li>
@@ -135,7 +135,7 @@
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "Shifts" ? "nav-item active open" : "nav-item") ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
+                        <a href="@Url.Action("Index", "Shifts", new { area = "Management" })" class="nav-link nav-toggle">
                             <i class="fa fa-list-alt"></i>
                             <span class="title">Shifts</span>
                             @if (ViewBag.Current == "Shifts")
@@ -167,6 +167,97 @@
                             <span class="@(ViewBag.Current == "Employees" ? "arrow open" : "arrow")"></span>
                         </a>
                     </li>
+
+
+
+
+
+
+
+
+
+
+                    <!-- KEEP BELOW LI TAGS FOR IF WE NEED TO UPDATE THE PRESENTATION TEMPLATE!!!! -->
+                    @*<li class="@(ViewBag.Current == "Agenda" ? "nav-item active open" : "nav-item") ">
+                            <a href="@Url.Action("Index", "Home", new { area = "" })" class="nav-link nav-toggle">
+                                <i class="icon-calendar"></i>
+                                <span class="title">Agenda</span>
+                                @if (ViewBag.Current == "Agenda")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Agenda" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Problem" ? "nav-item active open" : "nav-item") ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                <span class="title">Problem</span>
+                                @if (ViewBag.Current == "Problem")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Problem" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Solution" ? "nav-item active open" : "nav-item") ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-check-square-o"></i>
+                                <span class="title">Solution</span>
+                                @if (ViewBag.Current == "Solution")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Solution" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Tech" ? "nav-item active open" : "nav-item") ">
+                            <a href="@Url.Action("Index", "Requests", new { area = "Management" })" class="nav-link nav-toggle">
+                                <i class="fa fa-code-fork"></i>
+                                <span class="title">Technical Elements</span>
+                                @if (ViewBag.Current == "Tech")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Tech" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Demo" ? "nav-item active open" : "nav-item") ">
+                            <a href="@Url.Action("Index", "Users", new { area = "Management" })" class="nav-link nav-toggle">
+                                <i class="fa fa-desktop"></i>
+                                <span class="title">Demo</span>
+                                @if (ViewBag.Current == "Demo")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Demo" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Conclusion" ? "nav-item active open" : "nav-item") ">
+                            <a href="@Url.Action("Index", "Users", new { area = "Management" })" class="nav-link nav-toggle">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span class="title">Conclusion</span>
+                                @if (ViewBag.Current == "Conclusion")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Conclusion" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Current == "Questions" ? "nav-item active open" : "nav-item") ">
+                            <a href="@Url.Action("Index", "Users", new { area = "Management" })" class="nav-link nav-toggle">
+                                <i class="fa fa-question"></i>
+                                <span class="title">Questions</span>
+                                @if (ViewBag.Current == "Questions")
+                                {
+                                    <span class="selected"></span>
+                                }
+                                <span class="@(ViewBag.Current == "Questions" ? "arrow open" : "arrow")"></span>
+                            </a>
+                        </li>*@
+
+
+
                 </ul>
             </div>
         </div>

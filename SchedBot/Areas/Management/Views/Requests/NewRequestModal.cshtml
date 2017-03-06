@@ -4,11 +4,13 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("CreateRequest", "Requests"))
             {
+          //  @Html.HiddenFor(model => model.user.UserId)
+
             <div class="modal-content">
                 <div class="modal-header">
-                    @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                    @*<button type="button" class="close" data-dismiss="modal"><i class="   fa fa-times"></i></button>*@
                     <h4 class="modal-title" id="requestNewHeader">New Request</h4>
                 </div>
                 <div class="modal-body">
@@ -18,7 +20,7 @@
                         </div>
                         <div class="col-md-8 no-padding">
                             <div class="col-md-12 no-padding">
-                              
+
 
                                 <select class="form-control" id="newRequestType">
                                     <option value selected disabled></option>

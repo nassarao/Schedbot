@@ -1,45 +1,150 @@
-﻿@model IEnumerable<SchedbotDTOs.Shift>
+﻿<div class="col-md-12 col-sm-12">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">Manage Shifts</div>
+        </div>
+        <div class="portlet-body table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center col-md-2">Shift</th>
+                        <th class="text-center col-md-2">Day</th>
+                        <th class="text-center col-md-2">Start Time</th>
+                        <th class="text-center col-md-2">End Time</th>
+                        <th class="text-center col-md-2">Type</th>
+                        <th class="text-center col-md-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center col-md-2">Cook</td>
+                        <td class="text-center col-md-2">Monday</td>
+                        <td class="text-center col-md-2">8:00 AM</td>
+                        <td class="text-center col-md-2">4:00 PM.</td>
+                        <td class="text-center col-md-2">Alternate</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Dishwasher</td>
+                        <td class="text-center col-md-2">Monday</td>
+                        <td class="text-center col-md-2">9:30 AM</td>
+                        <td class="text-center col-md-2">5:30 PM</td>
+                        <td class="text-center col-md-2">Alternate</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                            <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Manager</td>
+                        <td class="text-center col-md-2">Monday</td>
+                        <td class="text-center col-md-2">12:00 PM.</td>
+                        <td class="text-center col-md-2">8:00 PM</td>
+                        <td class="text-center col-md-2">Alternate</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Cook</td>
+                        <td class="text-center col-md-2">Tuesday</td>
+                        <td class="text-center col-md-2">8:00 AM</td>
+                        <td class="text-center col-md-2">4:00 PM.</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Dishwasher</td>
+                        <td class="text-center col-md-2">Tuesday</td>
+                        <td class="text-center col-md-2">9:30 AM</td>
+                        <td class="text-center col-md-2">5:30 PM</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Manager</td>
+                        <td class="text-center col-md-2">Tuesday</td>
+                        <td class="text-center col-md-2">12:00 PM.</td>
+                        <td class="text-center col-md-2">8:00 PM</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Cook</td>
+                        <td class="text-center col-md-2">Wednesday</td>
+                        <td class="text-center col-md-2">8:00 AM</td>
+                        <td class="text-center col-md-2">4:00 PM.</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Dishwasher</td>
+                        <td class="text-center col-md-2">Wednesday</td>
+                        <td class="text-center col-md-2">9:30 AM</td>
+                        <td class="text-center col-md-2">5:30 PM</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center col-md-2">Manager</td>
+                        <td class="text-center col-md-2">Wednesday</td>
+                        <td class="text-center col-md-2">12:00 PM.</td>
+                        <td class="text-center col-md-2">8:00 PM</td>
+                        <td class="text-center col-md-2">Primary</td>
+                        <td class="col-md-2 text-center">
+                            <span class="btn-group btn-group-xs">
+                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ShiftType.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShiftTime)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShiftType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShiftTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShiftID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShiftID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShiftID })
-        </td>
-    </tr>
-}
-
-</table>

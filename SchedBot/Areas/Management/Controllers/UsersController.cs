@@ -24,7 +24,7 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> Index()
         {
             UserIndexViewModel userIndexVM = new UserIndexViewModel();
-            userIndexVM.UserDTOs = await db.Users.ToListAsync();
+            userIndexVM.UserDTOs = await db.Users.Include("Availability").ToListAsync();
             return View(userIndexVM);
         }
 

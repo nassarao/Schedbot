@@ -488,6 +488,7 @@
     <Content Include="Areas\Management\Views\Requests\DenyModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\ApproveModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\NewRequestModal.cshtml" />
+    <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\calendar.min.js" />

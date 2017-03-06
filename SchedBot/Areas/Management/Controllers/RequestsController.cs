@@ -22,9 +22,17 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> Index()
         {
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.Include("RequestType").ToList();
+            vm.Requests = db.Requests.ToList();
            
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateRequest(FormCollection collection)
+        {
+            SchedbotDTOs.Request request = new SchedbotDTOs.Request();
+         
+            return null;
         }
 
         // GET: Management/Requests/Details/5
@@ -41,10 +49,6 @@ namespace SchedBot.Areas.Management.Controllers
             }
             return View(request);
         }
-
-
-
-     
 
         // GET: Management/Requests/Delete/5
         public async Task<ActionResult> Delete(int? id)

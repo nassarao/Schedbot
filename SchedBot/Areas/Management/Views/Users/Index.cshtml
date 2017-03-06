@@ -43,25 +43,81 @@
                         </tr>
                     </thead>
                     <tbody>
-@foreach (var item in Model.UserDTOs)
+@foreach (var user in Model.UserDTOs)
 {
     <tr>
-        <td class="col-md-2">@(item.FirstName + " " + item.LastName)</td>
-        <td class="col-md-2">@(item.PhoneNumber)</td>
+        <td class="col-md-2">@(user.FirstName + " " + user.LastName)</td>
+        <td class="col-md-2">@(user.PhoneNumber)</td>
+        @if (user.Availability.Sunday > 0)
+        {
         <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Monday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Tuesday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Wednesday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Thursday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Friday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+        @if (user.Availability.Saturday > 0)
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        }
+        else
+        {
+            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
+        }
+       
+        @*<td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
         <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
         <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
         <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
         <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
+        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>*@
         <td class="col-md-1 text-center">
             <span class="btn-group btn-group-xs">
-                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = item.UserId })"><span class="fa fa-search"></span></a>
+                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a>
                 @*<button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button>*@
                 @*<a class="btn btn-outline red" href="@Url.Action("Delete", "Users", new { id = item.UserId })"><span class="fa fa-trash"></span></a>*@
               
-                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@item.LastName" data-firstName="@item.FirstName" data-id="@item.UserId"><i class="fa fa-trash"></i></button>
+                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@user.LastName" data-firstName="@user.FirstName" data-id="@user.UserId"><i class="fa fa-trash"></i></button>
                 @*<button class="btn btn-outline red deleteEmployee" id="deleteEmployee_@item.UserId" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>*@
             </span>
         </td>
