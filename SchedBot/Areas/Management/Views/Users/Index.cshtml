@@ -1,11 +1,6 @@
 ﻿@using SchedBot.Areas.Management.Models
 @model UserIndexViewModel
 
-@*
-  
-
-@* Below is the real html...................................................................................................................  *@
-
 @{
     ViewBag.Title = "Employees";
     ViewBag.Current = "Employees";
@@ -104,13 +99,6 @@
         {
             <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
         }
-       
-        @*<td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>*@
         <td class="col-md-1 text-center">
             <span class="btn-group btn-group-xs">
                 <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a>

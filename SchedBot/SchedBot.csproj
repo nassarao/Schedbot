@@ -287,6 +287,10 @@
     <Compile Include="Migrations\201701282119592_RequestsReceivingUser.Designer.cs">
       <DependentUpon>201701282119592_RequestsReceivingUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703060147101_TimeOffFields.cs" />
+    <Compile Include="Migrations\201703060147101_TimeOffFields.Designer.cs">
+      <DependentUpon>201703060147101_TimeOffFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -635,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701282119592_RequestsReceivingUser.resx">
       <DependentUpon>201701282119592_RequestsReceivingUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703060147101_TimeOffFields.resx">
+      <DependentUpon>201703060147101_TimeOffFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

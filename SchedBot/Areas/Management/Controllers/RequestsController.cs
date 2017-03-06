@@ -11,6 +11,8 @@ using SchedBot;
 using SchedbotDTOs;
 using SchedBot.Models;
 using SchedBot.Areas.Management.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace SchedBot.Areas.Management.Controllers
 {
@@ -23,7 +25,8 @@ namespace SchedBot.Areas.Management.Controllers
         {
             RequestViewModel vm = new RequestViewModel();
             vm.Requests = db.Requests.ToList();
-           
+            vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
+
             return View(vm);
         }
 
@@ -31,8 +34,21 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> CreateRequest(FormCollection collection)
         {
             SchedbotDTOs.Request request = new SchedbotDTOs.Request();
-         
-            return null;
+            string acntId = User.Identity.GetUserId();
+            request.SendingUserId = db.Users.First(x => x.AccountId == acntId).UserId;
+            request.Status = "Pending";
+            request.Reason = collection.GetValue("requestReason").AttemptedValue.Trim();
+            if (collection.AllKeys.Contains("daterange"))
+            {
+                //request.SendingUserId = db.Users.First(x => x.AccountId == User.Identity)
+                request.RequestType = "Time Off";
+                string[] dateRange = collection.GetValue("daterange").AttemptedValue.Split('-');
+                request.StartTimeOff = DateTime.Parse(dateRange[0].Trim());
+                request.EndTimeOff = DateTime.Parse(dateRange[1].Trim());
+                db.Requests.Add(request);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Management/Requests/Details/5
