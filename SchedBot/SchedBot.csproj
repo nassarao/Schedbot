@@ -218,7 +218,6 @@
     <Compile Include="Areas\Management\Controllers\JobRolesController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
-    <Compile Include="Areas\Management\Controllers\ShiftTypesController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
@@ -290,6 +289,10 @@
     <Compile Include="Migrations\201703060147101_TimeOffFields.cs" />
     <Compile Include="Migrations\201703060147101_TimeOffFields.Designer.cs">
       <DependentUpon>201703060147101_TimeOffFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703112252287_SchedulesTablesAdded.cs" />
+    <Compile Include="Migrations\201703112252287_SchedulesTablesAdded.Designer.cs">
+      <DependentUpon>201703112252287_SchedulesTablesAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -469,11 +472,6 @@
     <Content Include="Areas\Management\Views\Shifts\Details.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\Edit.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\Index.cshtml" />
-    <Content Include="Areas\Management\Views\ShiftTypes\Create.cshtml" />
-    <Content Include="Areas\Management\Views\ShiftTypes\Delete.cshtml" />
-    <Content Include="Areas\Management\Views\ShiftTypes\Details.cshtml" />
-    <Content Include="Areas\Management\Views\ShiftTypes\Edit.cshtml" />
-    <Content Include="Areas\Management\Views\ShiftTypes\Index.cshtml" />
     <Content Include="Areas\Management\Views\JobRoles\Create.cshtml" />
     <Content Include="Areas\Management\Views\JobRoles\Delete.cshtml" />
     <Content Include="Areas\Management\Views\JobRoles\Details.cshtml" />
@@ -765,6 +763,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703060147101_TimeOffFields.resx">
       <DependentUpon>201703060147101_TimeOffFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703112252287_SchedulesTablesAdded.resx">
+      <DependentUpon>201703112252287_SchedulesTablesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

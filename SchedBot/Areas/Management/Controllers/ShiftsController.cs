@@ -19,8 +19,8 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Shifts
         public async Task<ActionResult> Index()
         {
-            var shifts = db.Shifts.Include(s => s.ShiftType);
-            return View(await shifts.ToListAsync());
+           
+            return View(await db.Shifts.ToListAsync());
         }
 
         // GET: Management/Shifts/Details/5
@@ -41,7 +41,7 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Shifts/Create
         public ActionResult Create()
         {
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name");
+           
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace SchedBot.Areas.Management.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
+           
             return View(shift);
         }
 
@@ -75,7 +75,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
+       
             return View(shift);
         }
 
@@ -92,7 +92,7 @@ namespace SchedBot.Areas.Management.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ShiftTypeId = new SelectList(db.ShiftTypes, "ShiftTypeId", "Name", shift.ShiftTypeId);
+           
             return View(shift);
         }
 

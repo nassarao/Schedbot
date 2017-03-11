@@ -11,23 +11,15 @@ namespace SchedbotDTOs
 
         public int ShiftID { get; set; }
 
-        public DateTime Date { get; set; }
+        public DayOfWeek Day { get; set; }
 
-        public TimeSpan ShiftTime { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public bool Active { get; set; }
+        public int MyProperty { get; set; }
 
-        //Foreign Key
-        public int ShiftTypeId { get; set; }
-        public virtual ShiftType ShiftType { get; set; }
 
-    }
-
-    public class ShiftType
-    {
-       
-        public int ShiftTypeId { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
+        public int JobRoleId { get; set; }
+        public virtual JobRole JobRole { get; set; }
     }
 }
