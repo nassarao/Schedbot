@@ -38,13 +38,13 @@
                         <td class="text-center col-md-2">Cook</td>
                         <td class="text-center col-md-2">Monday</td>
                         <td class="text-center col-md-2">8:00 AM</td>
-                        <td class="text-center col-md-2">4:00 PM.</td>
+                        <td class="text-center col-md-2">4:00 PM</td>
                         <td class="text-center col-md-2">Alternate</td>
                         <td class="col-md-2 text-center">
                             <span class="btn-group btn-group-xs">
                                 <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-outline blue-steel" id="editShift"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-shiftname="Cook" data-shiftstarttime="8:00 AM" data-shiftendtime="4:00 PM" data-id="1" data-shiftday="Monday"><i class="fa fa-trash"></i></button>
                             </span>
                         </td>
                     </tr>
@@ -167,10 +167,22 @@
     
     
     
-    <!-- ************************************* Approve Modal ***************************************** -->
+    <!-- ************************************* New Shift Modal Start ***************************************** -->
         @Html.Partial("NewShiftModalPartial")
 
-        <!-- ************************************* Request Approve End ***************************************** -->
+        <!-- ************************************* New Shift Modal End ***************************************** -->
+        
+        <!-- ************************************* Edit Shift Modal Start ***************************************** -->
+        @Html.Partial("EditShiftModalPartial")
+
+        <!-- ************************************* Edit Shift Modal End ***************************************** -->
+        
+        
+        
+        <!-- ************************************* Delete Shift Modal Start ***************************************** -->
+        @Html.Partial("DeleteShiftModalPartial")
+
+        <!-- ************************************* Delete Shift Modal End ***************************************** -->
     
     
     
@@ -183,10 +195,45 @@
 
     $('#newShift').click(function () {
 
-                console.info("made inside new request click");
+                console.info("made inside new shift click");
                 $('#shiftNewModal').modal('show');
+                //$('#timepicker')
+                document.getElementById("timepicker").readOnly = false;
+                document.getElementById("timepicker2").readOnly = false;
 
     });
+    
+    
+    $('#editShift').click(function () {
+
+                console.info("made inside edit shift click");
+                $('#shiftEditModal').modal('show');
+                document.getElementById("timepicker").readOnly = false;
+                document.getElementById("timepicker2").readOnly = false;
+
+    });
+    
+    
+    
+    var item_to_delete;
+    var name;
+    $(".deleteItem").click(function (e) {
+        item_to_delete = $(this).data('id');
+        name = $(this).data('shiftname');
+        var shiftStartTime = $(this).data('shiftstarttime');
+        var shiftEndTime = $(this).data('shiftendtime');
+        var shiftDay = $(this).data('shiftday');
+        console.info(this);
+        //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
+        $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
+
+
+    });
+    
+    
+    
+    
+    
 
 
     $('#timepicker').pickatime({

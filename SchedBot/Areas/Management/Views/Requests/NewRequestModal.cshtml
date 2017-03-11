@@ -1,10 +1,10 @@
-﻿@model SchedBot.Areas.Management.Models.RequestViewModel
+@model SchedBot.Areas.Management.Models.RequestViewModel
 
 <div class="modal fade" id="requestNewModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        @using (Html.BeginForm("CreateRequest", "Requests"))
+        @using(Html.BeginForm("CreateRequest", "Requests", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
             {
           //  @Html.HiddenFor(model => model.user.UserId)
 

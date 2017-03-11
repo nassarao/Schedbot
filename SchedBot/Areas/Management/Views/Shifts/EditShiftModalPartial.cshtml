@@ -1,13 +1,13 @@
-<div class="modal fade" id="shiftNewModal" role="dialog">
+<div class="modal fade" id="shiftEditModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
-        @using(Html.BeginForm("CreateShift", "Shifts", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+        @using(Html.BeginForm("EditShift", "Shifts", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
             {
          // @Html.HiddenFor(model => model.user.UserId)
         <div class="modal-content">
             <div class="modal-header"> @*
                 <button type="button" class="close" data-dismiss="modal"><i class="   fa fa-times"></i></button>*@
-                <h4 class="modal-title" id="shiftNewHeader">New Shift</h4> </div>
+                <h4 class="modal-title" id="shiftNewHeader">Edit Shift</h4> </div>
             <div class="modal-body">
                 <div class="form-group">
                     <div class="col-md-4">
@@ -15,7 +15,8 @@
                     </div>
                     <div class="col-md-8 no-padding">
                         <div class="col-md-12 no-padding">
-                            <input type="text" class="form-control" id="shiftRole" /> </div>
+                            <input type="text" class="form-control" id="shiftRole" />
+                             </div>
                     </div>
                 </div>
                 <div class="margin-top-10" id="newRequestHTML"></div>
@@ -74,7 +75,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary pull-right" value="Submit Shift" />
+                <input type="submit" class="btn btn-primary pull-right" value="Update Shift" />
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
             </div>
         </div> } </div>

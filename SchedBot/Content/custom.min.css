@@ -1,4 +1,4 @@
-﻿.card {
+.card {
     position: relative;
     display: block;
     margin-bottom: .75rem;
@@ -35,9 +35,9 @@ i, cite, em, var, address, dfn {
     text-align: center!important;
 }
 .info-message{
-    font-size: 1rem!important;
+/*      font-size: 1.5rem !important;*/
     color:#e73d4a;
-    padding-left:50px; 
+/*    padding-left:50px; */
 }
 .info-message-text{
     margin-top:0px;

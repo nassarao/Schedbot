@@ -1,6 +1,6 @@
-﻿@model SchedbotDTOs.User
+@model SchedbotDTOs.User
 
-@using (Html.BeginForm("Edit", "Users"))
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.UserId)
