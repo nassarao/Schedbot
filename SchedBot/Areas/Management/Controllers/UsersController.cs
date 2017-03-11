@@ -95,7 +95,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = await db.Users.FindAsync(id);
+            User user = db.Users.Include(x => x.Availability).FirstOrDefault(x => x.UserId == id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -175,42 +175,44 @@ namespace SchedBot.Areas.Management.Controllers
         [HttpPost]
         public async Task<ActionResult> SaveAvailability(FormCollection collection)
         {
-            int UserId = int.Parse(collection["UserId"]);
-            User user = db.Users.Find(UserId);
+            int userId = int.Parse(collection["UserId"]);
+            User user = db.Users.Find(userId);
 
 
 
             foreach (var item in collection.AllKeys)
             {
+                var colValue = collection.GetValue(item);
                 if (!item.Equals("UserId"))
                 {
                     string[] name = item.Split('-');
 
-                    string dayOfWeek = name[0];
-                    string shift = name[1];
+                    string dayOfWeek = item.Split('.')[1];
+
+                    
 
                     switch (dayOfWeek)
                     {
-                        case "sun":
-                            user.Availability.Sunday = amPmBoth(shift);
+                        case "Sunday":
+                            user.Availability.Sunday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "mon":
-                            user.Availability.Monday = amPmBoth(shift);
+                        case "Monday":
+                            user.Availability.Monday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "tue":
-                            user.Availability.Tuesday = amPmBoth(shift);
+                        case "Tuesday":
+                            user.Availability.Tuesday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "wed":
-                            user.Availability.Wednesday = amPmBoth(shift);
+                        case "Wednesday":
+                            user.Availability.Wednesday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "thu":
-                            user.Availability.Thursday = amPmBoth(shift);
+                        case "Thursday":
+                            user.Availability.Thursday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "fri":
-                            user.Availability.Friday = amPmBoth(shift);
+                        case "Friday":
+                            user.Availability.Friday = int.Parse(colValue.AttemptedValue);
                             break;
-                        case "sat":
-                            user.Availability.Saturday = amPmBoth(shift);
+                        case "Saturday":
+                            user.Availability.Saturday = int.Parse(colValue.AttemptedValue);
                             break;
 
                     }
@@ -220,7 +222,7 @@ namespace SchedBot.Areas.Management.Controllers
             db.Entry(user).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Users");
+            return RedirectToAction("Edit", new { id = userId });
         }
 
         private int amPmBoth(string data)
