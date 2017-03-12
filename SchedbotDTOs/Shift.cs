@@ -16,7 +16,7 @@ namespace SchedbotDTOs
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public bool Active { get; set; }
-        public int MyProperty { get; set; }
+        public int Type { get; set; }
 
 
         public int JobRoleId { get; set; }

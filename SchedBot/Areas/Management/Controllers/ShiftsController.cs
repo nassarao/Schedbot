@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using SchedBot;
 using SchedbotDTOs;
+using SchedBot.Areas.Management.Models;
 
 namespace SchedBot.Areas.Management.Controllers
 {
@@ -19,8 +20,20 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Shifts
         public async Task<ActionResult> Index()
         {
+            ShiftsIndexModel vm = new ShiftsIndexModel()
+            {
+                Roles = db.JobRoles.ToList(),
+                Shifts = db.Shifts.ToList()
+                
+            };
+
+            vm.JobRoles = new List<SelectListItem>();
+            foreach (var role in vm.Roles)
+            {
+                vm.JobRoles.Add(new SelectListItem() { Text = role.Name, Value = role.JobRoleId.ToString() });
+            }
            
-            return View(await db.Shifts.ToListAsync());
+            return View(vm);
         }
 
         // GET: Management/Shifts/Details/5
@@ -49,9 +62,22 @@ namespace SchedBot.Areas.Management.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ShiftID,Date,ShiftTime,ShiftTypeId")] Shift shift)
+        
+        public async Task<ActionResult> Create(FormCollection coll)
         {
+            Shift shift = new Shift()
+            {
+                JobRoleId = int.Parse(coll.GetValue("JobRoles").AttemptedValue),
+                End = DateTime.Parse(coll.GetValue("End").AttemptedValue),
+                Start = DateTime.Parse(coll.GetValue("Start").AttemptedValue),
+                Day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), coll.GetValue("Day").AttemptedValue),
+                Type = int.Parse(coll.GetValue("Type").AttemptedValue),
+                Active = bool.Parse(coll.GetValue("Active").AttemptedValue),
+                
+
+
+
+            };
             if (ModelState.IsValid)
             {
                 db.Shifts.Add(shift);

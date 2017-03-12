@@ -1,22 +1,24 @@
+@model  SchedBot.Areas.Management.Models.ShiftsIndexModel
+
 @{
     ViewBag.Title = "Shifts";
     ViewBag.Current = "Shifts";
 }
-  
+
 
 <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.css" id="theme_base">
 <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.time.css" id="theme_time">
-   
-    
-     <div class="col-md-12 col-sm-12 margin-bottom-20">
-        <button class="btn green-meadow btn-outline sbold" id="newShift"><i class="fa fa-plus"></i>&nbsp; New Shift</button>
-    </div> 
 
-  
-  
-   <div class="col-md-12 col-sm-12">
-   <div id="newShift" class="modal fade in" data-toggle="modal" data-target="#shiftNewModal">
-        </div>
+
+<div class="col-md-12 col-sm-12 margin-bottom-20">
+    <button class="btn green-meadow btn-outline sbold" id="newShift"><i class="fa fa-plus"></i>&nbsp; New Shift</button>
+</div>
+
+
+
+<div class="col-md-12 col-sm-12">
+    <div id="newShift" class="modal fade in" data-toggle="modal" data-target="#shiftNewModal">
+    </div>
     <div class="portlet light portlet-fit">
         <div class="portlet-title">
             <div class="caption font-schedBot">Manage Shifts</div>
@@ -30,236 +32,116 @@
                         <th class="text-center col-md-2">Start Time</th>
                         <th class="text-center col-md-2">End Time</th>
                         <th class="text-center col-md-1">Type</th>
-                        <th class="text-center col-md-1" title="Active Next Week" >Active</th>
+                        <th class="text-center col-md-1" title="Active Next Week">Active</th>
                         <th class="text-center col-md-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center col-md-2">Cook</td>
-                        <td class="text-center col-md-2">Monday</td>
-                        <td class="text-center col-md-2">8:00 AM</td>
-                        <td class="text-center col-md-2">4:00 PM</td>
-                        <td class="text-center col-md-1">Alternate</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i></td>
+                   @foreach (var shift in Model.Shifts)
+                   {
+
+                   
+                    <td class="text-center col-md-2">@shift.JobRole.Name</td>
+                    <td class="text-center col-md-2">@shift.Day</td>
+                    <td class="text-center col-md-2">@shift.Start</td>
+                        <td class="text-center col-md-2">@shift.End</td>
+                        <td class="text-center col-md-1">@shift.Type</td>
+                        <td class="text-center col-md-1"><i class="fa fa-times"></i></td>
                         <td class="col-md-2 text-center">
                             <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel" id="editShift"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-shiftname="Cook" data-shiftstarttime="8:00 AM" data-shiftendtime="4:00 PM" data-id="1" data-shiftday="Monday"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Dishwasher</td>
-                        <td class="text-center col-md-2">Monday</td>
-                        <td class="text-center col-md-2">9:30 AM</td>
-                        <td class="text-center col-md-2">5:30 PM</td>
-                        <td class="text-center col-md-1">Alternate</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                            <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
+                                
                                 <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
                             </span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Manager</td>
-                        <td class="text-center col-md-2">Monday</td>
-                        <td class="text-center col-md-2">12:00 PM.</td>
-                        <td class="text-center col-md-2">8:00 PM</td>
-                        <td class="text-center col-md-1">Alternate</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Cook</td>
-                        <td class="text-center col-md-2">Tuesday</td>
-                        <td class="text-center col-md-2">8:00 AM</td>
-                        <td class="text-center col-md-2">4:00 PM.</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-times"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Dishwasher</td>
-                        <td class="text-center col-md-2">Tuesday</td>
-                        <td class="text-center col-md-2">9:30 AM</td>
-                        <td class="text-center col-md-2">5:30 PM</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Manager</td>
-                        <td class="text-center col-md-2">Tuesday</td>
-                        <td class="text-center col-md-2">12:00 PM.</td>
-                        <td class="text-center col-md-2">8:00 PM</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Cook</td>
-                        <td class="text-center col-md-2">Wednesday</td>
-                        <td class="text-center col-md-2">8:00 AM</td>
-                        <td class="text-center col-md-2">4:00 PM.</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-times"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Dishwasher</td>
-                        <td class="text-center col-md-2">Wednesday</td>
-                        <td class="text-center col-md-2">9:30 AM</td>
-                        <td class="text-center col-md-2">5:30 PM</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-times"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center col-md-2">Manager</td>
-                        <td class="text-center col-md-2">Wednesday</td>
-                        <td class="text-center col-md-2">12:00 PM.</td>
-                        <td class="text-center col-md-2">8:00 PM</td>
-                        <td class="text-center col-md-1">Primary</td>
-                        <td class="text-center col-md-1"><i class="fa fa-check"></i>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
-                                <!--                                           <a href="" class="btn btn-outline yellow-lemon"><span class="fa fa-edit"></span></a>-->
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
+                    }
                 </tbody>
-            </table>
+
+                </table>
+            </div>
         </div>
-    </div>
-    
-    
-    
-    <!-- ************************************* New Shift Modal Start ***************************************** -->
+
+
+
+        <!-- ************************************* New Shift Modal Start ***************************************** -->
         @Html.Partial("NewShiftModalPartial")
 
         <!-- ************************************* New Shift Modal End ***************************************** -->
-        
         <!-- ************************************* Edit Shift Modal Start ***************************************** -->
         @Html.Partial("EditShiftModalPartial")
 
         <!-- ************************************* Edit Shift Modal End ***************************************** -->
-        
-        
-        
         <!-- ************************************* Delete Shift Modal Start ***************************************** -->
         @Html.Partial("DeleteShiftModalPartial")
 
         <!-- ************************************* Delete Shift Modal End ***************************************** -->
-    
-    
-    
-</div>
-
-<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="~/Scripts/TimePicker/picker.js"></script>
-<script src="~/Scripts/TimePicker/picker.time.js"></script>
-<script>
-
-    $('#newShift').click(function () {
-
-                console.info("made inside new shift click");
-                $('#shiftNewModal').modal('show');
-                //$('#timepicker')
-                document.getElementById("timepicker").readOnly = false;
-                document.getElementById("timepicker2").readOnly = false;
-
-    });
-    
-    
-    $('#editShift').click(function () {
-
-                console.info("made inside edit shift click");
-                $('#shiftEditModal').modal('show');
-                document.getElementById("timepicker").readOnly = false;
-                document.getElementById("timepicker2").readOnly = false;
-
-    });
-    
-    
-    
-    var item_to_delete;
-    var name;
-    $(".deleteItem").click(function (e) {
-        item_to_delete = $(this).data('id');
-        name = $(this).data('shiftname');
-        var shiftStartTime = $(this).data('shiftstarttime');
-        var shiftEndTime = $(this).data('shiftendtime');
-        var shiftDay = $(this).data('shiftday');
-        console.info(this);
-        //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
-        $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
 
 
-    });
-    
-    
-    
-    
-    
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/TimePicker/picker.js"></script>
+    <script src="~/Scripts/TimePicker/picker.time.js"></script>
+    <script>
+
+        $('#newShift').click(function () {
+
+            console.info("made inside new shift click");
+            $('#shiftNewModal').modal('show');
+            //$('#timepicker')
+            document.getElementById("timepicker").readOnly = false;
+            document.getElementById("timepicker2").readOnly = false;
+
+        });
 
 
-    $('#timepicker').pickatime({
-        containter: '#shiftNewModal',
-        min: [7, 0],
-        max: [23, 0],
-        interval: 15
-    });
+        $('#editShift').click(function () {
 
-    $('#timepicker2').pickatime({
-        containter: '#shiftNewModal',
-        min: [7, 0],
-        max: [23, 0],
-        interval: 15
-    });
+            console.info("made inside edit shift click");
+            $('#shiftEditModal').modal('show');
+            document.getElementById("timepicker").readOnly = false;
+            document.getElementById("timepicker2").readOnly = false;
+
+        });
 
 
-    
-</script>
+
+        var item_to_delete;
+        var name;
+        $(".deleteItem").click(function (e) {
+            item_to_delete = $(this).data('id');
+            name = $(this).data('shiftname');
+            var shiftStartTime = $(this).data('shiftstarttime');
+            var shiftEndTime = $(this).data('shiftendtime');
+            var shiftDay = $(this).data('shiftday');
+            console.info(this);
+            //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
+            $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
+
+
+        });
+
+
+
+
+
+
+
+        $('#timepicker').pickatime({
+            containter: '#shiftNewModal',
+            min: [7, 0],
+            max: [23, 0],
+            interval: 15
+        });
+
+        $('#timepicker2').pickatime({
+            containter: '#shiftNewModal',
+            min: [7, 0],
+            max: [23, 0],
+            interval: 15
+        });
+
+
+
+    </script>
