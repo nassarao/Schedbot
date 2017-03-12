@@ -18,7 +18,7 @@ namespace SchedbotDTOs
         public string State { get; set; }
         public int ZipCode { get; set; }
         public string PhoneNumber { get; set; }
-
+       
         //This FK links Our user DB to the ASP AccountDB
         public string AccountId { get; set; }
 

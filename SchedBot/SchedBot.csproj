@@ -299,6 +299,22 @@
     <Compile Include="Migrations\201703112310092_TypeOnShiftTable.Designer.cs">
       <DependentUpon>201703112310092_TypeOnShiftTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703121758311_MaxHours.cs" />
+    <Compile Include="Migrations\201703121758311_MaxHours.Designer.cs">
+      <DependentUpon>201703121758311_MaxHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703121759064_TypeString.cs" />
+    <Compile Include="Migrations\201703121759064_TypeString.Designer.cs">
+      <DependentUpon>201703121759064_TypeString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703121806493_RemoveStartEndDateTimeShift.cs" />
+    <Compile Include="Migrations\201703121806493_RemoveStartEndDateTimeShift.Designer.cs">
+      <DependentUpon>201703121806493_RemoveStartEndDateTimeShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703121808048_StartEndTimeSpan.cs" />
+    <Compile Include="Migrations\201703121808048_StartEndTimeSpan.Designer.cs">
+      <DependentUpon>201703121808048_StartEndTimeSpan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -774,6 +790,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703112310092_TypeOnShiftTable.resx">
       <DependentUpon>201703112310092_TypeOnShiftTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703121758311_MaxHours.resx">
+      <DependentUpon>201703121758311_MaxHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703121759064_TypeString.resx">
+      <DependentUpon>201703121759064_TypeString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703121806493_RemoveStartEndDateTimeShift.resx">
+      <DependentUpon>201703121806493_RemoveStartEndDateTimeShift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703121808048_StartEndTimeSpan.resx">
+      <DependentUpon>201703121808048_StartEndTimeSpan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

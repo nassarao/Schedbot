@@ -39,22 +39,23 @@
                 <tbody>
                    @foreach (var shift in Model.Shifts)
                    {
+                    <tr>
 
-                   
-                    <td class="text-center col-md-2">@shift.JobRole.Name</td>
-                    <td class="text-center col-md-2">@shift.Day</td>
-                    <td class="text-center col-md-2">@shift.Start</td>
+                        <td class="text-center col-md-2">@shift.JobRole.Name</td>
+                        <td class="text-center col-md-2">@shift.Day</td>
+                        <td class="text-center col-md-2">@shift.Start</td>
                         <td class="text-center col-md-2">@shift.End</td>
                         <td class="text-center col-md-1">@shift.Type</td>
                         <td class="text-center col-md-1"><i class="fa fa-times"></i></td>
                         <td class="col-md-2 text-center">
                             <span class="btn-group btn-group-xs">
-                                
+
                                 <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
                             </span>
                         </td>
-                    }
+                    </tr>
+                   }
                 </tbody>
 
                 </table>

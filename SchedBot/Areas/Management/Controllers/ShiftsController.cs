@@ -68,15 +68,11 @@ namespace SchedBot.Areas.Management.Controllers
             Shift shift = new Shift()
             {
                 JobRoleId = int.Parse(coll.GetValue("JobRoles").AttemptedValue),
-                End = DateTime.Parse(coll.GetValue("End").AttemptedValue),
-                Start = DateTime.Parse(coll.GetValue("Start").AttemptedValue),
+                End = DateTime.Parse(coll.GetValue("End").AttemptedValue).TimeOfDay,
+                Start = DateTime.Parse(coll.GetValue("Start").AttemptedValue).TimeOfDay,
                 Day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), coll.GetValue("Day").AttemptedValue),
-                Type = int.Parse(coll.GetValue("Type").AttemptedValue),
-                Active = bool.Parse(coll.GetValue("Active").AttemptedValue),
-                
-
-
-
+                Type = coll.GetValue("Type").AttemptedValue,
+                Active = bool.Parse(coll.GetValue("Active").AttemptedValue)
             };
             if (ModelState.IsValid)
             {

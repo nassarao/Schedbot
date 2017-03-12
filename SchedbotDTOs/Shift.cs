@@ -13,10 +13,10 @@ namespace SchedbotDTOs
 
         public DayOfWeek Day { get; set; }
 
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public TimeSpan Start { get; set; }
+        public TimeSpan End { get; set; }
         public bool Active { get; set; }
-        public int Type { get; set; }
+        public string Type { get; set; }
 
 
         public int JobRoleId { get; set; }
