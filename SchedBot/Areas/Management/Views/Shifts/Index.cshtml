@@ -37,112 +37,121 @@
                     </tr>
                 </thead>
                 <tbody>
-                   @foreach (var shift in Model.Shifts)
-                   {
-                    <tr>
+                    @foreach (var shift in Model.Shifts)
+                    {
+                        <tr>
 
-                        <td class="text-center col-md-2">@shift.JobRole.Name</td>
-                        <td class="text-center col-md-2">@shift.Day</td>
-                        <td class="text-center col-md-2">@shift.Start</td>
-                        <td class="text-center col-md-2">@shift.End</td>
-                        <td class="text-center col-md-1">@shift.Type</td>
-                        <td class="text-center col-md-1"><i class="fa fa-times"></i></td>
-                        <td class="col-md-2 text-center">
-                            <span class="btn-group btn-group-xs">
+                            <td class="text-center col-md-2">@shift.JobRole.Name</td>
+                            <td class="text-center col-md-2">@shift.Day</td>
+                            <td class="text-center col-md-2">@shift.Start</td>
+                            <td class="text-center col-md-2">@shift.End</td>
+                            <td class="text-center col-md-1">@shift.Type</td>
+                            @if (shift.Active)
+                            {
+                                <td class="text-center col-md-1"><i class="fa fa-check"></i></td>
 
-                                <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </td>
-                    </tr>
-                   }
+                            }
+                            else
+                            {
+
+                            <td class="text-center col-md-1"><i class="fa fa-times"></i></td>
+                            }
+                            <td class="col-md-2 text-center">
+                                <span class="btn-group btn-group-xs">
+
+                                    <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                                </span>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
 
-                </table>
-            </div>
+            </table>
         </div>
-
-
-
-        <!-- ************************************* New Shift Modal Start ***************************************** -->
-        @Html.Partial("NewShiftModalPartial")
-
-        <!-- ************************************* New Shift Modal End ***************************************** -->
-        <!-- ************************************* Edit Shift Modal Start ***************************************** -->
-        @Html.Partial("EditShiftModalPartial")
-
-        <!-- ************************************* Edit Shift Modal End ***************************************** -->
-        <!-- ************************************* Delete Shift Modal Start ***************************************** -->
-        @Html.Partial("DeleteShiftModalPartial")
-
-        <!-- ************************************* Delete Shift Modal End ***************************************** -->
-
-
-
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="~/Scripts/TimePicker/picker.js"></script>
-    <script src="~/Scripts/TimePicker/picker.time.js"></script>
-    <script>
-
-        $('#newShift').click(function () {
-
-            console.info("made inside new shift click");
-            $('#shiftNewModal').modal('show');
-            //$('#timepicker')
-            document.getElementById("timepicker").readOnly = false;
-            document.getElementById("timepicker2").readOnly = false;
-
-        });
 
 
-        $('#editShift').click(function () {
+    <!-- ************************************* New Shift Modal Start ***************************************** -->
+    @Html.Partial("NewShiftModalPartial")
 
-            console.info("made inside edit shift click");
-            $('#shiftEditModal').modal('show');
-            document.getElementById("timepicker").readOnly = false;
-            document.getElementById("timepicker2").readOnly = false;
+    <!-- ************************************* New Shift Modal End ***************************************** -->
+    <!-- ************************************* Edit Shift Modal Start ***************************************** -->
+    @Html.Partial("EditShiftModalPartial")
 
-        });
+    <!-- ************************************* Edit Shift Modal End ***************************************** -->
+    <!-- ************************************* Delete Shift Modal Start ***************************************** -->
+    @Html.Partial("DeleteShiftModalPartial")
+
+    <!-- ************************************* Delete Shift Modal End ***************************************** -->
 
 
 
-        var item_to_delete;
-        var name;
-        $(".deleteItem").click(function (e) {
-            item_to_delete = $(this).data('id');
-            name = $(this).data('shiftname');
-            var shiftStartTime = $(this).data('shiftstarttime');
-            var shiftEndTime = $(this).data('shiftendtime');
-            var shiftDay = $(this).data('shiftday');
-            console.info(this);
-            //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
-            $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/TimePicker/picker.js"></script>
+<script src="~/Scripts/TimePicker/picker.time.js"></script>
+<script>
+
+    $('#newShift').click(function () {
+
+        console.info("made inside new shift click");
+        $('#shiftNewModal').modal('show');
+        //$('#timepicker')
+        document.getElementById("timepicker").readOnly = false;
+        document.getElementById("timepicker2").readOnly = false;
+
+    });
 
 
-        });
+    $('#editShift').click(function () {
 
+        console.info("made inside edit shift click");
+        $('#shiftEditModal').modal('show');
+        document.getElementById("timepicker").readOnly = false;
+        document.getElementById("timepicker2").readOnly = false;
 
-
-
-
-
-
-        $('#timepicker').pickatime({
-            containter: '#shiftNewModal',
-            min: [7, 0],
-            max: [23, 0],
-            interval: 15
-        });
-
-        $('#timepicker2').pickatime({
-            containter: '#shiftNewModal',
-            min: [7, 0],
-            max: [23, 0],
-            interval: 15
-        });
+    });
 
 
 
-    </script>
+    var item_to_delete;
+    var name;
+    $(".deleteItem").click(function (e) {
+        item_to_delete = $(this).data('id');
+        name = $(this).data('shiftname');
+        var shiftStartTime = $(this).data('shiftstarttime');
+        var shiftEndTime = $(this).data('shiftendtime');
+        var shiftDay = $(this).data('shiftday');
+        console.info(this);
+        //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
+        $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
+
+
+    });
+
+
+
+
+
+
+
+    $('#timepicker').pickatime({
+        containter: '#shiftNewModal',
+        min: [7, 0],
+        max: [23, 0],
+        interval: 15
+    });
+
+    $('#timepicker2').pickatime({
+        containter: '#shiftNewModal',
+        min: [7, 0],
+        max: [23, 0],
+        interval: 15
+    });
+
+
+
+</script>

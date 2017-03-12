@@ -512,6 +512,9 @@
     <Content Include="Areas\Management\Views\Requests\ApproveModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\NewRequestModal.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\NewShiftModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Users\SelectAvailabilityPartial2.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\DeleteShiftModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\EditShiftModalPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
