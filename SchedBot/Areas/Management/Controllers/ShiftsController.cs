@@ -100,6 +100,7 @@ namespace SchedBot.Areas.Management.Controllers
             List<User> users = db.Users.Include(x => x.Availability).ToList();
             List<User_JobRole> ujs = db.User_JobRoles.Include(x => x.User).Include(x => x.User.Availability).ToList();
             IDictionary<int, List<User_JobRole>> roleUserDic = new Dictionary<int, List<User_JobRole>>();
+
             foreach (User_JobRole uj in ujs)
             {
                 //foreach (JobRole role in user.)
@@ -114,6 +115,7 @@ namespace SchedBot.Areas.Management.Controllers
                     roleUserDic.Add(uj.JobRoleId, ujRole);
                 }
             }
+            Dictionary<int, double> currentHours = new Dictionary<int, double>();
             for (int i = 0; i < 7; i++)
             {
                 List<Shift> dayShifts = shifts.Where(x => x.Day == (DayOfWeek)Enum.Parse(typeof(DayOfWeek), i.ToString())).ToList();
@@ -162,15 +164,41 @@ namespace SchedBot.Areas.Management.Controllers
                             continue;
                         else
                         {
-                            User_Shift_Schedule uss = new User_Shift_Schedule()
+                            TimeSpan shiftHrs = shift.End - shift.Start;
+                            double shiftHours = shiftHrs.Hours + shiftHrs.Minutes / 60;
+                            double usercurrentHours = 0.0;
+                            if (currentHours.ContainsKey(user.UserId))
                             {
-                                ScheduleId = sched.Id,
-                                UserId = user.UserId,
-                                ShiftId = shift.ShiftID
-                            };
-                            db.UserShiftSchedules.Add(uss);
-                            db.SaveChanges();
-                            break;
+                                usercurrentHours = currentHours[user.UserId];
+                            }
+                            if (usercurrentHours + shiftHours < user.User.Availability.MaxHours)
+                            {
+
+                                User_Shift_Schedule uss = new User_Shift_Schedule()
+                                {
+                                    ScheduleId = sched.Id,
+                                    UserId = user.UserId,
+                                    ShiftId = shift.ShiftID
+                                };
+
+                                db.UserShiftSchedules.Add(uss);
+                                db.SaveChanges();
+
+                                usercurrentHours += shiftHours;
+                                if (currentHours.ContainsKey(user.UserId))
+                                {
+
+                                    currentHours[user.UserId] = usercurrentHours;
+
+                                }
+                                else
+                                {
+                                    currentHours.Add(user.UserId, shiftHours);
+                                }
+
+
+                                break;
+                            }
                         }
                     }
 
