@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201703121808048_StartEndTimeSpan.Designer.cs">
       <DependentUpon>201703121808048_StartEndTimeSpan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703122143388_UserShiftSchedules.cs" />
+    <Compile Include="Migrations\201703122143388_UserShiftSchedules.Designer.cs">
+      <DependentUpon>201703122143388_UserShiftSchedules.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -805,6 +809,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703121808048_StartEndTimeSpan.resx">
       <DependentUpon>201703121808048_StartEndTimeSpan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703122143388_UserShiftSchedules.resx">
+      <DependentUpon>201703122143388_UserShiftSchedules.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

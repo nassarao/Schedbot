@@ -20,7 +20,8 @@ namespace SchedBot
         public DbSet<Schedule> Schedules{ get; set; }
         public DbSet<Schedule_Shift> Schedule_Shifts{ get; set; }
         public DbSet<AvailableShifts> AvailableShifts { get; set; }
+        public DbSet<User_Shift_Schedule> UserShiftSchedules { get; set; }
 
-        
+
     }
 }

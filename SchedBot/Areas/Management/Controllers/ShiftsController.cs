@@ -24,7 +24,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 Roles = db.JobRoles.ToList(),
                 Shifts = db.Shifts.ToList()
-                
+
             };
 
             vm.JobRoles = new List<SelectListItem>();
@@ -32,7 +32,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 vm.JobRoles.Add(new SelectListItem() { Text = role.Name, Value = role.JobRoleId.ToString() });
             }
-           
+
             return View(vm);
         }
 
@@ -54,7 +54,7 @@ namespace SchedBot.Areas.Management.Controllers
         // GET: Management/Shifts/Create
         public ActionResult Create()
         {
-           
+
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace SchedBot.Areas.Management.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+
         public async Task<ActionResult> Create(FormCollection coll)
         {
             Shift shift = new Shift()
@@ -81,8 +81,105 @@ namespace SchedBot.Areas.Management.Controllers
                 return RedirectToAction("Index");
             }
 
-           
+
             return View(shift);
+        }
+
+        public ActionResult CreateSchedule()
+        {
+
+
+            Schedule sched = new Schedule(db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.Current));
+            db.Schedules.Add(sched);
+            db.SaveChanges();
+            List<Shift> shifts = db.Shifts.Where(x => x.Active == true).ToList();
+            List<Schedule_Shift> ss = sched.PopulateSchedule(shifts);
+            db.Schedule_Shifts.AddRange(ss);
+            db.SaveChanges();
+
+            List<User> users = db.Users.Include(x => x.Availability).ToList();
+            List<User_JobRole> ujs = db.User_JobRoles.Include(x => x.User).Include(x => x.User.Availability).ToList();
+            IDictionary<int, List<User_JobRole>> roleUserDic = new Dictionary<int, List<User_JobRole>>();
+            foreach (User_JobRole uj in ujs)
+            {
+                //foreach (JobRole role in user.)
+                if (roleUserDic.ContainsKey(uj.JobRoleId))
+                {
+                    roleUserDic[uj.JobRoleId].Add(uj);
+                }
+                else
+                {
+                    List<User_JobRole> ujRole = new List<User_JobRole>();
+                    ujRole.Add(uj);
+                    roleUserDic.Add(uj.JobRoleId, ujRole);
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                List<Shift> dayShifts = shifts.Where(x => x.Day == (DayOfWeek)Enum.Parse(typeof(DayOfWeek), i.ToString())).ToList();
+                foreach (Shift shift in dayShifts)
+                {
+                    List<User_JobRole> uj = roleUserDic[shift.JobRoleId];
+                    bool isAm = shift.Start.Hours < 12;
+                    foreach (User_JobRole user in uj)
+                    {
+
+                        int av = -1;
+                        switch (i)
+                        {
+                            case 0:
+                                av = user.User.Availability.Sunday;
+                                break;
+                            case 1:
+                                av = user.User.Availability.Monday;
+
+                                break;
+                            case 2:
+                                av = user.User.Availability.Tuesday;
+
+                                break;
+                            case 3:
+                                av = user.User.Availability.Wednesday;
+
+                                break;
+                            case 4:
+                                av = user.User.Availability.Thursday;
+
+                                break;
+                            case 5:
+                                av = user.User.Availability.Friday;
+
+                                break;
+                            case 6:
+                                av = user.User.Availability.Saturday;
+
+                                break;
+
+
+                        }
+
+                        if (av != 3 && ((av != 1 && isAm) || (av != 2 && !isAm)))
+                            continue;
+                        else
+                        {
+                            User_Shift_Schedule uss = new User_Shift_Schedule()
+                            {
+                                ScheduleId = sched.Id,
+                                UserId = user.UserId,
+                                ShiftId = shift.ShiftID
+                            };
+                            db.UserShiftSchedules.Add(uss);
+                            db.SaveChanges();
+                            break;
+                        }
+                    }
+
+                }
+
+            }
+
+
+            return RedirectToAction("Index");
         }
 
         // GET: Management/Shifts/Edit/5
@@ -97,7 +194,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 return HttpNotFound();
             }
-       
+
             return View(shift);
         }
 
@@ -114,7 +211,7 @@ namespace SchedBot.Areas.Management.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-           
+
             return View(shift);
         }
 

@@ -14,6 +14,13 @@
     <button class="btn green-meadow btn-outline sbold" id="newShift"><i class="fa fa-plus"></i>&nbsp; New Shift</button>
 </div>
 
+@using (Html.BeginForm("CreateSchedule", "Shifts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="col-md-12 col-sm-12 margin-bottom-20">
+    <button class="btn green-meadow btn-outline sbold"  type="submit" id="createSched"><i class="fa fa-plus"></i>&nbsp; Creat Schedule</button>
+</div>
+}
+
 
 
 <div class="col-md-12 col-sm-12">
