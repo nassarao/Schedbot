@@ -118,6 +118,9 @@ namespace SchedBot.Areas.Management.Controllers
             Dictionary<int, double> currentHours = new Dictionary<int, double>();
             for (int i = 0; i < 7; i++)
             {
+                Dictionary<int, List<Shift>> userDayShifts = new Dictionary<int, List<Shift>>();
+
+
                 List<Shift> dayShifts = shifts.Where(x => x.Day == (DayOfWeek)Enum.Parse(typeof(DayOfWeek), i.ToString())).ToList();
                 foreach (Shift shift in dayShifts)
                 {
@@ -164,40 +167,84 @@ namespace SchedBot.Areas.Management.Controllers
                             continue;
                         else
                         {
-                            TimeSpan shiftHrs = shift.End - shift.Start;
-                            double shiftHours = shiftHrs.Hours + shiftHrs.Minutes / 60;
-                            double usercurrentHours = 0.0;
-                            if (currentHours.ContainsKey(user.UserId))
-                            {
-                                usercurrentHours = currentHours[user.UserId];
-                            }
-                            if (usercurrentHours + shiftHours < user.User.Availability.MaxHours)
-                            {
 
-                                User_Shift_Schedule uss = new User_Shift_Schedule()
+                            bool isAvailable = true;
+                            if (userDayShifts.ContainsKey(user.UserId))
+                            {
+                                List<Shift> otherUserShifts = userDayShifts[user.UserId];
+                                foreach (Shift os in otherUserShifts)
                                 {
-                                    ScheduleId = sched.Id,
-                                    UserId = user.UserId,
-                                    ShiftId = shift.ShiftID
-                                };
 
-                                db.UserShiftSchedules.Add(uss);
-                                db.SaveChanges();
+                                    if (os.Start < shift.Start)
+                                    {
+                                        if (os.End > shift.Start)
+                                        {
+                                            isAvailable = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (shift.End > os.Start)
+                                        {
+                                            isAvailable = false;
+                                        }
+                                    }
+                                }
+                            }
 
-                                usercurrentHours += shiftHours;
+                            if (isAvailable)
+                            {
+
+                                TimeSpan shiftHrs = shift.End - shift.Start;
+                                double shiftHours = shiftHrs.Hours + shiftHrs.Minutes / 60;
+                                double usercurrentHours = 0.0;
                                 if (currentHours.ContainsKey(user.UserId))
                                 {
-
-                                    currentHours[user.UserId] = usercurrentHours;
-
+                                    usercurrentHours = currentHours[user.UserId];
                                 }
-                                else
+                                if (usercurrentHours + shiftHours < user.User.Availability.MaxHours)
                                 {
-                                    currentHours.Add(user.UserId, shiftHours);
+
+                                    User_Shift_Schedule uss = new User_Shift_Schedule()
+                                    {
+                                        ScheduleId = sched.Id,
+                                        UserId = user.UserId,
+                                        ShiftId = shift.ShiftID
+                                    };
+
+                                    db.UserShiftSchedules.Add(uss);
+                                    db.SaveChanges();
+
+                                    if (userDayShifts.ContainsKey(user.UserId))
+                                    {
+                                        userDayShifts[user.UserId].Add(shift);
+
+
+                                    }
+                                    else
+                                    {
+                                        List<Shift> userShiftList = new List<Shift>();
+                                        userShiftList.Add(shift);
+                                        userDayShifts.Add(user.UserId, userShiftList);
+                                    }
+
+
+                                    usercurrentHours += shiftHours;
+                                    if (currentHours.ContainsKey(user.UserId))
+                                    {
+
+                                        currentHours[user.UserId] = usercurrentHours;
+
+                                    }
+                                    else
+                                    {
+                                        currentHours.Add(user.UserId, shiftHours);
+                                    }
+
+
+                                    break;
                                 }
 
-
-                                break;
                             }
                         }
                     }
