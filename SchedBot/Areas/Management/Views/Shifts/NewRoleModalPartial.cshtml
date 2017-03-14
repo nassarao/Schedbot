@@ -1,8 +1,9 @@
 <div class="modal fade" id="roleNewModal" role="dialog">
     <div class="modal-dialog"> 
         <!-- Modal content-->
-        @using(Html.BeginForm("CreateJobRole", "JobRole", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+        @using(Html.BeginForm("CreateJobRole", "JobRole", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="newRoleForm", @name="newRoleForm"}))
             {
+            @Html.AntiForgeryToken()
          // @Html.HiddenFor(model => model.user.UserId)
         <div class="modal-content">
             <div class="modal-header"> @*
@@ -15,7 +16,7 @@
                     </div>
                     <div class="col-md-8 no-padding">
                         <div class="col-md-12 no-padding">
-                            <input type="text" class="form-control" id="roleName" /> </div>
+                            <input type="text" class="form-control" id="roleName" name="name"/> </div>
                     </div>
                 </div>
                 <div class="margin-top-10" id="newRoleHTML"></div>
@@ -25,7 +26,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12 no-padding">
                         
-                            <textarea class="form-control" id="roleDescription" rows="3"></textarea>
+                            <textarea class="form-control" id="roleDescription" name="description" rows="3"></textarea>
                         
                     </div>
                 </div>
@@ -33,7 +34,7 @@
                 
             </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary pull-right" value="Add Role" />
+                <input type="button" class="btn btn-primary pull-right" value="Add Role" id="newRoleSubmit" name="newRoleSubmit" />
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
             </div>
         </div> } </div>
