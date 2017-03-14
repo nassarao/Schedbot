@@ -10,7 +10,8 @@
     
      <div class="col-md-12 col-sm-12 margin-bottom-20">
         <button class="btn green-meadow btn-outline sbold" id="newShift"><i class="fa fa-plus"></i>&nbsp; New Shift</button>
-    </div> 
+        <button class="btn green-meadow btn-outline sbold" id="addRole"><i class="fa fa-plus"></i>&nbsp; Add Role</button>
+    </div>
 
   
   
@@ -193,6 +194,12 @@
         @Html.Partial("DeleteShiftModalPartial")
 
         <!-- ************************************* Delete Shift Modal End ***************************************** -->
+        
+        
+        <!-- ************************************* New Role Modal Start ***************************************** -->
+        @Html.Partial("NewRoleModalPartial")
+
+        <!-- ************************************* New Role Modal End ***************************************** -->
     
     
     
@@ -210,6 +217,14 @@
                 //$('#timepicker')
                 document.getElementById("timepicker").readOnly = false;
                 document.getElementById("timepicker2").readOnly = false;
+
+    });
+    
+    $('#addRole').click(function () {
+
+                console.info("made inside new role click");
+                $('#roleNewModal').modal('show');
+                
 
     });
     

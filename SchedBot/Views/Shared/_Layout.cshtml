@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity
 
 @{
     var userName = User.Identity.GetUserName();
@@ -22,6 +22,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.css" id="theme_base">
+    <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.time.css" id="theme_time">
+    <link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
 </head>
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">
@@ -69,6 +72,49 @@
                                                     <span class="label label-sm label-icon label-danger">
                                                         <i class="fa fa-exchange"></i>
                                                     </span> New trade request.
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-extended dropdown-quicklinks" id="header_notification_bar">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-link"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="external">
+                                    <h3>
+                                        <span class="bold">3 Quick Links</span> 
+                                    </h3>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                        <li>
+                                            <a id="addEmployeeQuickLink" name="addEmployeeQuickLink" href="javascript:;">
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="icon-user"></i> 
+                                                    </span> Add Employee
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" id="addShiftQuickLink" name="addShiftQuickLink">
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="icon-calendar"></i> 
+                                                    </span> Add Shift
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" id="addRoleQuickLink" name="addRoleQuickLink">
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="fa fa-briefcase"></i> 
+                                                    </span> Add Role
                                                 </span>
                                             </a>
                                         </li>
@@ -147,7 +193,7 @@
                     </li>
                     <li class="@(ViewBag.Current == "Requests" ? "nav-item active open" : "nav-item") ">
                         <a href="@Url.Action("Index", "Requests", new { area = "Management" })" class="nav-link nav-toggle">
-                            <i class="icon-home"></i>
+                            <i class="icon-shuffle"></i>
                             <span class="title">Requests</span>
                             @if (ViewBag.Current == "Requests")
                             {
@@ -276,6 +322,46 @@
             <i class="icon-arrow-up"></i>
         </div>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- ************************************* New Shift Modal Start ***************************************** -->
+        @*@Html.Partial("NewShiftModalPartial")*@
+        @Html.Partial("~/Areas/Management/Views/Shifts/NewShiftModalPartial.cshtml")
+
+        <!-- ************************************* New Shift Modal End ***************************************** -->
+        
+        <!-- ************************************* New Role Modal Start ***************************************** -->
+        @Html.Partial("~/Areas/Management/Views/Shifts/NewRoleModalPartial.cshtml")
+
+        <!-- ************************************* New Role Modal End ***************************************** -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+
+    
+    
+    
+    
+    
+    
+    
+    
 
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
@@ -285,6 +371,7 @@
     <script src="@Url.Content("~/Scripts/jquery.blockui.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.uniform.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-switch.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
     <script src="~/Scripts/moment.min.js" type="text/javascript"></script>
     <script src="~/Scripts/fullcalendar.js" type="text/javascript"></script>
     <script src="~/Scripts/jquery-ui.min.js" type="text/javascript"></script>
@@ -296,9 +383,63 @@
     <script src="@Url.Content("~/Scripts/layout.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/demo.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/quick-sidebar.min.js")" type="text/javascript"></script>
+    
+    <script src="~/Scripts/TimePicker/picker.js"></script>
+<script src="~/Scripts/TimePicker/picker.time.js"></script>
+    
 </body>
 
 </html>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#addEmployeeQuickLink').click(function () {
+            $('#addEmployeeModal').modal('show');
+
+        });
+        
+        $('#addShiftQuickLink').click(function () {
+            $('#shiftNewModal').modal('show');
+            document.getElementById("timepicker").readOnly = false;
+                document.getElementById("timepicker2").readOnly = false;
+
+        });
+
+        
+        $('#addRoleQuickLink').click(function () {
+            $('#roleNewModal').modal('show');
+
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        $('#timepicker').pickatime({
+        containter: '#shiftNewModal',
+        min: [7, 0],
+        max: [23, 0],
+        interval: 15
+    });
+
+    $('#timepicker2').pickatime({
+        containter: '#shiftNewModal',
+        min: [7, 0],
+        max: [23, 0],
+        interval: 15
+    });
+        
+        
+
+    });
+    
+</script>
 
 <script>
 
