@@ -18,7 +18,7 @@ namespace SchedbotDTOs
         public int Thursday { get; set; }
         public int Friday { get; set; }
         public int Saturday { get; set; }
-        
+        public int MaxHours { get; set; }
     }
 
     public class AvailableShifts

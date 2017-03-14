@@ -183,7 +183,11 @@ namespace SchedBot.Areas.Management.Controllers
             foreach (var item in collection.AllKeys)
             {
                 var colValue = collection.GetValue(item);
-                if (!item.Equals("UserId"))
+                if(item.Contains("MaxHours"))
+                {
+                    user.Availability.MaxHours = int.Parse(colValue.AttemptedValue);
+                }
+                if (item.Contains("Availability"))
                 {
                     string[] name = item.Split('-');
 

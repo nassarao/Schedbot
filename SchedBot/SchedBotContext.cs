@@ -17,10 +17,11 @@ namespace SchedBot
         public DbSet<User> Users { get; set; }
         public DbSet<JobRole> JobRoles{ get; set; }
         public DbSet<User_JobRole> User_JobRoles{ get; set; }
+        public DbSet<Schedule> Schedules{ get; set; }
+        public DbSet<Schedule_Shift> Schedule_Shifts{ get; set; }
+        public DbSet<AvailableShifts> AvailableShifts { get; set; }
+        public DbSet<User_Shift_Schedule> UserShiftSchedules { get; set; }
 
-        public System.Data.Entity.DbSet<SchedbotDTOs.AvailableShifts> AvailableShifts { get; set; }
 
-
-        public System.Data.Entity.DbSet<SchedbotDTOs.ShiftType> ShiftTypes { get; set; }
     }
 }
