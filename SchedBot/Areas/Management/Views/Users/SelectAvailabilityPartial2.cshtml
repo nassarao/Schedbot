@@ -170,18 +170,9 @@
             url: '@Url.Action("SaveAvailability", "Users")'
             , type: "POST"
             , data: model_to_update.serialize()
-            , success: function (response) {
-                
-                swal({
-                    title: "Success!"
-                    , text: "You successfully updated your availability"
-                    , type: "success"
-                    , showCancelButton: false
-                    , confirmButtonText: "Ok"
-                    , closeOnConfirm: true
-                    , closeOnCancel: false
-                });
-                
+            , success: function (response) {                
+                swal('Success!', 'User availability successfully updated', 'success');
+                                
             }
             , error: function (response) {
                 sweetAlert("Oops...", "Something went wrong!", "error");

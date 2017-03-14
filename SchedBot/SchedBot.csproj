@@ -419,6 +419,7 @@
     <Content Include="Content\simple-line-icons.css" />
     <Content Include="Content\simple-line-icons.min.css" />
     <Content Include="Content\sweetalert.css" />
+    <Content Include="Content\sweetalert2.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="Content\uniform.default.css" />
     <Content Include="Content\uniform.default.min.css" />
@@ -569,6 +570,7 @@
     <Content Include="Scripts\select2.full.js" />
     <Content Include="Scripts\select2.full.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\sweetalert2.js" />
     <Content Include="Scripts\TimePicker\compressed\legacy.js" />
     <Content Include="Scripts\TimePicker\compressed\picker.date.js" />
     <Content Include="Scripts\TimePicker\compressed\picker.js" />
