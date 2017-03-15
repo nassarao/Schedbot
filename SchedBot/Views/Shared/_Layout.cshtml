@@ -488,8 +488,71 @@
         
         
         
+        $('#newShiftSubmit').click(function () {
+        
+        var model_to_update = $('#newShiftForm');
+            var userId = $('#user_UserId').val();
+
+        console.info("Inside new shift submit click...", model_to_update.serialize());
+        console.log(location);
         
         
+        $.ajax({
+            url: '@Url.Action("Create", "Shifts")'
+            , type: "POST"
+            , data: model_to_update.serialize()
+            , success: function (response) {
+                $('#shiftNewModal').modal('toggle');
+                
+                swal({
+          title: 'Success!',
+          text: "Your shift was successfully added",
+          type: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          confirmButtonClass: 'btn btn-primary',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false
+        }).then(function () {
+          location.reload();    
+        }, function (dismiss) {
+          // dismiss can be 'cancel', 'overlay',
+          // 'close', and 'timer'
+          if (dismiss === 'cancel') {
+            //hook in way to clear data
+          }
+        })
+                                
+            }
+            , error: function (response) {
+                $('#shiftNewModal').modal('toggle');
+                //sweetAlert("Oops...", "Something went wrong!", "error");
+                
+                swal({
+          title: 'Oops...',
+          text: "Something went wrong! Would you like to return to the modal?",
+          type: 'error',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, return to modal',
+          cancelButtonText: 'No, cancel',
+          confirmButtonClass: 'btn btn-primary margin-right-10',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false
+        }).then(function () {
+          $('#shiftNewModal').modal('toggle');
+        }, function (dismiss) {
+          // dismiss can be 'cancel', 'overlay',
+          // 'close', and 'timer'
+          if (dismiss === 'cancel') {
+            //hook in way to clear data
+          }
+        })
+                
+            }
+        });
+        
+        
+    });
         
         
         
