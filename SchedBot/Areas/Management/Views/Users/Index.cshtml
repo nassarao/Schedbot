@@ -1,18 +1,13 @@
-﻿@using SchedBot.Areas.Management.Models
-@model UserIndexViewModel
-
-@{
-    ViewBag.Title = "Employees";
-    ViewBag.Current = "Employees";
-}
+@using SchedBot.Areas.Management.Models
+@model UserIndexViewModel 
+@{ ViewBag.Title = "Employees"; ViewBag.Current = "Employees"; }
 
 <div>
     <div class="col-md-12 col-sm-12 margin-bottom-20">
         <button class="btn green-meadow btn-outline sbold" id="addEmployee"><i class="fa fa-plus"></i>&nbsp; Add Employee</button>
     </div>
     <div class="col-md-12 col-sm-12">
-        <div id='addEmployee' class='modal fade in' data-toggle="modal" data-target="#addEmployeeModal">
-        </div>
+        <div id='addEmployee' class='modal fade in' data-toggle="modal" data-target="#addEmployeeModal"> </div>
         <div class="portlet box grey-mint">
             <div class="portlet-title">
                 <div class="caption">Manage Employees</div>
@@ -37,83 +32,32 @@
                             <th class="col-md-1 text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-@foreach (var user in Model.UserDTOs)
-{
-    <tr>
-        <td class="col-md-2">@(user.FirstName + " " + user.LastName)</td>
-        <td class="col-md-2">@(user.PhoneNumber)</td>
-        @if (user.Availability.Sunday > 0)
-        {
-        <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Monday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Tuesday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Wednesday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Thursday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Friday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        @if (user.Availability.Saturday > 0)
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-        }
-        else
-        {
-            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-        }
-        <td class="col-md-1 text-center">
-            <span class="btn-group btn-group-xs">
-                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a>
-                @*<button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button>*@
-                @*<a class="btn btn-outline red" href="@Url.Action("Delete", "Users", new { id = item.UserId })"><span class="fa fa-trash"></span></a>*@
-              
-                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@user.LastName" data-firstName="@user.FirstName" data-id="@user.UserId"><i class="fa fa-trash"></i></button>
-                @*<button class="btn btn-outline red deleteEmployee" id="deleteEmployee_@item.UserId" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>*@
-            </span>
-        </td>
-    </tr>
-
-}
-                        
-                        @*<tr>
+                    <tbody> @foreach (var user in Model.UserDTOs) {
+                        <tr>
+                            <td class="col-md-2">@(user.FirstName + " " + user.LastName)</td>
+                            <td class="col-md-2">@(user.PhoneNumber)</td> @if (user.Availability.Sunday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Monday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Tuesday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Wednesday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Thursday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Friday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> } @if (user.Availability.Saturday > 0) {
+                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
+                            <td class="col-md-1 text-center"></td> }
+                            <td class="col-md-1 text-center"> <span class="btn-group btn-group-xs">
+                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a> @*
+                                <button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button>*@ @*<a class="btn btn-outline red" href="@Url.Action(" Delete ", "Users ", new { id = item.UserId })"><span class="fa fa-trash"></span></a>*@
+                                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@user.LastName" data-firstName="@user.FirstName" data-id="@user.UserId"><i class="fa fa-trash"></i></button> @*
+                                <button class="btn btn-outline red deleteEmployee" id="deleteEmployee_@item.UserId" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>*@ </span>
+                            </td>
+                        </tr> } @*
+                        <tr>
                             <td class="col-md-2">Ahmad Nassar</td>
                             <td class="col-md-2">(513)777-7777</td>
                             <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
@@ -124,173 +68,92 @@
                             <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
                             <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
                             <td class="col-md-1 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
-                        </tr>*@
-                    </tbody>
+                        </tr>*@ </tbody>
                 </table>
-                <div id='deleteEmployee' class='modal fade in' data-toggle="modal" data-target="#deleteEmployeeModal">
-                </div>
+                <div id='deleteEmployee' class='modal fade in' data-toggle="modal" data-target="#deleteEmployeeModal"> </div>
             </div>
         </div>
     </div>
-
-
-
-
-
     <!-- *************************************** Add Modal ************************************************ -->
-    
     <div class="modal fade" id="addEmployeeModal" role="dialog">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
-            @using (Html.BeginForm("Create","Users", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                <div class="modal-content">
-                    <div class="modal-header">
-                        @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
-                        <h4 class="modal-title" id="addEmployeeHeader">Add Employee</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label class="control-label">Basic Employee Info</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-6">
-                                        @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name"  })
-                                     
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name" })
-                             
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-6">
-                                        @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel", @maxlength = "10" })
-
-
-                                        
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address" })
-
-
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City" }) 
-                                    </div>
-                                    <div class="col-md-4">
-                                        @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State", @maxlength = "2" })
-
-                                    </div>
-                                    <div class="col-md-4">
-                                        @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code", @type = "text", @maxlength = "5"})
-
-                                    </div>
+            <!-- Modal content-->@using (Html.BeginForm("Create","Users", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            <div class="modal-content">
+                <div class="modal-header"> @*
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
+                    <h4 class="modal-title" id="addEmployeeHeader">Add Employee</h4> </div>
+                <div class="modal-body"> @Html.AntiForgeryToken() @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label">Basic Employee Info</label>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name" }) </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel", @maxlength = "10" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address" }) </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City" }) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State", @maxlength = "2" }) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code", @type = "text", @maxlength = "5"}) </div>
+                            </div>
                         </div>
-                        <div class="row margin-top-10">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label class="control-label">Login Info</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        
-                                        @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-6">
-                                       
-                                        @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", @placeholder = "Password" })
-                                    </div>
-                                    <div class="col-md-6">
-                                       
-                                        @Html.PasswordFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
-                                    </div>
+                    </div>
+                    <div class="row margin-top-10">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label">Login Info</label>
                                 </div>
                             </div>
-                            
+                            <div class="form-group">
+                                <div class="col-md-12"> @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" }) </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", @placeholder = "Password" }) </div>
+                                <div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" }) </div>
+                            </div>
                         </div>
-                        
-                        
-                        @*<div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" class="btn btn-default" value="Register" />
-                                </div>
-                            </div>*@
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success pull-right" value="Add Employee" />
-                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
-                    </div>
+                    </div> @*
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-default" value="Register" /> </div>
+                    </div>*@ </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success pull-right" value="Add Employee" />
+                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
                 </div>
-            }
-
-        </div>
+            </div> } </div>
     </div>
-
-
-
-
-    <!-- ************************************* Delete Modal ***************************************** -->
-
-    @*<div class="modal fade" id="employeeDeleteModal" role="dialog">
+    <!-- ************************************* Delete Modal ***************************************** -->@*
+    <div class="modal fade" id="employeeDeleteModal" role="dialog">
         <div class="modal-dialog">
-
-
-            <!-- Modal content-->
-            @using (Html.BeginForm("Delete", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="modal-content">
-                    <div class="modal-header">
-                       
-
-
-                        @*<button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                        <h4 class="modal-title" id="employeeDeleteHeader">Delete Employee</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <p>Are you sure you would like to remove <span id="employeeName"></span> from the list of employees?</p>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-danger pull-right" value="Delete Employee" />
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
-                    </div>
+            <!-- Modal content-->@using (Html.BeginForm("Delete", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) { @Html.AntiForgeryToken()
+            <div class="modal-content">
+                <div class="modal-header"> @*
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                    <h4 class="modal-title" id="employeeDeleteHeader">Delete Employee</h4> </div>
+                <div class="modal-body">
+                    <p>Are you sure you would like to remove <span id="employeeName"></span> from the list of employees?</p>
                 </div>
-            }
-
-        </div>
-    </div>*@
-
-
-    @* -------------------------------------------------------------------------- *@
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger pull-right" value="Delete Employee" />
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
+                </div>
+            </div> } </div>
+    </div>*@ @* -------------------------------------------------------------------------- *@
     <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Confirmation</h4>
-                </div>
+                    <h4 class="modal-title">Delete Confirmation</h4> </div>
                 <div class="modal-body">
                     <p>Are you sure you would like to remove <span id="employeeName"></span> from the list of employees?</p>
                 </div>
@@ -300,44 +163,24 @@
                 </div>
             </div>
         </div>
-        </div>
-
-        <!-- ************************************* Delete End ***************************************** -->
-
-
-
-
     </div>
-
-
-
-
-@Scripts.Render("~/bundles/jquery")
-
+    <!-- ************************************* Delete End ***************************************** -->
+</div> @Scripts.Render("~/bundles/jquery")
 <script>
     $(document).ready(function () {
-
         $('#addEmployee').click(function () {
             $('#addEmployeeModal').modal('show');
-
         });
-
         $('.deleteEmployee').click(function () {
             console.info("Made inside delete click...");
             $('#employeeDeleteModal').modal('show');
-
             var firstName = $(this).data('firstname');
             var lastName = $(this).data('lastname');
             var userId = $(this).data('userid');
             console.log("user in modal: ", firstName, lastName, userId);
             $('#employeeName').html("<b>" + firstName + " " + lastName + "</b>");
-
-            
-
         });
-
     });
-
     var item_to_delete;
     var name;
     $(".deleteItem").click(function (e) {
@@ -346,23 +189,36 @@
         var lastName = $(this).data('lastname');
         name = firstName + " " + lastName;
         $('#employeeName').html("<b>" + firstName + " " + lastName + "</b>");
-
-
     });
     $('#btnContinueDelete').click(function () {
         //window.location = "Delete/" + item_to_delete;
-        
         $.ajax({
-            url: '@Url.Action("Delete", "Users")',
-            type:"POST",        
-            data: {id : item_to_delete},
-            success: function (response) {
+            url: '@Url.Action("Delete", "Users")'
+            , type: "POST"
+            , data: {
+                id: item_to_delete
+            }
+            , success: function (response) {
                 $('#basic').modal('toggle');
-               // alert("Successfully deleted user: " + name);
-                location.reload();
-            },
-            error: function (response) {
-                alert("Failed to delete user: " + name);
+                // alert("Successfully deleted user: " + name);
+                //swal("Employee Deleted", "You successfully deleted " + name, "success")
+                swal({
+                    title: "Success!"
+                    , text: "You successfully deleted " + name + " from the list of employees"
+                    , type: "success"
+                    , showCancelButton: false
+                    , confirmButtonText: "Ok"
+                    , closeOnConfirm: false
+                    , closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        location.reload();
+                    }
+                });
+                
+            }
+            , error: function (response) {
+                sweetAlert("Oops...", "Something went wrong!", "error");
             }
         });
     });

@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -5706,10 +5706,18 @@ a.label:hover {
 .label-success {
     background-color: #5cb85c
 }
+.label-green-meadow {
+    background-color: #1BBC9B
+}
 
 .label-success[href]:focus,
 .label-success[href]:hover {
     background-color: #449d44
+}
+
+.label-green-meadow[href]:focus,
+.label-green-meadow[href]:hover {
+    background-color: #158f76
 }
 
 .label-info {

@@ -23,7 +23,7 @@ namespace SchedBot.Areas.Management.Controllers
             ShiftsIndexModel vm = new ShiftsIndexModel()
             {
                 Roles = db.JobRoles.ToList(),
-                Shifts = db.Shifts.ToList()
+                Shifts = db.Shifts.OrderBy(x => x.Day).ThenBy(x => x.Start).ThenBy(x => x.End).ToList()
 
             };
 

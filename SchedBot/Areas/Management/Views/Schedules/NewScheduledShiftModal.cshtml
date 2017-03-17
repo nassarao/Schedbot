@@ -1,0 +1,134 @@
+<div class="modal fade" id="scheduledShiftNewModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "Schedules", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "newScheduledShiftForm", @name = "newScheduledShiftForm" }))
+        {
+            // @Html.HiddenFor(model => model.user.UserId)
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="scheduledShiftNewHeader">Create and Assign Shift</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label">Shift Role:</label>
+                        </div>
+
+
+                        <div class="col-md-8 no-padding">
+                            <div class="col-md-12 no-padding">
+                                @*@Html.DropDownListFor(model => model.JobRoles, Model.JobRoles, new { @class = "form-control", @name="JobRole" })*@
+
+<!--                                <select class="form-control" name="JobRoles" id="JobRoles"></select>-->
+                        
+                            <input type="number" class="form-control" id="JobRoles" name="JobRoles" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label">Employee:</label>
+                        </div>
+
+
+                        <div class="col-md-8 no-padding">
+                            <div class="col-md-12 no-padding">
+                                @*@Html.DropDownListFor(model => model.JobRoles, Model.JobRoles, new { @class = "form-control", @name="JobRole" })*@
+
+<!--                                <select class="form-control" name="userId" id="userId"></select>-->
+                            <input type="number" class="form-control" id="userId" name="userId" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="margin-top-10" id="newScheduledShiftHTML"></div>
+                    <!--
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Shift Type:</label>
+                                                </div>
+                                                <div class="col-md-8 no-padding">
+                                                    <div class="col-md-12 no-padding">
+                                                        <select class="form-control" name="Type" id="newShiftType">
+                                                            <option value  disabled></option>
+                                                            <option selected value="Primary">Primary</option>
+                                                            <option  value="Alternative">Alternative</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                    -->
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label">Day:</label>
+                        </div>
+                        <div class="col-md-8 no-padding">
+                            <div class="col-md-12 no-padding">
+                                <select class="form-control" name="Day" id="newScheduledShiftDay">
+                                    <option value disabled></option>
+                                    <option selected value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label">Shift Start Time:</label>
+                        </div>
+                        <div class="col-md-8 no-padding">
+                            <div class="col-md-12 no-padding">
+                                <input class="timepicker form-control" type="text" placeholder="Start Time" name="Start" id="timepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="control-label">Shift End Time:</label>
+                        </div>
+                        <div class="col-md-8 no-padding">
+                            <div class="col-md-12 no-padding">
+                                <input class="timepicker form-control" type="text" placeholder="End Time" name="End" id="timepicker2">
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Active Next Week:</label>
+                                                </div>
+                                                <div class="col-md-8 no-padding">
+                                                    <div class="col-md-12 no-padding">
+                                                        <select class="form-control" name="Active" id="newShiftActive">
+                                                            <option value disabled></option>
+                                                            <option selected value="True">True</option>
+                                                            <option value="False">False</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                    -->
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary pull-right" value="Submit" name="newScheduledShiftSubmit" id="newScheduledShiftSubmit" />
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

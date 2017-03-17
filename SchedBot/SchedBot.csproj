@@ -217,10 +217,12 @@
     <Compile Include="Areas\Management\Controllers\AvailableShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\JobRolesController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
+    <Compile Include="Areas\Management\Controllers\SchedulesController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Management\Models\SchedulesIndexModel.cs" />
     <Compile Include="Areas\Management\Models\ShiftsIndexModel.cs" />
     <Compile Include="Areas\Management\Models\UserEditViewModel.cs" />
     <Compile Include="Areas\Management\Models\UserIndexViewModel.cs" />
@@ -418,6 +420,8 @@
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\simple-line-icons.css" />
     <Content Include="Content\simple-line-icons.min.css" />
+    <Content Include="Content\sweetalert.css" />
+    <Content Include="Content\sweetalert2.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="Content\uniform.default.css" />
     <Content Include="Content\uniform.default.min.css" />
@@ -516,9 +520,16 @@
     <Content Include="Areas\Management\Views\Requests\ApproveModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\NewRequestModal.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\NewShiftModalPartial.cshtml" />
-    <Content Include="Areas\Management\Views\Users\SelectAvailabilityPartial2.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\DeleteShiftModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\EditShiftModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Shifts\NewRoleModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Users\SelectAvailabilityPartial2.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\NewScheduledShiftModal.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
@@ -566,6 +577,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2.full.js" />
     <Content Include="Scripts\select2.full.min.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\sweetalert2.js" />
     <Content Include="Scripts\TimePicker\compressed\legacy.js" />
     <Content Include="Scripts\TimePicker\compressed\picker.date.js" />
     <Content Include="Scripts\TimePicker\compressed\picker.js" />
@@ -729,7 +742,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Management\Views\Schedules\" />
     <Folder Include="Areas\Management\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

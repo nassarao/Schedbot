@@ -1,155 +1,183 @@
 @model SchedbotDTOs.User
-@using (Html.BeginForm("SaveAvailability", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form"})) 
-{ 
-@Html.HiddenFor(model => model.UserId)
-<div class="col-md-7 col-sm-12">
-    <div class="col-md-12 col-sm-12">
-        <div class="portlet light">
-            <div class="portlet-title tabbable-line">
-                <div class="col-md-3 col-sm-12 col-xs-12 caption font-schedBot">Availability</div>
-                <div class="col-md-9 col-sm-12 col-xs-12 info-message">
-                    <p class="info-message-text"><i class="fa fa-info-circle"></i> Shifts starting before 12:00PM are considered AM shifts. Remaining shifts are PM shifts.</p>
-                </div>
-            </div>
-            <div class="portlet-body">
-                   
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Max Desired Hours:</label>
-                        <div class="col-md-3">@Html.EditorFor(model => model.Availability.MaxHours ,new { htmlAttributes = new { @class = "form-control", @type = "number", min = "0" } })
-                        @*<input type="number" name="MaxHours" class="form-control" min="0"  >*@</div>
-<!--      Commented code below can be used once we have a data model for maxHours                  -->
-<!--                         <div class="col-md-3"> @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } }) @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" }) </div> -->
+@using (Html.BeginForm("SaveAvailability", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form", @name = "availabilityForm", @id = "availabilityForm" }))
+{
+    @Html.HiddenFor(model => model.UserId)
+    <div class="col-md-7 col-sm-12">
+        <div class="col-md-12 col-sm-12">
+            <div class="portlet light">
+                <div class="portlet-title tabbable-line">
+                    <div class="col-md-3 col-sm-12 col-xs-12 caption font-schedBot">Availability</div>
+                    <div class="col-md-9 col-sm-12 col-xs-12 info-message">
+                        <p class="info-message-text"><i class="fa fa-info-circle"></i> Shifts starting before 12:00PM are considered AM shifts. Remaining shifts are PM shifts.</p>
                     </div>
-                    
-                    <hr>
-                
+                </div>
+                <div class="portlet-body" name="form_stuff" id="form_stuff">
 
                     <div class="form-group">
+                        <label class="control-label col-md-3">Max Desired Hours:</label>
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Availability.MaxHours, new { htmlAttributes = new { @class = "form-control", @type = "number", min = "0" } })
+                        @*<input type="number" name="MaxHours" class="form-control" min="0"  >*@
+                    </div>
+                    <!--      Commented code below can be used once we have a data model for maxHours                  -->
+                    <!--                         <div class="col-md-3"> @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } }) @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" }) </div> -->
+                </div>
+
+                <hr>
+
+
+                <div class="form-group">
                     <label class="control-label col-md-3">Sunday:</label>
-                    
-                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Sunday,                
-                  new List<SelectListItem> { 
+
+                    <div class="col-md-3">
+
+                        @Html.DropDownListFor(model => model.Availability.Sunday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Monday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Monday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Monday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Tuesday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Tuesday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Tuesday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Wednesday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Wednesday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Wednesday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Thursday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Thursday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Thursday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Friday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Friday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Friday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label class="control-label col-md-3">Saturday:</label>
-                    
+
                     <div class="col-md-3">
-                        
-                        @Html.DropDownListFor(model => model.Availability.Saturday,                
-                  new List<SelectListItem> { 
+
+                        @Html.DropDownListFor(model => model.Availability.Saturday,
+                  new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "None" },
                        new SelectListItem { Value = "1" , Text = "AM" },
                        new SelectListItem { Value = "2" , Text = "PM" },
                        new SelectListItem { Value = "3" , Text = "Both" }
                     },
-                  new { @class="form-control"})
-                        
-                    </div> 
+                  new { @class = "form-control" })
+
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-outline green-meadow sbold">Save Availability</button>
+                <button type="button" class="btn btn-block btn-outline green-meadow sbold" id="saveAvailability" name="saveAvailability">Save Availability</button>
             </div>
         </div>
     </div>
 </div> }
+
+
+<script>
+    
+    $('#saveAvailability').click(function () {
+        
+        var model_to_update = $('#availabilityForm');
+
+        console.info("Inside availability click...", model_to_update);
+        
+        
+        $.ajax({
+            url: '@Url.Action("SaveAvailability", "Users")'
+            , type: "POST"
+            , data: model_to_update.serialize()
+            , success: function (response) {                
+                swal('Success!', 'User availability successfully updated', 'success');
+                                
+            }
+            , error: function (response) {
+                sweetAlert("Oops...", "Something went wrong!", "error");
+            }
+        });
+    });
+                    
+</script>

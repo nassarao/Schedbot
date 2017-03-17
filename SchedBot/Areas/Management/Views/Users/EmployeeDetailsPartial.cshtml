@@ -1,6 +1,6 @@
 @model SchedbotDTOs.User
 
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form", @name="userDetailsForm", @id="userDetailsForm"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.UserId)
@@ -63,9 +63,40 @@
                         @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <button class="btn btn-block btn-outline green-meadow sbold" type="submit">Save Details</button>
+                <button class="btn btn-block btn-outline green-meadow sbold" type="button" id="saveDetails" name="saveDetails">Save Details</button>
             
         </div>
     </div>
 </div>
 }
+
+
+
+
+
+<script>
+    
+    $('#saveDetails').click(function () {
+        
+        var model_to_update = $('#availabilityForm');
+
+        console.info("Inside details click...", model_to_update);
+        
+        
+        $.ajax({
+            url: '@Url.Action("Edit", "Users")'
+            , type: "POST"
+            , data: model_to_update.serialize()
+            , success: function (response) {                
+                swal('Success!', 'User details successfully updated', 'success');
+                                
+            }
+            , error: function (response) {
+                sweetAlert("Oops...", "Something went wrong!", "error");
+            }
+        });
+    });
+                    
+</script>
+
+
