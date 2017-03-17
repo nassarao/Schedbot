@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SchedbotDTOs.User_Shift_Schedule>
+@model IEnumerable<SchedbotDTOs.User_Shift_Schedule>
 
 @{
     ViewBag.Title = "SchedBot - Schedules";
@@ -54,6 +54,8 @@
 <link href="~/Content/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/clockface.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.css" id="theme_base">
+<link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.time.css" id="theme_time">
 
 <div class="col-md-12 col-sm-12">
     <div class="portlet box grey-mint">
@@ -95,8 +97,11 @@
                             -->
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <button class="btn btn-outline yellow-lemon">View Schedule</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn green-meadow btn-outline sbold" id="newScheduledShift" type="button"><i class="fa fa-plus"></i>&nbsp; Add and Assign Shift</button>
                     </div>
                 </form>
             </div>
@@ -123,31 +128,30 @@
                                <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
                            </tr>
                        }
-                    @*<tr>
-                        <td class="col-md-2">Mark Jones</td>
-                        <td class="col-md-2">Monday</td>
-                        <td class="col-md-2">8:30 a.m.</td>
-                        <td class="col-md-2">4:30 p.m.</td>
-                        <td class="col-md-2">Line Cook</td>
-                        <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">Trevor Smith</td>
-                        <td class="col-md-2">Monday</td>
-                        <td class="col-md-2">10:00 a.m.</td>
-                        <td class="col-md-2">6:00 p.m.</td>
-                        <td class="col-md-2">Dish Washer</td>
-                        <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>*@
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
+
+
+
+<!-- ************************************* New Scheduled Shift Modal Start ***************************************** -->
+    @Html.Partial("NewScheduledShiftModal")
+
+    <!-- ************************************* New Scheduled Shift Modal End ***************************************** -->
+
+
+
 <script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="~/Scripts/moment.min.js" type="text/javascript"></script>
 <script src="~/Scripts/daterangepicker.js" type="text/javascript"></script>
+<script src="~/Scripts/TimePicker/picker.js"></script>
+<script src="~/Scripts/TimePicker/picker.time.js"></script>
+
+
+
 @*<script src="~/Scripts/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script src="~/Scripts/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
@@ -160,4 +164,121 @@
     $('button[name="daterange"]').click(function () {
         $('input[name="daterange"]').trigger("click");
     });
+</script>
+<script>
+
+    $('#newScheduledShift').click(function () {
+
+        console.info("made inside new shift click");
+        //getRoles();
+        $('#scheduledShiftNewModal').modal('show');
+        //$('#timepicker')
+        document.getElementById("timepicker").readOnly = false;
+        document.getElementById("timepicker2").readOnly = false;
+        
+        
+        
+        
+        
+        
+        
+         $('#newScheduledShiftSubmit').click(function () {
+        
+        var model_to_update = $('#newScheduledShiftForm');
+            //var userId = $('#user_UserId').val();
+
+        console.info("Inside create and assign schedule click...", model_to_update.serialize());
+        
+        
+        $.ajax({
+            url: '@Url.Action("Create", "Schedules")'
+            , type: "POST"
+            , data: model_to_update.serialize()
+            , success: function (response) {
+                $('#scheduledShiftNewModal').modal('toggle');
+                
+                getRoles(userId);
+                swal('Success!', 'Shift successfully added and assigned', 'success');
+                                
+            }
+            , error: function (response) {
+                $('#scheduledShiftNewModal').modal('toggle');
+                //sweetAlert("Oops...", "Something went wrong!", "error");
+                
+                swal({
+          title: 'Oops...',
+          text: "Something went wrong! Would you like to return to the modal?",
+          type: 'error',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, return to modal',
+          cancelButtonText: 'No, cancel',
+          confirmButtonClass: 'btn btn-primary margin-right-10',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false
+        }).then(function () {
+          $('#scheduledShiftNewModal').modal('toggle');
+        }, function (dismiss) {
+          // dismiss can be 'cancel', 'overlay',
+          // 'close', and 'timer'
+          if (dismiss === 'cancel') {
+            //hook in way to clear data
+          }
+        })
+                
+            }
+        });
+             
+             
+             
+    });
+        
+        
+        
+        
+        
+        
+
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function getRoles(){
+            
+        $.getJSON('@Url.Action("GetListOfRoles", "JobRoles")', function( data ) {
+//  var items = [];
+//  $.each( data, function( key, val ) {
+//    items.push( "<li id='" + key + "'>" + val + "</li>" );
+//  });
+// 
+//  $( "<ul/>", {
+//    "class": "my-new-list",
+//    html: items.join( "" )
+//  }).appendTo( "body" );
+});
+        
+        
+        }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 </script>

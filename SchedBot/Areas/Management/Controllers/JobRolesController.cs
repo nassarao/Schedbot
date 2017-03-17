@@ -117,6 +117,19 @@ namespace SchedBot.Areas.Management.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetListOfRoles()
+        {
+            var listOfRoles = Json(db.JobRoles.ToList());
+            var rolesJSON = Json(listOfRoles, JsonRequestBehavior.AllowGet);
+            return rolesJSON;
+        }
+
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

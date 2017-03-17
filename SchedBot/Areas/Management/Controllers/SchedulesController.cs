@@ -53,20 +53,35 @@ namespace SchedBot.Areas.Management.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ShiftId,ScheduleId,UserId")] User_Shift_Schedule user_Shift_Schedule)
+        public ActionResult Create(FormCollection coll)
         {
-            if (ModelState.IsValid)
-            {
-                db.UserShiftSchedules.Add(user_Shift_Schedule);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.ScheduleId = new SelectList(db.Schedules, "Id", "Id", user_Shift_Schedule.ScheduleId);
-            ViewBag.ShiftId = new SelectList(db.Shifts, "ShiftID", "Type", user_Shift_Schedule.ShiftId);
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "Email", user_Shift_Schedule.UserId);
-            return View(user_Shift_Schedule);
+            Shift shift = new Shift()
+            {
+                JobRoleId = int.Parse(coll.GetValue("JobRoles").AttemptedValue),
+                End = DateTime.Parse(coll.GetValue("End").AttemptedValue).TimeOfDay,
+                Start = DateTime.Parse(coll.GetValue("Start").AttemptedValue).TimeOfDay,
+                Day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), coll.GetValue("Day").AttemptedValue)
+            };
+
+            //generate new user dto here
+
+
+
+
+            
+            
+            //if (ModelState.IsValid)
+            //{
+            //    db.UserShiftSchedules.Add(user_Shift_Schedule);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //ViewBag.ScheduleId = new SelectList(db.Schedules, "Id", "Id", user_Shift_Schedule.ScheduleId);
+            //ViewBag.ShiftId = new SelectList(db.Shifts, "ShiftID", "Type", user_Shift_Schedule.ShiftId);
+            //ViewBag.UserId = new SelectList(db.Users, "UserId", "Email", user_Shift_Schedule.UserId);
+            return RedirectToAction("Index");
         }
 
         // GET: Management/Schedules/Edit/5
