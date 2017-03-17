@@ -1,4 +1,4 @@
-@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 
 @{
     var userName = User.Identity.GetUserName();
@@ -170,7 +170,7 @@
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "Schedules" ? "nav-item active open" : "nav-item") ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
+                        <a href="@Url.Action("Index", "Schedules", new { area = "Management" })" class="nav-link nav-toggle">
                             <i class="icon-calendar"></i>
                             <span class="title">Schedules</span>
                             @if (ViewBag.Current == "Schedules")

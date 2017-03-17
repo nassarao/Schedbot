@@ -217,10 +217,12 @@
     <Compile Include="Areas\Management\Controllers\AvailableShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\JobRolesController.cs" />
     <Compile Include="Areas\Management\Controllers\RequestsController.cs" />
+    <Compile Include="Areas\Management\Controllers\SchedulesController.cs" />
     <Compile Include="Areas\Management\Controllers\ShiftsController.cs" />
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Management\Models\SchedulesIndexModel.cs" />
     <Compile Include="Areas\Management\Models\ShiftsIndexModel.cs" />
     <Compile Include="Areas\Management\Models\UserEditViewModel.cs" />
     <Compile Include="Areas\Management\Models\UserIndexViewModel.cs" />
@@ -522,6 +524,11 @@
     <Content Include="Areas\Management\Views\Shifts\EditShiftModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Shifts\NewRoleModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Users\SelectAvailabilityPartial2.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Create.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Delete.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Details.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Edit.cshtml" />
+    <Content Include="Areas\Management\Views\Schedules\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
@@ -734,7 +741,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Management\Views\Schedules\" />
     <Folder Include="Areas\Management\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
