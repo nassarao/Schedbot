@@ -222,6 +222,7 @@
     <Compile Include="Areas\Management\Controllers\UsersController.cs" />
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Management\Models\CalanderScheduleViewModel.cs" />
     <Compile Include="Areas\Management\Models\SchedulesIndexModel.cs" />
     <Compile Include="Areas\Management\Models\ShiftsIndexModel.cs" />
     <Compile Include="Areas\Management\Models\UserEditViewModel.cs" />
