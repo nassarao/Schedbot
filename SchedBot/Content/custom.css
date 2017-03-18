@@ -33,3 +33,7 @@ i, cite, em, var, address, dfn {
 .text-xs-center {
     text-align: center!important;
 }
+
+.moreBorder{
+    border: 5px solid black !important;
+}

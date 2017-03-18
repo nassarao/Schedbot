@@ -1,12 +1,12 @@
-var AppCalendar = function() {
+var AppCalendar = function () {
 
     return {
         //main function to initiate the module
-        init: function() {
+        init: function () {
             this.initCalendar();
         },
 
-        initCalendar: function() {
+        initCalendar: function () {
 
             if (!jQuery().fullCalendar) {
                 return;
@@ -53,7 +53,7 @@ var AppCalendar = function() {
                 }
             }
 
-            var initDrag = function(el) {
+            var initDrag = function (el) {
                 // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
                 // it doesn't need to have a start or end
                 var eventObject = {
@@ -69,23 +69,23 @@ var AppCalendar = function() {
                 });
             };
 
-            var addEvent = function(title) {
+            var addEvent = function (title) {
                 title = title.length === 0 ? "Untitled Event" : title;
                 var html = $('<div class="external-event label label-default">' + title + '</div>');
                 jQuery('#event_box').append(html);
                 initDrag(html);
             };
 
-            $('#external-events div.external-event').each(function() {
+            $('#external-events div.external-event').each(function () {
                 initDrag($(this));
             });
 
-            $('#event_add').unbind('click').click(function() {
+            $('#event_add').unbind('click').click(function () {
                 var title = $('#event_title').val();
                 addEvent(title);
             });
 
-            
+
 
             $('#calendar').fullCalendar('destroy'); // destroy the calendar
             $('#calendar').fullCalendar({ //re-initialize the calendar
@@ -94,7 +94,7 @@ var AppCalendar = function() {
                 slotMinutes: 15,
                 editable: true,
                 droppable: true, // this allows things to be dropped onto the calendar !!!
-                drop: function(date, allDay) { // this function is called when something is dropped
+                drop: function (date, allDay) { // this function is called when something is dropped
 
                     // retrieve the dropped element's stored Event Object
                     var originalEventObject = $(this).data('eventObject');
@@ -116,94 +116,64 @@ var AppCalendar = function() {
                         $(this).remove();
                     }
                 },
-                //events: console.info("Events load here...")
-                events: [{
-                    title: 'Adam - Server',
-                    start: new Date(y, m, d+1, 11, 15),
-                    end: new Date(y, m, d+1, 15, 45),
-                    backgroundColor: App.getBrandColor('yellow'),
-                    allDay: false,
-                }, {
-                    title: 'Andrew - Manager',
-                    start: new Date(y, m, d+1, 9, 30),
-                    end: new Date(y, m, d+1, 17, 30),
-                    allDay: false,
-                }, {
-                    title: 'Ahmad - Cook',
-                    start: new Date(y, m, d+1, 8, 00),
-                    end: new Date(y, m, d+1, 13, 30),
-                    backgroundColor: App.getBrandColor('green'),
-                    allDay: false,
-                }, {
-                    title: 'Adam - Server',
-                    start: new Date(y, m, d+2, 11, 15),
-                    end: new Date(y, m, d+2, 15, 45),
-                    backgroundColor: App.getBrandColor('yellow'),
-                    allDay: false,
-                }, {
-                    title: 'Andrew - Manager',
-                    start: new Date(y, m, d+2, 9, 30),
-                    end: new Date(y, m, d+2, 17, 30),
-                    allDay: false,
-                }, {
-                    title: 'Ahmad - Cook',
-                    start: new Date(y, m, d+2, 8, 00),
-                    end: new Date(y, m, d+2, 13, 30),
-                    backgroundColor: App.getBrandColor('green'),
-                    allDay: false,
-                }, {
-                    title: 'Adam - Server',
-                    start: new Date(y, m, d+3, 11, 15),
-                    end: new Date(y, m, d+3, 15, 45),
-                    backgroundColor: App.getBrandColor('yellow'),
-                    allDay: false,
-                }, {
-                    title: 'Andrew - Manager',
-                    start: new Date(y, m, d+3, 9, 30),
-                    end: new Date(y, m, d+3, 17, 30),
-                    allDay: false,
-                }, {
-                    title: 'Ahmad - Cook',
-                    start: new Date(y, m, d+3, 8, 00),
-                    end: new Date(y, m, d+3, 13, 30),
-                    backgroundColor: App.getBrandColor('green'),
-                    allDay: false,
-                }, {
-                    title: 'Adam - Server',
-                    start: new Date(y, m, d+4, 11, 15),
-                    end: new Date(y, m, d+4, 15, 45),
-                    backgroundColor: App.getBrandColor('yellow'),
-                    allDay: false,
-                }, {
-                    title: 'Andrew - Manager',
-                    start: new Date(y, m, d+4, 9, 30),
-                    end: new Date(y, m, d+4, 17, 30),
-                    allDay: false,
-                }, {
-                    title: 'Ahmad - Cook',
-                    start: new Date(y, m, d+4, 8, 00),
-                    end: new Date(y, m, d+4, 13, 30),
-                    backgroundColor: App.getBrandColor('green'),
-                    allDay: false,
-                },
-                {
-                    title: 'Adam - Server',
-                    start: new Date(y, m, d+5, 11, 15),
-                    end: new Date(y, m, d+5, 15, 45),
-                    backgroundColor: App.getBrandColor('yellow'),
-                    allDay: false,
-                }, {
-                    title: 'Andrew - Manager',
-                    start: new Date(y, m, d+5, 9, 30),
-                    end: new Date(y, m, d+5, 17, 30),
-                    allDay: false,
-                }, {
-                    title: 'Ahmad - Cook',
-                    start: new Date(y, m, d+5, 8, 00),
-                    end: new Date(y, m, d+5, 13, 30),
-                    backgroundColor: App.getBrandColor('green'),
-                    allDay: false,
-                } ]
+                events: [
+  {
+      "title": "Ahmad Nassar - Cook",
+      "start": "2017-03-19T08:00:00",
+      "end": "2017-03-19T16:00:00",
+      "backgroundColor": "pink",
+      "allDay": false,
+      "className": "moreBorder"
+  },
+  {
+      "title": "Donald trump - Dishwasher",
+      "start": "2017-03-19T08:00:00",
+      "end": "2017-03-19T16:00:00",
+      "backgroundColor": "purple",
+      "allDay": false,
+      "borderColor": "white"
+  },
+  {
+      "title": "Andrew Barker - Server",
+      "start": "2017-03-19T08:00:00",
+      "end": "2017-03-19T12:00:00",
+      "backgroundColor": "green",
+      "allDay": false,
+      "borderColor": "white"
+  },
+  {
+      "title": "Lului test - Server",
+      "start": "2017-03-19T11:30:00",
+      "end": "2017-03-19T16:00:00",
+      "backgroundColor": "green",
+      "allDay": false,
+      "borderColor": "white"
+  },
+  {
+      "title": "Tim C - Janitor",
+      "start": "2017-03-19T12:00:00",
+      "end": "2017-03-19T17:00:00",
+      "backgroundColor": "blue",
+      "allDay": false,
+      "borderColor": "white"
+  },
+  {
+      "title": "Unassigned  - Null test",
+      "start": "2017-03-19T08:00:00",
+      "end": "2017-03-19T10:00:00",
+      "backgroundColor": "red",
+      "allDay": false,
+      "borderColor": "white"
+  },
+  {
+      "title": "Andrew Barker - Cook",
+      "start": "2017-03-20T17:00:00",
+      "end": "2017-03-20T20:00:00",
+      "backgroundColor": "black",
+      "allDay": false,
+      "borderColor": "white"
+  }
+                ]
             });
 
         }
@@ -212,6 +182,6 @@ var AppCalendar = function() {
 
 }();
 
-jQuery(document).ready(function() {    
-   AppCalendar.init(); 
+jQuery(document).ready(function () {
+    AppCalendar.init();
 });

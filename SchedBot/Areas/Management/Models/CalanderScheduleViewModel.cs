@@ -12,30 +12,43 @@ namespace SchedBot.Areas.Management.Models
         public List<Event> events { get; set; }
     }
 
-    public class Event{
+    public class Event
+    {
 
         public string title { get; set; }
-        public DateTime start { get; set; }
-        public DateTime end { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
         public string backgroundColor { get; set; }
         public bool allDay { get; set; }
-
+        public string borderColor { get; set; }
 
         public Event(User_Shift_Schedule uss)
         {
-            DateTime startDate = uss.Schedule.StartDate;
-            startDate.Add(uss.Shift.Start);
-            DateTime endDate = uss.Schedule.EndDate;
-            endDate.Add(uss.Shift.End);
-            title = String.Format("{0} {1} - {2}", uss.User.FirstName, uss.User.LastName, uss.Shift.JobRole);
-            start = startDate;
-            end = endDate;
+
+
+            foreach (DateTime day in EachDay(uss.Schedule.StartDate, uss.Schedule.EndDate))
+            {
+                if (uss.Shift.Day == day.DayOfWeek)
+                {
+                    start = day.Add(uss.Shift.Start).ToString("s");
+                    end = day.Add(uss.Shift.End).ToString("s");
+
+                }
+            }
+
+            title = String.Format("{0} {1} - {2}", uss.User.FirstName, uss.User.LastName, uss.Shift.JobRole.Name);
+
             backgroundColor = "red";
+            borderColor = "white";
             allDay = false;
 
 
         }
+        private IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
+        }
 
-     
     }
 }
