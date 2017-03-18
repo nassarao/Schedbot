@@ -19,10 +19,16 @@ namespace SchedBot.Areas.Management.Controllers
         public ActionResult Index()
         {
             //Change Flag to Current for loading the default page...using NotFinal for building html purpose and testing
-            var currentSchedule = db.Schedules.Where(x => x.Flag == Schedule.Flags.NotFinal);
-            int currentScheduleId = currentSchedule.First().Id;
-            var userShiftSchedules = db.UserShiftSchedules.Where(x => x.ScheduleId == currentScheduleId).Include(u => u.Schedule).Include(u => u.Shift).Include(u => u.User).OrderBy(x => x.Shift.Day).ThenBy(x => x.Shift.Start).ThenBy(x => x.Shift.End);
-            return View(userShiftSchedules.ToList());
+            Schedule currentSchedule = db.Schedules.Where(x => x.Flag == Schedule.Flags.NotFinal).FirstOrDefault();
+            if (currentSchedule != null)
+            {
+               
+                List<User_Shift_Schedule>  userShiftSchedules = db.UserShiftSchedules.Where(x => x.ScheduleId == currentSchedule.Id)
+                    .Include(u => u.Schedule).Include(u => u.Shift).Include(u => u.User)
+                    .OrderBy(x => x.Shift.Day).ThenBy(x => x.Shift.Start).ThenBy(x => x.Shift.End).ToList();
+                return View(userShiftSchedules);
+            }
+            return View();
         }
 
         public ActionResult CreateSchedule()
@@ -310,8 +316,8 @@ namespace SchedBot.Areas.Management.Controllers
 
 
 
-            
-            
+
+
             //if (ModelState.IsValid)
             //{
             //    db.UserShiftSchedules.Add(user_Shift_Schedule);

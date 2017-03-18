@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace SchedBot.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
@@ -37,19 +37,28 @@ namespace SchedBot.Controllers
             return View();
         }
 
-        public JsonResult GenerateScheduleJSON(DateTime start, DateTime end)
+        [HttpGet]
+        public JsonResult GenerateScheduleJSON()
         {
-            Schedule sched = db.Schedules.FirstOrDefault(x => x.StartDate == start && x.EndDate == end);
-            if (sched != null) {
-                List<User_Shift_Schedule> ussL = db.UserShiftSchedules.Where(x => x.ScheduleId == sched.Id).ToList();
-                CalanderScheduleViewModel vm = new CalanderScheduleViewModel();
-                vm.events = new List<Event>();
-                foreach (User_Shift_Schedule uss in ussL)
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+            List<Schedule> scheds = db.Schedules.Where(x => x.StartDate >= oneYearAgo.Date).ToList();
+            CalanderScheduleViewModel vm = new CalanderScheduleViewModel();
+            vm.events = new List<Event>();
+
+            if (scheds != null && scheds.Count >= 1)
+            {
+                foreach (Schedule sched in scheds)
                 {
-                    vm.events.Add(new Event(uss));
+
+                    List<User_Shift_Schedule> ussL = db.UserShiftSchedules.Where(x => x.ScheduleId == sched.Id).ToList();
+
+                    foreach (User_Shift_Schedule uss in ussL)
+                        vm.events.Add(new Event(uss));
                 }
-                return Json(new JavaScriptSerializer().Serialize(vm.events));
+                return Json(vm.events, JsonRequestBehavior.AllowGet);
             }
+
+
             return null;
         }
     }
