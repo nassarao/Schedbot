@@ -178,9 +178,9 @@
         console.info("made inside new shift click");
         //getRoles();
         $('#scheduledShiftNewModal').modal('show');
-        //$('#timepicker')
-        document.getElementById("timepicker").readOnly = false;
-        document.getElementById("timepicker2").readOnly = false;
+        removeDisabledAttFromTimePickers();
+        
+        fixTimepickerScrollbar();
         
         
         

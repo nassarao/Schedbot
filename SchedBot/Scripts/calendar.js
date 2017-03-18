@@ -116,6 +116,7 @@ var AppCalendar = function() {
                         $(this).remove();
                     }
                 },
+                //events: console.info("Events load here...")
                 events: [{
                     title: 'Adam - Server',
                     start: new Date(y, m, d+1, 11, 15),
