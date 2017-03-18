@@ -9,6 +9,7 @@ namespace SchedBot.Areas.Management.Models
     public class SchedulesIndexModel
     {
         public List<User> UserDTOs { get; set; }
+        public List<Schedule> Schedules { get; set; }
         public List<User_Shift_Schedule> UserShiftScheduleDTOs { get; set; }
     }
 }
