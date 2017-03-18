@@ -128,8 +128,9 @@
 
         console.info("made inside edit shift click");
         $('#shiftEditModal').modal('show');
-        document.getElementById("timepicker").readOnly = false;
-        document.getElementById("timepicker2").readOnly = false;
+        removeDisabledAttFromTimePickers();
+
+        fixTimepickerScrollbar();
 
     });
 
