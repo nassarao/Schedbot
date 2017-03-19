@@ -24,20 +24,21 @@
 @using (Html.BeginForm("FinalizeSchedule", "Schedules", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 <div class="col-md-12 col-sm-12 margin-bottom-20">
-    <button id="finalizeSched" type="submit"class="btn green-meadow btn-outline sbold" style="float:right">Finalize Schedule</button>
-    </div>
+    <button id="finalizeSched" type="submit" class="btn green-meadow btn-outline sbold" style="float:right">Finalize Schedule</button>
+</div>
 }
-    <div class="col-md-12 col-sm-12">
-        <div class="portlet box grey-mint">
-            <div class="portlet-title">
-                <div class="caption">Schedule</div>
-            </div>
-            <div class="portlet-body table-responsive">
-                <div class="col-md-12 col-sm-12 margin-bottom-15 well">
-                    <form class="form-horizontal">
-                        <div class="col-md-3">
-                            <div class="col-md-3 control-label">Dates:</div>
-                            <div class="col-md-9">
+
+<div class="col-md-12 col-sm-12">
+    <div class="portlet box grey-mint">
+        <div class="portlet-title">
+            <div class="caption">Schedule</div>
+        </div>
+        <div class="portlet-body table-responsive">
+            <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-15 well">
+                <form class="form-horizontal">
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <div class="col-md-3 control-label">Dates:</div>
+                        <div class="col-md-9">
 
                                 @{
                                     List<SelectListItem> schedulesSelectList = new List<SelectListItem>();
@@ -70,33 +71,38 @@
 
                                 }
 
-                                @Html.DropDownListFor(model => model.Schedules, schedulesSelectList, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.Schedules, schedulesSelectList, new { @class = "form-control", @name="schedulesDropDown", @id= "schedulesDropDown" })
 
 
 
 
-                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="col-md-3 control-label">Employee:</div>
-                            <div class="col-md-9">
-                                @Html.DropDownListFor(model => model.UserDTOs, userSelectList, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                        <div class="col-md-3 control-label">Employee:</div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.UserDTOs, userSelectList, new { @class = "form-control", @name= "usersDropDown", @id= "usersDropDown" })
 
 
-                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-outline yellow-lemon">View Schedule</button>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <button name="viewSchedBtn" id="viewSchedBtn" type="button" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = "Management"})" class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i>&nbsp; View Schedule</button>
+                    </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <button class="btn btn-outline grey-mint" type="button" name="finalizeScheduleBtn" id="finalizeScheduleBtn"><i class="fa fa-calendar-check-o "></i> &nbsp; Finalize Schedule</button>
+                            @*<button class="btn green-meadow btn-outline sbold" id="newScheduledShift" type="button"><i class="fa fa-plus"></i>&nbsp; Add and Assign Shift</button>*@
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn green-meadow btn-outline sbold" id="newScheduledShift" type="button"><i class="fa fa-plus"></i>&nbsp; Add and Assign Shift</button>
                         </div>
-                    </form>
-                </div>
-                @Html.Partial("ScheduleTablePartial", Model.UserShiftScheduleDTOs)
+</form>
             </div>
+            @Html.Partial("ScheduleTablePartial", Model.UserShiftScheduleDTOs)
         </div>
     </div>
+</div>
 
 
 
@@ -131,29 +137,74 @@
     </script>
     <script>
 
-        $("#testLoadTable").click(function () {
+    $(document).ready(function () {
+        this.currentSched = document.getElementById("currentSched").value;
+        var cSValue = currentSched.value;
+        console.log("currentSched", cSValue.toString());
+        $("#schedulesDropDown").ready(function () {
+            var schedDD = $("#schedulesDropDown").val(cSValue);
 
-            var url = $(this).data("request-url");
 
-            $("#schedTable").load(url, { scheduleId: "46", userId: "4" })
+            //running same code as viewBtnClick but not calling that click method to avoid showing button as being clicked on the screen
+            var url = $("#viewSchedBtn").data("request-url");
+            var schedDropdownId = $("#schedulesDropDown").val();
+            var userDropdownId = $("#usersDropDown").val();
+            $("#schedTable").load(url, { scheduleId: schedDropdownId, userId: userDropdownId })
+
+
         });
 
+        
 
-        $('#newScheduledShift').click(function () {
-
-            console.info("made inside new shift click");
-            //getRoles();
-            $('#scheduledShiftNewModal').modal('show');
-            //$('#timepicker')
-            document.getElementById("timepicker").readOnly = false;
-            document.getElementById("timepicker2").readOnly = false;
+    })
 
 
 
+    $("#viewSchedBtn").click(function () {
+
+        var url = $(this).data("request-url");
+        var schedDropdownId = $("#schedulesDropDown").val();
+        var userDropdownId = $("#usersDropDown").val();
+
+        $("#schedTable").load(url, { scheduleId: schedDropdownId, userId: userDropdownId })
+    });
 
 
 
-            $('#newScheduledShiftSubmit').click(function () {
+
+    $("#finalizeScheduleBtn").click(function () {
+        console.log("Inside finalize click...");
+        swal({
+            title: 'Are you sure?',
+            text: "Are you sure you would like to finalize the schedule? You won't be able to revert this!",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, finalize it!'
+        }).then(function () {
+            //remove this swal and insert code to make ajax call and display success/error
+            swal(
+                'Success!',
+                'Your schedule has been finalized.',
+                'success'
+            )
+        })
+    });
+
+
+
+
+    $('#newScheduledShift').click(function () {
+
+        console.info("made inside new shift click");
+        $('#scheduledShiftNewModal').modal('show');
+        document.getElementById("timepicker").readOnly = false;
+        document.getElementById("timepicker2").readOnly = false;
+
+
+
+        $('#newScheduledShiftSubmit').click(function () {
 
                 var model_to_update = $('#newScheduledShiftForm');
                 //var userId = $('#user_UserId').val();
@@ -210,37 +261,6 @@
 
 
         });
-
-
-
-
-
-
-
-
-
-
-        function getRoles() {
-
-            $.getJSON('@Url.Action("GetListOfRoles", "JobRoles")', function (data) {
-                //  var items = [];
-                //  $.each( data, function( key, val ) {
-                //    items.push( "<li id='" + key + "'>" + val + "</li>" );
-                //  });
-                //
-                //  $( "<ul/>", {
-                //    "class": "my-new-list",
-                //    html: items.join( "" )
-                //  }).appendTo( "body" );
-            });
-
-
-        }
-
-
-
-
-
 
 
 

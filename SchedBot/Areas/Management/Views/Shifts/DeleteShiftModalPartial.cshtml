@@ -1,4 +1,5 @@
-<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="shiftDeleteModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+   @Html.AntiForgeryToken() @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
-                <button id="btnContinueDelete" type="button" class="btn btn-danger">Delete Shift</button>
+                <button id="deleteShiftSubmit" type="button" class="btn btn-danger">Delete Shift</button>
             </div>
         </div>
     </div>

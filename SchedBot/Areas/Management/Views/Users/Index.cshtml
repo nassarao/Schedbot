@@ -51,24 +51,10 @@
                             <td class="col-md-1 text-center"><i class="fa fa-check"></i></td> } else {
                             <td class="col-md-1 text-center"></td> }
                             <td class="col-md-1 text-center"> <span class="btn-group btn-group-xs">
-                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a> @*
-                                <button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button>*@ @*<a class="btn btn-outline red" href="@Url.Action(" Delete ", "Users ", new { id = item.UserId })"><span class="fa fa-trash"></span></a>*@
-                                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@user.LastName" data-firstName="@user.FirstName" data-id="@user.UserId"><i class="fa fa-trash"></i></button> @*
-                                <button class="btn btn-outline red deleteEmployee" id="deleteEmployee_@item.UserId" data-firstName="@item.FirstName" data-lastName="@item.LastName" data-userID="@item.UserId"><i class="fa fa-trash"></i></button>*@ </span>
+                <a class="btn btn-outline yellow-lemon" href="@Url.Action("Edit", "Users", new { id = user.UserId })"><span class="fa fa-search"></span></a> 
+                                <button id="deleteItem" class="btn btn-outline red deleteItem" data-target="#basic" data-toggle="modal" data-lastName="@user.LastName" data-firstName="@user.FirstName" data-id="@user.UserId"><i class="fa fa-trash"></i></button>  </span>
                             </td>
-                        </tr> } @*
-                        <tr>
-                            <td class="col-md-2">Ahmad Nassar</td>
-                            <td class="col-md-2">(513)777-7777</td>
-                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-check"></i></td>
-                            <td class="col-md-1 text-center"><i class="fa fa-times"></i></td>
-                            <td class="col-md-1 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
-                        </tr>*@ </tbody>
+                        </tr> } </tbody>
                 </table>
                 <div id='deleteEmployee' class='modal fade in' data-toggle="modal" data-target="#deleteEmployeeModal"> </div>
             </div>
@@ -218,6 +204,7 @@
                 
             }
             , error: function (response) {
+            $('#basic').modal('toggle');
                 sweetAlert("Oops...", "Something went wrong!", "error");
             }
         });

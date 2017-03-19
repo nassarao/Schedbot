@@ -24,7 +24,7 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> Index()
         {
             UserIndexViewModel userIndexVM = new UserIndexViewModel();
-            userIndexVM.UserDTOs = await db.Users.Include("Availability").OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
+            userIndexVM.UserDTOs = await db.Users.Where(x => x.FirstName != "Unassigned" && x.Email != null).Include("Availability").OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
             return View(userIndexVM);
         }
 
@@ -106,6 +106,14 @@ namespace SchedBot.Areas.Management.Controllers
 
             vm.user_jobRoles = db.User_JobRoles.Where(x => x.UserId == user.UserId).Select(x => x.JobRole).ToList();
             return View(vm);
+        }
+
+        //GET: Management/Users/MyProfile
+        public RedirectToRouteResult MyProfile()
+        {
+            var userEmail = User.Identity;
+            var schedUser = db.Users.Where(x => x.Email == userEmail.Name).FirstOrDefault();
+            return RedirectToAction("Edit",  new { id = schedUser.UserId });
         }
 
         // POST: Management/Users/Edit/5
