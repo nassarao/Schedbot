@@ -234,6 +234,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="MailService.cs" />
     <Compile Include="Migrations\201611230225072_InitialCreate.cs" />
     <Compile Include="Migrations\201611230225072_InitialCreate.Designer.cs">
       <DependentUpon>201611230225072_InitialCreate.cs</DependentUpon>
@@ -329,6 +330,7 @@
     <Compile Include="Areas\Management\Models\RequestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchedBotContext.cs" />
+    <Compile Include="ScheduleFinalizeEventArgs.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,12 +9,31 @@ using System.Web.Mvc;
 using SchedBot;
 using SchedbotDTOs;
 using SchedBot.Areas.Management.Models;
+using System.Threading.Tasks;
 
 namespace SchedBot.Areas.Management.Controllers
 {
     public class SchedulesController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
+
+        public delegate Task ScheduleFinalizedEventArgs(object source, ScheduleFinalizeEventArgs args);
+
+        //Define event
+        public event ScheduleFinalizedEventArgs ScheduleFinalized;
+        // public event EventHandler<ScheduleFinalizeEventArgs> ScheduleFinalized;
+
+        protected virtual async Task OnScheduleFinalized(int schedId)
+        {
+           
+            ScheduleFinalizeEventArgs args = new ScheduleFinalizeEventArgs()
+            {
+                
+                Users = db.Users.Where(x =>x.Email != null).ToList(),
+                Schedule = db.Schedules.FirstOrDefault(x => x.Id == schedId)
+            };
+           await ScheduleFinalized?.Invoke(this, args);
+        }
 
         // GET: Management/Schedules
         public ActionResult Index()
@@ -36,7 +55,25 @@ namespace SchedBot.Areas.Management.Controllers
 
 
         }
-        
+        [HttpPost]
+        public async Task<ActionResult> FinalizeSchedule()
+        {
+            MailService mail = new MailService();
+            ScheduleFinalized +=  mail.OnScheduleFinalized;
+
+            Schedule nextSched = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.Final);
+            if (nextSched != null)
+            {
+                nextSched.Flag = Schedule.Flags.Final;
+                db.Entry(nextSched).State = EntityState.Modified;
+                db.SaveChanges();
+                //Raising Schedule Finalized Event 
+            }
+            await OnScheduleFinalized(nextSched.Id);
+            return RedirectToAction("Index");
+
+        }
+
         [HttpPost]
         public ActionResult LoadScheduleTable(string scheduleId, string userId = "0")
         {
