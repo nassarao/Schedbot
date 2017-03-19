@@ -108,6 +108,14 @@ namespace SchedBot.Areas.Management.Controllers
             return View(vm);
         }
 
+        //GET: Management/Users/MyProfile
+        public RedirectToRouteResult MyProfile()
+        {
+            var userEmail = User.Identity;
+            var schedUser = db.Users.Where(x => x.Email == userEmail.Name).FirstOrDefault();
+            return RedirectToAction("Edit",  new { id = schedUser.UserId });
+        }
+
         // POST: Management/Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

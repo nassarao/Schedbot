@@ -21,6 +21,7 @@ namespace SchedBot.Areas.Management.Models
         public string backgroundColor { get; set; }
         public bool allDay { get; set; }
         public string borderColor { get; set; }
+        public bool editable { get; set; }
 
         public Event(User_Shift_Schedule uss)
         {
@@ -41,6 +42,7 @@ namespace SchedBot.Areas.Management.Models
             backgroundColor = "red";
             borderColor = "white";
             allDay = false;
+            editable = false;
 
 
         }
