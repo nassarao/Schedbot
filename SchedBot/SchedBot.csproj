@@ -516,7 +516,7 @@
     <Content Include="Areas\Management\Views\Users\EmployeeDetailsPartial.cshtml" />
     <Content Include="Areas\Management\Views\Users\RolesPartial.cshtml" />
     <Content Include="Areas\Management\Views\Users\RolesModalPartial.cshtml" />
-    <Content Include="Areas\Management\Views\Requests\RequestDetailsModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\timeOffDetailsModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\DenyModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\ApproveModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\NewRequestModal.cshtml" />
@@ -532,6 +532,7 @@
     <Content Include="Areas\Management\Views\Schedules\Index.cshtml" />
     <Content Include="Areas\Management\Views\Schedules\NewScheduledShiftModal.cshtml" />
     <Content Include="Areas\Management\Views\Schedules\ScheduleTablePartial.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\tradeDetailsModalPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
