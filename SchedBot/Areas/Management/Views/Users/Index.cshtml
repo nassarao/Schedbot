@@ -203,8 +203,8 @@
                 });
                 
             }
-            , error: function (response) 
-            $('#shiftDeleteModal').modal('toggle');
+            , error: function (response) {
+            $('#basic').modal('toggle');
                 sweetAlert("Oops...", "Something went wrong!", "error");
             }
         });
