@@ -1,12 +1,33 @@
 var AppCalendar = function () {
+    
+    this.eventData = '';
 
     return {
         //main function to initiate the module
         init: function () {
-            this.initCalendar();
-        },
+            
+            $.ajax({
+            url: '/Home/GenerateScheduleJSON'
+            , type: "GET"
+            , success: function (response) {
+                this.eventData = response;
+                initCalendar(response);
+                                
+            }
+            , error: function (response) {
+            
+               swal('Oops...', 'Something went wrong trying to get the shifts for the calendar', 'error');
+                initCalendar('');
+                
+            }
+        });
+        }
 
-        initCalendar: function () {
+        
+
+    };
+    
+    function initCalendar (eventData) {
 
             if (!jQuery().fullCalendar) {
                 return;
@@ -116,69 +137,11 @@ var AppCalendar = function () {
                         $(this).remove();
                     }
                 },
-                events: [
-  {
-      "title": "Ahmad Nassar - Cook",
-      "start": "2017-03-19T08:00:00",
-      "end": "2017-03-19T16:00:00",
-      "backgroundColor": "pink",
-      "allDay": false,
-      "className": "moreBorder"
-  },
-  {
-      "title": "Donald trump - Dishwasher",
-      "start": "2017-03-19T08:00:00",
-      "end": "2017-03-19T16:00:00",
-      "backgroundColor": "purple",
-      "allDay": false,
-      "borderColor": "white"
-  },
-  {
-      "title": "Andrew Barker - Server",
-      "start": "2017-03-19T08:00:00",
-      "end": "2017-03-19T12:00:00",
-      "backgroundColor": "green",
-      "allDay": false,
-      "borderColor": "white"
-  },
-  {
-      "title": "Lului test - Server",
-      "start": "2017-03-19T11:30:00",
-      "end": "2017-03-19T16:00:00",
-      "backgroundColor": "green",
-      "allDay": false,
-      "borderColor": "white"
-  },
-  {
-      "title": "Tim C - Janitor",
-      "start": "2017-03-19T12:00:00",
-      "end": "2017-03-19T17:00:00",
-      "backgroundColor": "blue",
-      "allDay": false,
-      "borderColor": "white"
-  },
-  {
-      "title": "Unassigned  - Null test",
-      "start": "2017-03-19T08:00:00",
-      "end": "2017-03-19T10:00:00",
-      "backgroundColor": "red",
-      "allDay": false,
-      "borderColor": "white"
-  },
-  {
-      "title": "Andrew Barker - Cook",
-      "start": "2017-03-20T17:00:00",
-      "end": "2017-03-20T20:00:00",
-      "backgroundColor": "black",
-      "allDay": false,
-      "borderColor": "white"
-  }
-                ]
+                events: eventData
+
             });
 
         }
-
-    };
 
 }();
 

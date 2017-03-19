@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.css" id="theme_base">
     <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.time.css" id="theme_time">
     <link rel="stylesheet" type="text/css" href="~/Content/sweetalert2.css">
+    <script src="~/Scripts/customApp.js"></script>
 </head>
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">
@@ -402,8 +403,9 @@
         
         $('#addShiftQuickLink').click(function () {
             $('#shiftNewModal').modal('show');
-            document.getElementById("timepicker").readOnly = false;
-                document.getElementById("timepicker2").readOnly = false;
+            removeDisabledAttFromTimePickers();
+
+            fixTimepickerScrollbar();
 
         });
 
