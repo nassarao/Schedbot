@@ -24,7 +24,7 @@ namespace SchedBot.Areas.Management.Controllers
         public async Task<ActionResult> Index()
         {
             UserIndexViewModel userIndexVM = new UserIndexViewModel();
-            userIndexVM.UserDTOs = await db.Users.Include("Availability").OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
+            userIndexVM.UserDTOs = await db.Users.Where(x => x.FirstName != "Unassigned" && x.Email != null).Include("Availability").OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
             return View(userIndexVM);
         }
 

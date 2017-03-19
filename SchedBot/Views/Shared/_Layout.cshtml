@@ -1,7 +1,12 @@
-﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity
 
 @{
     var userName = User.Identity.GetUserName();
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
 }
 
 
@@ -87,7 +92,7 @@
                             <ul class="dropdown-menu">
                                 <li class="external">
                                     <h3>
-                                        <span class="bold">3 Quick Links</span> 
+                                        <span class="bold">Quick Links</span> 
                                     </h3>
                                 </li>
                                 <li>
@@ -116,6 +121,15 @@
                                                     <span class="label label-sm label-icon label-success">
                                                         <i class="fa fa-briefcase"></i> 
                                                     </span> Add Role
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" id="addRoleQuickLink" name="addRoleQuickLink">
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="icon-calendar"></i> 
+                                                    </span> Add and Assign Shift
                                                 </span>
                                             </a>
                                         </li>
@@ -332,7 +346,6 @@
     
     
     <!-- ************************************* New Shift Modal Start ***************************************** -->
-        @*@Html.Partial("NewShiftModalPartial")*@
         @*@Html.Partial("~/Areas/Management/Views/Shifts/NewShiftModalPartial.cshtml")*@
 
         <!-- ************************************* New Shift Modal End ***************************************** -->
@@ -341,6 +354,12 @@
         @Html.Partial("~/Areas/Management/Views/Shifts/NewRoleModalPartial.cshtml")
 
         <!-- ************************************* New Role Modal End ***************************************** -->
+        
+        
+        <!-- ************************************* New Scheduled Shift Modal Start ***************************************** -->
+        @Html.Partial("~/Areas/Management/Views/Schedules/NewScheduledShiftModal.cshtml")
+
+        <!-- ************************************* New Scheduled Shift Modal End ***************************************** -->
         
         
         

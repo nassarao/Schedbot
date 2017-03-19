@@ -62,8 +62,8 @@
                             <td class="col-md-2 text-center">
                                 <span class="btn-group btn-group-xs">
 
-                                    <button class="btn btn-outline blue-steel"><i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-outline red deleteItem"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-outline blue-steel editShift" id="editShift"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-outline red deleteShift" data-target="#shiftDeleteModal" data-toggle="modal" data-id="@shift.ShiftID" data-shiftname="@shift.JobRole.Name" data-shiftstarttime="@shift.Start" data-shiftendtime="@shift.End" data-shiftday="@shift.Day"><i class="fa fa-trash"></i></button>
                                 </span>
                             </td>
                         </tr>
@@ -124,13 +124,13 @@
     });
     
     
-    $('#editShift').click(function () {
+    $('.editShift').click(function () {
 
         console.info("made inside edit shift click");
         $('#shiftEditModal').modal('show');
-        removeDisabledAttFromTimePickers();
-
-        fixTimepickerScrollbar();
+//        removeDisabledAttFromTimePickers();
+//
+//        fixTimepickerScrollbar();
 
     });
 
@@ -138,7 +138,7 @@
 
     var item_to_delete;
     var name;
-    $(".deleteItem").click(function (e) {
+    $(".deleteShift").click(function (e) {
         item_to_delete = $(this).data('id');
         name = $(this).data('shiftname');
         var shiftStartTime = $(this).data('shiftstarttime');
@@ -146,7 +146,7 @@
         var shiftDay = $(this).data('shiftday');
         console.info(this);
         //$('#shiftName').html("<b>" + shiftStartTime + " - " + shiftEndTime + " " + name + "</b>");
-        $('#shiftName').html("<b>" + name + " shift scheduled on " + shiftDay + "s from " + shiftStartTime + " - " + shiftEndTime + "</b>");
+        $('#shiftName').html("<b>" + name + "</b> shift scheduled on <b>" + shiftDay + "s </b> from <b>" + shiftStartTime + " - " + shiftEndTime + "</b>");
 
 
     });
@@ -154,7 +154,43 @@
     
     
     
-
+    var token = $("#__AjaxAntiForgeryForm input").val();
+    
+    
+$('#deleteShiftSubmit').click(function () {
+        //window.location = "Delete/" + item_to_delete;
+    console.warn(item_to_delete);
+        $.ajax({
+            url: '@Url.Action("Delete", "Shifts")'
+            , type: "POST"
+            , data: {
+                __RequestVerificationToken: token,
+                id: item_to_delete
+            }
+            , success: function (response) {
+                $('#shiftDeleteModal').modal('toggle');
+                swal({
+                    title: "Success!"
+                    , text: "Shift successfully deleted"
+                    , type: "success"
+                    , showCancelButton: false
+                    , confirmButtonText: "Ok"
+                    , closeOnConfirm: false
+                    , closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        location.reload();
+                    }
+                });
+                
+            }
+            , error: function (response) {
+                console.error(response);
+                $('#shiftDeleteModal').modal('toggle');
+                sweetAlert("Oops...", "Something went wrong while trying to delete the shift!", "error");
+            }
+        });
+    });
 
 
 
