@@ -1,52 +1,8 @@
-@model IEnumerable<SchedbotDTOs.User_Shift_Schedule>
-
+@model SchedBot.Areas.Management.Models.SchedulesIndexModel
 @{
     ViewBag.Title = "SchedBot - Schedules";
     ViewBag.Current = "Schedules";
 }
-
-@*<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Schedule.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shift.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Schedule.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Shift.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>*@
-
-
-
 
 
 <link href="~/Content/daterangepicker.min.css" rel="stylesheet" type="text/css" />
@@ -57,12 +13,15 @@
 <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.css" id="theme_base">
 <link rel="stylesheet" href="~/Scripts/TimePicker/themes/default.time.css" id="theme_time">
 
-    @using (Html.BeginForm("CreateSchedule", "Schedules", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        <div class="col-md-12 col-sm-12 margin-bottom-20">
-            <button class="btn green-meadow btn-outline sbold" type="submit" id="createSched"><i class="fa fa-plus"></i>&nbsp; Create Schedule</button>
-        </div>
-    }
+@using (Html.BeginForm("CreateSchedule", "Schedules", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="col-md-12 col-sm-12 margin-bottom-20">
+        <button class="btn green-meadow btn-outline sbold" type="submit" id="createSched"><i class="fa fa-plus"></i>&nbsp; Create Schedule</button>
+    </div>
+}
+
+<button id="testLoadTable" type="button" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = "Management"})" class="btn green-meadow btn-outline sbold">Test Loading Table</button>
+
 <div class="col-md-12 col-sm-12">
     <div class="portlet box grey-mint">
         <div class="portlet-title">
@@ -74,33 +33,51 @@
                     <div class="col-md-3">
                         <div class="col-md-3 control-label">Dates:</div>
                         <div class="col-md-9">
-                            <select class="form-control">
-                                <option disabled></option>
-                                <option value="0" selected>3/5/17 - 3/11/17</option>
-                                <option value="1">3/5/17 - 3/11/17</option>
-                            </select>
-                            <!--
-                                                    <div class="input-group" id="defaultrange" name="daterange" >
-                                                        <input type="text" class="form-control" name="daterange"/>
-                                                        <span class="input-group-btn"><button class="btn btn-default date-range-toggle" name="daterange"><i class="fa fa-calendar"></i></button></span>
-                                                    </div>
-                            -->
+
+                            @{
+                                List<SelectListItem> schedulesSelectList = new List<SelectListItem>();
+                                
+
+                                schedulesSelectList.Add(new SelectListItem());
+                                foreach (var sched in Model.Schedules)
+                                {
+                                    
+                                    if (sched.Flag == SchedbotDTOs.Schedule.Flags.Current)
+                                    {
+                                      @Html.HiddenFor(model => sched.Id,new { id = "currentSched"})
+
+                                    }
+                                    
+                                        SelectListItem item = new SelectListItem { Value = sched.Id.ToString(), Text = sched.StartDate.ToString("MM/dd/yyyy") + " - " + sched.EndDate.ToString("MM/dd/yyyy") };
+
+                                        schedulesSelectList.Add(item);
+                                    
+
+                                }
+
+
+                                List<SelectListItem> userSelectList = new List<SelectListItem>();
+                                userSelectList.Add(new SelectListItem() { Value = "0", Text = "All Users" });
+                                foreach (var user in Model.UserDTOs)
+                                {
+                                    userSelectList.Add(new SelectListItem { Value = user.UserId.ToString(), Text = user.FirstName + " " + user.LastName });
+                                }
+
+                            }
+
+                            @Html.DropDownListFor(model => model.Schedules, schedulesSelectList, new { @class = "form-control" })
+
+
+
+
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="col-md-3 control-label">Employee:</div>
                         <div class="col-md-9">
-                            <select class="form-control">
-                                <option disabled></option>
-                                <option value="0" selected>Andrew Barker</option>
-                                <option value="1">Ahmad Nassar</option>
-                            </select>
-                            <!--
-                                                    <div class="input-group" id="defaultrange" name="daterange" >
-                                                        <input type="text" class="form-control" name="daterange"/>
-                                                        <span class="input-group-btn"><button class="btn btn-default date-range-toggle" name="daterange"><i class="fa fa-calendar"></i></button></span>
-                                                    </div>
-                            -->
+                            @Html.DropDownListFor(model => model.UserDTOs, userSelectList, new { @class = "form-control" })
+
+
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -111,31 +88,7 @@
                     </div>
                 </form>
             </div>
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th class="col-md-2">Employee</th>
-                        <th class="col-md-2">Day</th>
-                        <th class="col-md-2">Time Start</th>
-                        <th class="col-md-2">Time End</th>
-                        <th class="col-md-2">Shift Role</th>
-                        <th class="col-md-2 text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody
-                       @foreach (var scheduledShift in Model)
-                       {
-                           <tr>
-                               <td class="col-md-2">@(scheduledShift.User.FirstName + " " + scheduledShift.User.LastName)</td>
-                               <td class="col-md-2">@(scheduledShift.Shift.Day)</td>
-                               <td class="col-md-2">@(scheduledShift.Shift.Start)</td>
-                               <td class="col-md-2">@(scheduledShift.Shift.End)</td>
-                               <td class="col-md-2">@(scheduledShift.Shift.JobRole.Name)</td>
-                               <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
-                           </tr>
-                       }
-                </tbody>
-            </table>
+            @Html.Partial("ScheduleTablePartial", Model.UserShiftScheduleDTOs)
         </div>
     </div>
 </div>
@@ -144,9 +97,9 @@
 
 
 <!-- ************************************* New Scheduled Shift Modal Start ***************************************** -->
-    @Html.Partial("NewScheduledShiftModal")
+@Html.Partial("NewScheduledShiftModal")
 
-    <!-- ************************************* New Scheduled Shift Modal End ***************************************** -->
+<!-- ************************************* New Scheduled Shift Modal End ***************************************** -->
 
 
 
@@ -173,118 +126,125 @@
 </script>
 <script>
 
+    $("#testLoadTable").click(function () {
+
+        var url = $(this).data("request-url");
+
+        $("#schedTable").load(url, { scheduleId: "46", userId: "4" })
+    });
+
+
     $('#newScheduledShift').click(function () {
 
         console.info("made inside new shift click");
         //getRoles();
         $('#scheduledShiftNewModal').modal('show');
-        removeDisabledAttFromTimePickers();
-        
-        fixTimepickerScrollbar();
-        
-        
-        
-        
-        
-        
-        
-         $('#newScheduledShiftSubmit').click(function () {
-        
-        var model_to_update = $('#newScheduledShiftForm');
+        //$('#timepicker')
+        document.getElementById("timepicker").readOnly = false;
+        document.getElementById("timepicker2").readOnly = false;
+
+
+
+
+
+
+        $('#newScheduledShiftSubmit').click(function () {
+
+            var model_to_update = $('#newScheduledShiftForm');
             //var userId = $('#user_UserId').val();
 
-        console.info("Inside create and assign schedule click...", model_to_update.serialize());
-        
-        
-        $.ajax({
-            url: '@Url.Action("Create", "Schedules")'
-            , type: "POST"
-            , data: model_to_update.serialize()
-            , success: function (response) {
-                $('#scheduledShiftNewModal').modal('toggle');
-                
-                getRoles(userId);
-                swal('Success!', 'Shift successfully added and assigned', 'success');
-                                
-            }
-            , error: function (response) {
-                $('#scheduledShiftNewModal').modal('toggle');
-                //sweetAlert("Oops...", "Something went wrong!", "error");
-                
-                swal({
-          title: 'Oops...',
-          text: "Something went wrong! Would you like to return to the modal?",
-          type: 'error',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, return to modal',
-          cancelButtonText: 'No, cancel',
-          confirmButtonClass: 'btn btn-primary margin-right-10',
-          cancelButtonClass: 'btn btn-danger',
-          buttonsStyling: false
-        }).then(function () {
-          $('#scheduledShiftNewModal').modal('toggle');
-        }, function (dismiss) {
-          // dismiss can be 'cancel', 'overlay',
-          // 'close', and 'timer'
-          if (dismiss === 'cancel') {
-            //hook in way to clear data
-          }
-        })
-                
-            }
+            console.info("Inside create and assign schedule click...", model_to_update.serialize());
+
+
+            $.ajax({
+                url: '@Url.Action("Create", "Schedules")'
+                , type: "POST"
+                , data: model_to_update.serialize()
+                , success: function (response) {
+                    $('#scheduledShiftNewModal').modal('toggle');
+
+                    getRoles(userId);
+                    swal('Success!', 'Shift successfully added and assigned', 'success');
+
+                }
+                , error: function (response) {
+                    $('#scheduledShiftNewModal').modal('toggle');
+                    //sweetAlert("Oops...", "Something went wrong!", "error");
+
+                    swal({
+                        title: 'Oops...',
+                        text: "Something went wrong! Would you like to return to the modal?",
+                        type: 'error',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, return to modal',
+                        cancelButtonText: 'No, cancel',
+                        confirmButtonClass: 'btn btn-primary margin-right-10',
+                        cancelButtonClass: 'btn btn-danger',
+                        buttonsStyling: false
+                    }).then(function () {
+                        $('#scheduledShiftNewModal').modal('toggle');
+                    }, function (dismiss) {
+                        // dismiss can be 'cancel', 'overlay',
+                        // 'close', and 'timer'
+                        if (dismiss === 'cancel') {
+                            //hook in way to clear data
+                        }
+                    })
+
+                }
+            });
+
+
+
         });
-             
-             
-             
-    });
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
 
     });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    function getRoles(){
-            
-        $.getJSON('@Url.Action("GetListOfRoles", "JobRoles")', function( data ) {
-//  var items = [];
-//  $.each( data, function( key, val ) {
-//    items.push( "<li id='" + key + "'>" + val + "</li>" );
-//  });
-// 
-//  $( "<ul/>", {
-//    "class": "my-new-list",
-//    html: items.join( "" )
-//  }).appendTo( "body" );
-});
-        
-        
-        }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+    function getRoles() {
+
+        $.getJSON('@Url.Action("GetListOfRoles", "JobRoles")', function (data) {
+            //  var items = [];
+            //  $.each( data, function( key, val ) {
+            //    items.push( "<li id='" + key + "'>" + val + "</li>" );
+            //  });
+            //
+            //  $( "<ul/>", {
+            //    "class": "my-new-list",
+            //    html: items.join( "" )
+            //  }).appendTo( "body" );
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
