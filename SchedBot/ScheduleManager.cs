@@ -50,10 +50,10 @@ namespace SchedBot
         
         public void DropAndCreateFutureSchedule()
         {
-            Schedule current = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.Current);
-            if (current != null)
+            Schedule future = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.NotFinal);
+            if (future != null)
             {
-                db.Schedules.Remove(current);
+                db.Schedules.Remove(future);
                 db.SaveChanges();
                 CreateSchedule();
             }

@@ -116,6 +116,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 db.Entry(shift).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                sm.DropAndCreateFutureSchedule();
                 return RedirectToAction("Index");
             }
 
@@ -145,6 +146,7 @@ namespace SchedBot.Areas.Management.Controllers
             Shift shift = await db.Shifts.FindAsync(id);
             db.Shifts.Remove(shift);
             await db.SaveChangesAsync();
+            sm.DropAndCreateFutureSchedule();
             return RedirectToAction("Index");
         }
 
