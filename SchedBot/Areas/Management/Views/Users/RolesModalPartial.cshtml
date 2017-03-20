@@ -25,21 +25,18 @@
                                             @Html.Label(item.Name)
                                         </div>
                                         <div class="col-md-2">
-                                            @foreach (var uj in Model.user_jobRoles)
+                                            @foreach (var uj in Model.CheckBoxProps)
                                             {
-                                                if (item.JobRoleId == uj.JobRoleId)
+                                                if (item.JobRoleId == uj.Key.JobRoleId)
                                                 {
-                                                    hasmatch = true;
-                                                    @Html.CheckBox(item.JobRoleId.ToString(), true)
-                                                    break;
+                                                    
+                                                    @Html.CheckBoxFor(model => uj.Value, new { @id = uj.Key.JobRoleId, @Name=uj.Key.JobRoleId })
+                                                    
                                                 }
 
 
                                             }
-                                            @if (!hasmatch)
-                                            {
-                                                @Html.CheckBox(item.JobRoleId.ToString(), false)
-                                            }
+                                            
                                             @* <input type="checkbox" name="@item.JobRoleId" class="margin-top-15" />*@
                                         </div>
                                     }
