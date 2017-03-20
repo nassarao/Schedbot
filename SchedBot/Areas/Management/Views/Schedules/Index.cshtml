@@ -17,16 +17,10 @@
 {
     <div class="col-md-12 col-sm-12 margin-bottom-20">
         <button class="btn green-meadow btn-outline sbold" type="submit" id="createSched"><i class="fa fa-plus"></i>&nbsp; Create Schedule</button> <br /> <br />
-        <button id="testLoadTable" type="button" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = "Management"})" class="btn green-meadow btn-outline sbold">Test Loading Table</button>
+       
     </div>
 }
 
-@using (Html.BeginForm("FinalizeSchedule", "Schedules", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-<div class="col-md-12 col-sm-12 margin-bottom-20">
-    <button id="finalizeSched" type="submit" class="btn green-meadow btn-outline sbold" style="float:right">Finalize Schedule</button>
-</div>
-}
 
 <div class="col-md-12 col-sm-12">
     <div class="portlet box grey-mint">
@@ -184,11 +178,32 @@
             confirmButtonText: 'Yes, finalize it!'
         }).then(function () {
             //remove this swal and insert code to make ajax call and display success/error
-            swal(
-                'Success!',
-                'Your schedule has been finalized.',
-                'success'
-            )
+            $.ajax({
+                url: '@Url.Action("FinalizeSchedule", "Schedules")'
+       , type: "POST"
+       , success: function (response) {
+          
+           swal({
+               title: "Success!"
+               , text: "Schedule successfully finalized"
+               , type: "success"
+               , showCancelButton: false
+               , confirmButtonText: "Ok"
+               , closeOnConfirm: false
+               , closeOnCancel: false
+           }, function (isConfirm) {
+               //if (isConfirm) {
+               //    location.reload();
+               //}
+           });
+
+       }
+       , error: function (response) {
+          
+           sweetAlert("Oops...", "Something went wrong while trying to finalize the schedule", "error");
+       }
+            });
+
         })
     });
 

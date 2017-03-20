@@ -104,8 +104,54 @@ namespace SchedBot.Areas.Management.Controllers
             vm.user = user;
             vm.jobRoles = db.JobRoles.ToList();
 
-            vm.user_jobRoles = db.User_JobRoles.Where(x => x.UserId == user.UserId).Select(x => x.JobRole).ToList();
+            vm.user_jobRoles = db.User_JobRoles.Where(x => x.UserId == user.UserId).ToList();
+            vm.CheckBoxProps = new Dictionary<JobRole, bool>();
+            foreach (var item in vm.jobRoles)
+            {
+                vm.CheckBoxProps.Add(item, false);
+                foreach (var uj in vm.user_jobRoles)
+                {
+                    if (uj.JobRoleId == item.JobRoleId)
+                    {
+                        vm.CheckBoxProps[item] = true;
+
+                    }
+                }
+            }
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult LoadRoles(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Include(x => x.Availability).FirstOrDefault(x => x.UserId == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            UserEditViewModel vm = new UserEditViewModel();
+            vm.user = user;
+            vm.jobRoles = db.JobRoles.ToList();
+
+            vm.user_jobRoles = db.User_JobRoles.Where(x => x.UserId == user.UserId).ToList();
+            vm.CheckBoxProps = new Dictionary<JobRole, bool>();
+            foreach (var item in vm.jobRoles)
+            {
+                vm.CheckBoxProps.Add(item, false);
+                foreach (var uj in vm.user_jobRoles)
+                {
+                    if (uj.JobRoleId == item.JobRoleId)
+                    {
+                        vm.CheckBoxProps[item] = true;
+
+                    }
+                }
+            }
+            return PartialView("RolesPartial",vm);
         }
 
         //GET: Management/Users/MyProfile
@@ -113,7 +159,7 @@ namespace SchedBot.Areas.Management.Controllers
         {
             var userEmail = User.Identity;
             var schedUser = db.Users.Where(x => x.Email == userEmail.Name).FirstOrDefault();
-            return RedirectToAction("Edit",  new { id = schedUser.UserId });
+            return RedirectToAction("Edit", new { id = schedUser.UserId });
         }
 
         // POST: Management/Users/Edit/5
@@ -157,24 +203,36 @@ namespace SchedBot.Areas.Management.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-          [HttpPost]
-          public async Task<ActionResult> SaveRoles(FormCollection collection)
+        [HttpPost]
+        public async Task<ActionResult> SaveRoles(FormCollection collection)
         {
             int UserId = int.Parse(collection["user.UserId"]);
             User user = db.Users.Find(UserId);
-          
+            db.User_JobRoles.RemoveRange(db.User_JobRoles.Where(x => x.UserId == UserId));
+            List<User_JobRole> ujs = new List<User_JobRole>();
+
             foreach (var item in collection.AllKeys)
             {
-                if (!item.Equals("user.UserId")){
-                    User_JobRole uj = new User_JobRole()
+                try
+                {
+                    int jobRoleId = int.Parse(item);
+                    if (db.User_JobRoles.FirstOrDefault(x => x.JobRoleId == jobRoleId && x.UserId == user.UserId) == null)
                     {
-                        JobRoleId = int.Parse(item),
-                        UserId = user.UserId
-                    };
-                   
-                    db.User_JobRoles.Add(uj);
+                        User_JobRole uj = new User_JobRole()
+                        {
+                            UserId = UserId,
+                            JobRoleId = jobRoleId
+                        };
+                        ujs.Add(uj);
+
+                    }
                 }
+                catch { continue; }
             }
+            if (ujs.Count > 0)
+                db.User_JobRoles.AddRange(ujs);
+
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "Users");
 
@@ -191,7 +249,7 @@ namespace SchedBot.Areas.Management.Controllers
             foreach (var item in collection.AllKeys)
             {
                 var colValue = collection.GetValue(item);
-                if(item.Contains("MaxHours"))
+                if (item.Contains("MaxHours"))
                 {
                     user.Availability.MaxHours = int.Parse(colValue.AttemptedValue);
                 }
@@ -201,7 +259,7 @@ namespace SchedBot.Areas.Management.Controllers
 
                     string dayOfWeek = item.Split('.')[1];
 
-                    
+
 
                     switch (dayOfWeek)
                     {
