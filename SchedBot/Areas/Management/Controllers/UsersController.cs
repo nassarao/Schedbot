@@ -216,8 +216,9 @@ namespace SchedBot.Areas.Management.Controllers
                 try
                 {
                     int jobRoleId = int.Parse(item);
-                    if (db.User_JobRoles.FirstOrDefault(x => x.JobRoleId == jobRoleId && x.UserId == user.UserId) == null)
-                    {
+                    User_JobRole newUJ = db.User_JobRoles.FirstOrDefault(x => x.JobRoleId == jobRoleId && x.UserId == user.UserId);
+                    
+                    
                         User_JobRole uj = new User_JobRole()
                         {
                             UserId = UserId,
@@ -225,9 +226,10 @@ namespace SchedBot.Areas.Management.Controllers
                         };
                         ujs.Add(uj);
 
-                    }
+                    
                 }
-                catch { continue; }
+                catch (Exception ex){
+                }
             }
             if (ujs.Count > 0)
                 db.User_JobRoles.AddRange(ujs);

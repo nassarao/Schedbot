@@ -1,11 +1,11 @@
 @model SchedbotDTOs.User
 
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form", @name="userDetailsForm", @id="userDetailsForm"}))
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form", @name = "userDetailsForm", @id = "userDetailsForm" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.UserId)
-    @Html.HiddenFor(model => model.AvailabilityId)
-    @Html.HiddenFor(Model => Model.AccountId)
+    @Html.HiddenFor(model => model.UserId, new { @name="UserId"})
+    @Html.HiddenFor(model => model.AvailabilityId, new { @name = "AvailabilityId" })
+    @Html.HiddenFor(Model => Model.AccountId, new { @name = "AccountId" })
 <div class="col-md-12 col-sm-12">
     <div class="portlet light">
         <div class="portlet-title">
@@ -17,59 +17,60 @@
                     <label class="control-label col-md-2">Name:</label>
                     <div class="col-md-5">
                    
-                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" , @name="FirstName"} })
                         @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-5">
-                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @name = "LastName" } })
                         @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Email:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email", @name = "Email" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Phone:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @type = "tel", @maxlength = "10" } })
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @type = "tel", @maxlength = "10",  @name = "PhoneNumber" } })
                         @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Address:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control",  @name = "Address" } })
                         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">City:</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control",  @name = "City" } })
                         @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">State:</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @maxlength = "2" } })
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @maxlength = "2",  @name = "State" } })
                         @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                     </div>
                     <label class="control-label col-md-2">Zip:</label>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "5", @type = "text" } })
+                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @maxlength = "5", @type = "text" , @name = "ZipCode" } })
                         @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <button class="btn btn-block btn-outline green-meadow sbold" type="submit" id="saveDetails" name="saveDetails">Save Details</button>
+                <button class="btn btn-block btn-outline green-meadow sbold" type="button" id="saveDetails" name="saveDetails">Save Details</button>
             
         </div>
     </div>
 </div>
+
 }
 
 
@@ -81,19 +82,48 @@
     $('#saveDetails').click(function () {
         
         var model_to_update = $('#availabilityForm');
+        var token = $("#__AjaxAntiForgeryForm input").val();
 
-        console.info("Inside details click...", model_to_update);
+        var UserId = $("#UserId").val();
+        var FirstName = $("#FirstName").val();
+        var LastName = $("#LastName").val();
+        var Email = $("#Email").val();
+        var PhoneNumber = $("#PhoneNumber").val();
+        var Address = $("#Address").val();
+        var City = $("#City").val();
+        var State = $("#State").val();
+        var ZipCode = $("#ZipCode").val();
+        var AvailabilityId = $("#AvailabilityId").val();
+        var AccountId = $("#AccountId").val();
+
+        console.info("Inside details click...", model_to_update.serialize());
         
         
         $.ajax({
             url: '@Url.Action("Edit", "Users")'
+            , headers: { __RequestVerificationToken: token }
             , type: "POST"
-            , data: model_to_update.serialize()
+            , data: {
+                UserId: UserId,
+                FirstName: FirstName,
+                LastName: LastName,
+                Email: Email,
+                PhoneNumber: PhoneNumber,
+                Address: Address,
+                City: City,
+                State: State,
+                ZipCode: ZipCode,
+                AvailabilityId: AvailabilityId,
+                AccountId: AccountId,
+                __RequestVerificationToken: token
+
+            }
             , success: function (response) {                
                 swal('Success!', 'User details successfully updated', 'success');
                                 
             }
             , error: function (response) {
+                console.error(response);
                 sweetAlert("Oops...", "Something went wrong!", "error");
             }
         });

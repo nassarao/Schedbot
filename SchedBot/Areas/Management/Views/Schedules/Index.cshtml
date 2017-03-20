@@ -48,6 +48,11 @@
 
                                         }
 
+                                        if(sched.Flag == SchedbotDTOs.Schedule.Flags.NotFinal)
+                                        {
+                                            @Html.HiddenFor(model => sched.Id, new { id = "futureSched"})
+                                        }
+
                                         SelectListItem item = new SelectListItem { Value = sched.Id.ToString(), Text = sched.StartDate.ToString("MM/dd/yyyy") + " - " + sched.EndDate.ToString("MM/dd/yyyy") };
 
                                         schedulesSelectList.Add(item);

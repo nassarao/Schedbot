@@ -1,4 +1,4 @@
-@model IEnumerable<SchedbotDTOs.JobRole>
+@model SchedBot.Areas.Management.Models.UserEditViewModel
 
 <div class="col-md-12 col-sm-12">
     <div class="portlet light">
@@ -19,9 +19,9 @@
                             <div class="table table-responsive table-striped table-hover col-md-12">
                                 <table class="col-md-12 table-responsive table-striped table-hover" >
                                     <tbody name="rolesTable" id="rolesTable">
-                                      @foreach (var item in Model)
+                                      @foreach (var item in Model.user_jobRoles)
                                       {
-                                          <tr>@item.Name</tr><br />
+                                          <tr>@item.JobRole.Name</tr><br />
                                       }
                                     </tbody>
                                 </table>
@@ -48,7 +48,7 @@
 
         });
         
-        
+
         
         
         
