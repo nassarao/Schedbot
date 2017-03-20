@@ -19,6 +19,7 @@ namespace SchedBot.Areas.Management.Controllers
     public class UsersController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
+        ScheduleManager sm = new ScheduleManager();
 
         // GET: Management/Users
         public async Task<ActionResult> Index()
@@ -236,6 +237,7 @@ namespace SchedBot.Areas.Management.Controllers
 
 
             await db.SaveChangesAsync();
+            sm.DropAndCreateFutureSchedule();
             return RedirectToAction("Index", "Users");
 
         }
@@ -293,6 +295,7 @@ namespace SchedBot.Areas.Management.Controllers
 
             db.Entry(user).State = EntityState.Modified;
             await db.SaveChangesAsync();
+            sm.DropAndCreateFutureSchedule();
 
             return RedirectToAction("Edit", new { id = userId });
         }

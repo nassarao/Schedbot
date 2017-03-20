@@ -16,6 +16,7 @@ namespace SchedBot.Areas.Management.Controllers
     public class ShiftsController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
+        ScheduleManager sm = new ScheduleManager();
 
         // GET: Management/Shifts
         public async Task<ActionResult> Index()
@@ -78,6 +79,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 db.Shifts.Add(shift);
                 await db.SaveChangesAsync();
+                sm.DropAndCreateFutureSchedule();
                 return RedirectToAction("Index");
             }
 
@@ -114,6 +116,7 @@ namespace SchedBot.Areas.Management.Controllers
             {
                 db.Entry(shift).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                sm.DropAndCreateFutureSchedule();
                 return RedirectToAction("Index");
             }
 
@@ -143,6 +146,7 @@ namespace SchedBot.Areas.Management.Controllers
             Shift shift = await db.Shifts.FindAsync(id);
             db.Shifts.Remove(shift);
             await db.SaveChangesAsync();
+            sm.DropAndCreateFutureSchedule();
             return RedirectToAction("Index");
         }
 
