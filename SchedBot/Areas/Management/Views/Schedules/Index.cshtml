@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-2 col-sm-6 col-xs-12 form-group">
                         <div class="col-md-2 col-sm-6 col-xs-12">
-                            <button class="btn btn-outline grey-mint" type="button" name="finalizeScheduleBtn" id="finalizeScheduleBtn"><i class="fa fa-calendar-check-o "></i> &nbsp; Finalize Schedule</button>
+                            <button class="btn btn-outline grey-mint" type="button" name="finalizeScheduleBtn" id="finalizeScheduleBtn"><i class="fa fa-calendar-check-o" hidden></i> &nbsp; Finalize Schedule</button>
                             @*<button class="btn green-meadow btn-outline sbold" id="newScheduledShift" type="button"><i class="fa fa-plus"></i>&nbsp; Add and Assign Shift</button>*@
                         </div>
                         </div>
@@ -135,8 +135,9 @@
         });
     </script>
     <script>
-
-    $(document).ready(function () {
+        $("#finalizeScheduleBtn").hide();
+        $(document).ready(function () {
+            
         this.currentSched = document.getElementById("currentSched").value;
         var cSValue = currentSched.value;
         console.log("currentSched", cSValue.toString());
@@ -150,10 +151,30 @@
             var userDropdownId = $("#usersDropDown").val();
             $("#schedTable").load(url, { scheduleId: schedDropdownId, userId: userDropdownId })
 
+            
 
         });
 
-        
+        $("#schedulesDropDown").change(function () {
+            var selectedSchedId = $(this).val();
+            var futureSchedId = $("#futureSched").val();
+            console.log("current sched after change", selectedSchedId, futureSchedId);
+
+            if (futureSchedId && futureSchedId == selectedSchedId) {
+                console.log("Show finalize btn");
+                $("#finalizeScheduleBtn").show();
+                
+
+            }
+            else {
+                console.log("Hide finalize btn");
+                $("#finalizeScheduleBtn").hide();
+                
+            }
+
+            
+
+        })
 
     })
 
