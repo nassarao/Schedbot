@@ -61,15 +61,15 @@ namespace SchedBot.Areas.Management.Controllers
             MailService mail = new MailService();
             ScheduleFinalized +=  mail.OnScheduleFinalized;
 
-            Schedule nextSched = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.Final);
+            Schedule nextSched = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.NotFinal);
             if (nextSched != null)
             {
                 nextSched.Flag = Schedule.Flags.Final;
                 db.Entry(nextSched).State = EntityState.Modified;
                 db.SaveChanges();
                 //Raising Schedule Finalized Event 
-            }
             await OnScheduleFinalized(nextSched.Id);
+            }
             return RedirectToAction("Index");
 
         }

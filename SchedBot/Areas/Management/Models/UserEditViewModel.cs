@@ -11,7 +11,8 @@ namespace SchedBot.Areas.Management.Models
         public User  user { get; set; }
         public List<AvailableShifts> shifts { get; set; }
         public Availability availability { get; set; }
-        public List<JobRole> user_jobRoles { get; set; }
+        public List<User_JobRole> user_jobRoles { get; set; }
         public List<JobRole> jobRoles { get; set; }
+        public Dictionary<JobRole,bool> CheckBoxProps { get; set; }
     }
 }
