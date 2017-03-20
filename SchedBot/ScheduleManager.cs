@@ -16,8 +16,8 @@ namespace SchedBot
 
         //Define event
         public event ScheduleFinalizedEventArgs ScheduleFinalized;
-      
 
+        bool shiftAssigned = false;
         public async Task FinalizeSchedule()
         {
             MailService mail = new MailService();
@@ -99,7 +99,11 @@ namespace SchedBot
             //Loop through each shift
             foreach (Shift shift in dayShifts)
             {
+                shiftAssigned = false;
+                if( shift.ShiftID == 20 )
+                {
 
+                }
                 if (roleUserDic.ContainsKey(shift.JobRoleId))
                 {
                     //All useres that can work this specific shift
@@ -122,13 +126,18 @@ namespace SchedBot
         {
             foreach (User_JobRole user in uj)
             {
+              
                 //Determine if they are avilabe to work this shift
                 int av = GetUserAvilabilty(i, user);
 
                 //checking what users avilabilty is on that day way
                 if (av != 3 && ((av != 1 && isAm) || (av != 2 && !isAm)))
                 {
-                    continue;
+                    if (uj.IndexOf(user) >= uj.Count - 1)
+                    {
+                        AssignEmptyUserToShift(unAssignedUser, sched, shift);
+                         break;
+                    }
                 }
                 else
                 {
@@ -159,10 +168,13 @@ namespace SchedBot
                             if (uj.IndexOf(user) >= uj.Count - 1)
                             {
                                 AssignEmptyUserToShift(unAssignedUser, sched, shift);
+                                break;
                             }
                         }
 
                     }
+                    else 
+                        AssignEmptyUserToShift(unAssignedUser, sched, shift);
 
                 }
             }
@@ -216,15 +228,18 @@ namespace SchedBot
 
         private void AssignEmptyUserToShift(User unAssignedUser, Schedule sched, Shift shift)
         {
-
-            User_Shift_Schedule uss = new User_Shift_Schedule()
+            if (shiftAssigned != true)
             {
-                ScheduleId = sched.Id,
-                UserId = unAssignedUser.UserId,
-                ShiftId = shift.ShiftID
-            };
-            db.UserShiftSchedules.Add(uss);
-            db.SaveChanges();
+                User_Shift_Schedule uss = new User_Shift_Schedule()
+                {
+                    ScheduleId = sched.Id,
+                    UserId = unAssignedUser.UserId,
+                    ShiftId = shift.ShiftID
+                };
+                db.UserShiftSchedules.Add(uss);
+                db.SaveChanges();
+                shiftAssigned = true;
+            }
         }
 
         private static void GetLengthOfShift(Shift shift, out double shiftHours, out double usercurrentHours)
@@ -257,29 +272,33 @@ namespace SchedBot
 
         private void AssignUserToShift(Schedule sched, Dictionary<int, List<Shift>> userDayShifts, Shift shift, User_JobRole user)
         {
-            User_Shift_Schedule uss = new User_Shift_Schedule()
+            if (shiftAssigned != true)
             {
-                ScheduleId = sched.Id,
-                UserId = user.UserId,
-                ShiftId = shift.ShiftID
-            };
+                User_Shift_Schedule uss = new User_Shift_Schedule()
+                {
+                    ScheduleId = sched.Id,
+                    UserId = user.UserId,
+                    ShiftId = shift.ShiftID
+                };
 
-            db.UserShiftSchedules.Add(uss);
-            db.SaveChanges();
+                db.UserShiftSchedules.Add(uss);
+                db.SaveChanges();
 
-            //Making sure usr is or is not in list
-            if (userDayShifts.ContainsKey(user.UserId))
-            {
-                userDayShifts[user.UserId].Add(shift);
+                //Making sure usr is or is not in list
+                if (userDayShifts.ContainsKey(user.UserId))
+                {
+                    userDayShifts[user.UserId].Add(shift);
 
 
-            }
-            else
-            {
-                //If we make it here that means he has no prior shifts this schedule and this is his first
-                List<Shift> userShiftList = new List<Shift>();
-                userShiftList.Add(shift);
-                userDayShifts.Add(user.UserId, userShiftList);
+                }
+                else
+                {
+                    //If we make it here that means he has no prior shifts this schedule and this is his first
+                    List<Shift> userShiftList = new List<Shift>();
+                    userShiftList.Add(shift);
+                    userDayShifts.Add(user.UserId, userShiftList);
+                }
+                shiftAssigned = true;
             }
         }
 
