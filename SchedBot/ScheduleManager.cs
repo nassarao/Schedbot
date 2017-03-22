@@ -55,8 +55,10 @@ namespace SchedBot
             {
                 db.Schedules.Remove(future);
                 db.SaveChanges();
-                CreateSchedule();
             }
+
+            CreateSchedule();
+            
         }
 
         public void CreateSchedule()
