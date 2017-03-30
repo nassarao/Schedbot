@@ -48,24 +48,6 @@
                             }
                         </tr>
                         }
-
-
-                        @*<tr>
-                            <td class="col-md-2">Trade
-                            <td class="col-md-5">Andrew <i class="fa fa-lg fa-exchange"></i> Ahmad</td>
-                            <td class="col-md-2">Pending</td>
-                            <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark"><i class="fa fa-2x fa-check"></i></a></td>
-                            <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark"><i class="fa fa-2x fa-times"></i></a></td>
-                            <td class="col-md-1 text-center"><a href="#" id="requestDetails" class="font-dark"><i class="fa fa-2x fa-commenting-o"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-2">Time Off</td>
-                            <td class="col-md-5">Adam</td>
-                            <td class="col-md-2">Approved</td>
-                            <td class="col-md-1 text-center"><a href="#" class="bg-font-grey-steel disabled-link" disabled><i class="disabled fa fa-2x fa-check"></i></a></td>
-                            <td class="col-md-1 text-center"><a href="#" class="bg-font-grey-steel disabled-link"><i class="fa fa-2x fa-times"></i></a></td>
-                            <td class="col-md-1 text-center"><a href="#" class="font-dark"><i class="fa fa-2x fa-commenting-o"></i></a></td>
-                        </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +75,7 @@
 
         <!-- ************************************* Request Approve End ***************************************** -->
         <!-- ************************************* New Request Modal ***************************************** -->
-        @Html.Partial("NewRequestModal")
+        @Html.Partial("NewRequestModal",Model)
 
     </div>
 

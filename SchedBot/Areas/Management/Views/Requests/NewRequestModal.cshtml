@@ -22,10 +22,10 @@
                             <div class="col-md-12 no-padding">
 
 
-                                <select class="form-control" id="newRequestType">
+                                <select name ="requestType" class="form-control" id="newRequestType">
                                     <option value selected disabled></option>
-                                    <option value="trade">Trade</option>
-                                    <option value="timeOff">Time Off</option>
+                                    <option  value="trade">Trade</option>
+                                    <option  value="timeOff">Time Off</option>
                                 </select>
                             </div>
 
@@ -35,15 +35,18 @@
 
                     <div class="margin-top-10" id="newRequestHTML"></div>
 
-                    <div class="form-group" id="timeOffRange">
-                        <div class="col-md-4">
-                            <label class="control-label">Select Desired Time Off:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="col-md-12">
-                                <div class="input-group" id="defaultrange" name="daterange">
-                                    <input type="text" class="form-control" name="daterange" />
-                                    <span class="input-group-btn"><button class="btn btn-default date-range-toggle" name="daterange" type="button"><i class="fa fa-calendar"></i></button></span>
+
+                    <div id="changingHtml">
+                        <div class="form-group" id="timeOffRange">
+                            <div class="col-md-4">
+                                <label class="control-label">Select Desired Time Off:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-12">
+                                    <div class="input-group" id="defaultrange" name="daterange">
+                                        <input type="text" class="form-control" name="daterange" />
+                                        <span class="input-group-btn"><button class="btn btn-default date-range-toggle" name="daterange" type="button"><i class="fa fa-calendar"></i></button></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
