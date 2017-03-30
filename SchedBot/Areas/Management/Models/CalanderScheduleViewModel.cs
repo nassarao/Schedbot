@@ -39,7 +39,16 @@ namespace SchedBot.Areas.Management.Models
 
             title = String.Format("{0} {1} - {2}", uss.User.FirstName, uss.User.LastName, uss.Shift.JobRole.Name);
 
-            backgroundColor = "red";
+            if(uss.User.FirstName == "Unassigned" && uss.User.Email == null)
+            {
+                backgroundColor = "red";
+
+            }
+            else
+            {
+                backgroundColor = "#333";
+            }
+
             borderColor = "white";
             allDay = false;
             editable = false;

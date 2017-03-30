@@ -169,19 +169,30 @@ $('#deleteShiftSubmit').click(function () {
             }
             , success: function (response) {
                 $('#shiftDeleteModal').modal('toggle');
+
+                //swal({
+                //    title: "Success!"
+                //    , text: "Shift successfully deleted"
+                //    , type: "success"
+                //    , showCancelButton: false
+                //    , confirmButtonText: "Ok"
+                //    , closeOnConfirm: false
+                //    , closeOnCancel: false
+                //}, function (isConfirm) {
+                //    if (isConfirm) {
+                //        location.reload();
+                //    }
+                //});
+
                 swal({
-                    title: "Success!"
-                    , text: "Shift successfully deleted"
-                    , type: "success"
-                    , showCancelButton: false
-                    , confirmButtonText: "Ok"
-                    , closeOnConfirm: false
-                    , closeOnCancel: false
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        location.reload();
-                    }
-                });
+                    title: 'Success!',
+                    text: "Shift successfully deleted",
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                }).then(function () {
+                    location.reload();
+                })
                 
             }
             , error: function (response) {
