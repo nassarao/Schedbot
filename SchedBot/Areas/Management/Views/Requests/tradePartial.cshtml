@@ -1,0 +1,77 @@
+﻿@model SchedBot.Areas.Management.Models.RequestViewModel
+
+
+<div>
+
+    <div class="form-group">
+
+        <div class="col-md-4">
+
+            <label class="control-label">Current Shift:</label>
+
+        </div>
+        <div class="col-md-8 no-padding">
+
+            <div class="col-md-12 no-padding">
+
+               @Html.DropDownListFor(model => model.UserShifts, Model.UserShifts)
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div>
+
+    <div class="form-group">
+
+        <div class="col-md-4">
+
+            <label class="control-label">Employee to Trade:</label>
+
+        </div>
+        <div class="col-md-8 no-padding">
+
+            <div class="col-md-12 no-padding">
+
+                @Html.DropDownListFor(model => model.Users,Model.Users)
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+<div>
+
+    <div class="form-group">
+
+        <div class="col-md-4">
+
+            <label class="control-label">Shift To Trade For:</label>
+
+        </div>
+        <div class="col-md-8 no-padding">
+
+            <div class="col-md-12 no-padding">
+
+                <select class="form-control" id="newRequestTradeForShift">
+
+
+                    <option value selected disabled></option>
+
+                    <option value="Mon">Mon (Shift Hours)</option>
+
+                    <option value="Tues">Tues (Shift Hours)</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>

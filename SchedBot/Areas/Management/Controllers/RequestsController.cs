@@ -37,16 +37,26 @@ namespace SchedBot.Areas.Management.Controllers
             string acntId = User.Identity.GetUserId();
             request.SendingUserId = db.Users.First(x => x.AccountId == acntId).UserId;
             request.Status = "Pending";
+            string requestType = collection.Get("requetType");
+            request.RequestType = requestType;
             request.Reason = collection.GetValue("requestReason").AttemptedValue.Trim();
-            if (collection.AllKeys.Contains("daterange"))
+            if (requestType == "trade")
             {
-                //request.SendingUserId = db.Users.First(x => x.AccountId == User.Identity)
-                request.RequestType = "Time Off";
-                string[] dateRange = collection.GetValue("daterange").AttemptedValue.Split('-');
-                request.StartTimeOff = DateTime.Parse(dateRange[0].Trim());
-                request.EndTimeOff = DateTime.Parse(dateRange[1].Trim());
-                db.Requests.Add(request);
-                db.SaveChanges();
+
+            }
+            else if (requestType == "timeOff")
+            {
+                if (collection.AllKeys.Contains("daterange"))
+                {
+                    //request.SendingUserId = db.Users.First(x => x.AccountId == User.Identity)
+                    request.RequestType = "Time Off";
+                    string[] dateRange = collection.GetValue("daterange").AttemptedValue.Split('-');
+                    request.StartTimeOff = DateTime.Parse(dateRange[0].Trim());
+                    request.EndTimeOff = DateTime.Parse(dateRange[1].Trim());
+                    db.Requests.Add(request);
+                    db.SaveChanges();
+                }
+
             }
             return RedirectToAction("Index");
         }

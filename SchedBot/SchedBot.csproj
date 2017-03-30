@@ -536,6 +536,7 @@
     <Content Include="Areas\Management\Views\Schedules\NewScheduledShiftModal.cshtml" />
     <Content Include="Areas\Management\Views\Schedules\ScheduleTablePartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\tradeDetailsModalPartial.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\tradePartial.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />

@@ -16,5 +16,8 @@ namespace SchedBot.Areas.Management.Models
 
         public List<SelectListItem> Users { get; set; }
         public List<SelectListItem> ReqTypes { get; set; }
+        public List<SelectListItem> UserShifts { get; set; }
+        public List<SelectListItem> OtherUserShifts { get; set; }
+
     }
 }
