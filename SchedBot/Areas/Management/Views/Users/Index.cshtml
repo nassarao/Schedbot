@@ -188,19 +188,29 @@
                 $('#basic').modal('toggle');
                 // alert("Successfully deleted user: " + name);
                 //swal("Employee Deleted", "You successfully deleted " + name, "success")
+                //swal({
+                //    title: "Success!"
+                //    , text: "You successfully deleted " + name + " from the list of employees"
+                //    , type: "success"
+                //    , showCancelButton: false
+                //    , confirmButtonText: "Ok"
+                //    , closeOnConfirm: false
+                //    , closeOnCancel: false
+                //}, function (isConfirm) {
+                //    if (isConfirm) {
+                //        location.reload();
+                //    }
+                //});
+
                 swal({
-                    title: "Success!"
-                    , text: "You successfully deleted " + name + " from the list of employees"
-                    , type: "success"
-                    , showCancelButton: false
-                    , confirmButtonText: "Ok"
-                    , closeOnConfirm: false
-                    , closeOnCancel: false
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        location.reload();
-                    }
-                });
+                    title: 'Success!',
+                    text: "You successfully deleted " + name + " from the list of employees",
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                }).then(function () {
+                    location.reload();
+                })
                 
             }
             , error: function (response) {
