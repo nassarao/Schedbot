@@ -11,11 +11,16 @@ using SchedBot;
 using SchedbotDTOs;
 using SchedBot.Areas.Management.Models;
 using SchedBot.Controllers;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using SchedBot.Models;
+
 
 namespace SchedBot.Areas.Management.Controllers
 {
+    [Authorize]
+
     public class UsersController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
@@ -172,6 +177,12 @@ namespace SchedBot.Areas.Management.Controllers
         {
             if (ModelState.IsValid)
             {
+            ApplicationUserManager userManger = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var aspUser = userManger.FindById(user.AccountId);
+                aspUser.Email = user.Email;
+                aspUser.UserName = user.Email;
+                userManger.Update(aspUser);
+
                 db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

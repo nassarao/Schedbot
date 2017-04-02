@@ -37,13 +37,13 @@
                         @foreach (var req in Model.Requests)
                         {
                         <tr>
-                            @if (req.RequestType == "Time Off")
-                            {
                             <td class="col-md-2">@req.RequestType </td>
                             <td>@req.SendingUser.FirstName</td>
                             <td>@req.Status</td>
                             <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest"><i class="fa fa-2x fa-check"></i></a></td>
                             <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest"><i class="fa fa-2x fa-times"></i></a></td>
+                            @if (req.RequestType == "Time Off")
+                            {
                             <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.SendingUser.FirstName" data-lastName="@req.SendingUser.LastName" data-startTimeOff="@req.StartTimeOff" data-endTimeOff="@req.EndTimeOff" data-requestReason="@req.Reason" data-requestStatus="@req.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                             }
                         </tr>
@@ -153,61 +153,62 @@
 
                 var requestType = $("#newRequestType").val();
                 var dynamicHTML = {};
-
+                var url = $("#changingHtml").data("request-url");
                 if (requestType == "trade") {
-                    dynamicHTML = '   <div>  ' +
-     '                               <div class="form-group">  ' +
-     '                                   <div class="col-md-4">  ' +
-     '                                       <label class="control-label">Current Shift:</label>  ' +
-     '                                   </div>  ' +
-     '                                   <div class="col-md-8 no-padding">  ' +
-     '                                       <div class="col-md-12 no-padding">  ' +
-     '                                           <select class="form-control" id="newRequestCurrentShift">  ' +
-     '                                               <option value selected disabled></option>  ' +
-     '                                               <option value="Mon">Mon</option>  ' +
-     '                                               <option value="Tues">Tues</option>  ' +
-     '                                           </select>  ' +
-     '                                       </div>  ' +
-     '     ' +
-     '                                   </div>  ' +
-     '                               </div>  ' +
-     '                           </div>  ' +
-     '     ' +
-     '                           <div>  ' +
-     '                               <div class="form-group">  ' +
-     '                                   <div class="col-md-4">  ' +
-     '                                       <label class="control-label">Employee to Trade:</label>  ' +
-     '                                   </div>  ' +
-     '                                   <div class="col-md-8 no-padding">  ' +
-     '                                       <div class="col-md-12 no-padding">  ' +
-     '                                           <select class="form-control" id="newRequestEmployeeToTrade">  ' +
-     '                                               <option value selected disabled></option>  ' +
-     '                                               <option value="Ahmad">Ahmad</option>  ' +
-     '                                               <option value="Adam">Adam</option>  ' +
-     '                                           </select>  ' +
-     '                                       </div>  ' +
-     '     ' +
-     '                                   </div>  ' +
-     '                               </div>  ' +
-     '                           </div>  ' +
-     '                           <div>  ' +
-     '                               <div class="form-group">  ' +
-     '                                   <div class="col-md-4">  ' +
-     '                                       <label class="control-label">Shift To Trade For:</label>  ' +
-     '                                   </div>  ' +
-     '                                   <div class="col-md-8 no-padding">  ' +
-     '                                       <div class="col-md-12 no-padding">  ' +
-     '                                           <select class="form-control" id="newRequestTradeForShift">  ' +
-     '                                               <option value selected disabled></option>  ' +
-     '                                               <option value="Mon">Mon (Shift Hours)</option>  ' +
-     '                                               <option value="Tues">Tues (Shift Hours)</option>  ' +
-     '                                           </select>  ' +
-     '                                       </div>  ' +
-     '     ' +
-     '                                   </div>  ' +
-     '                               </div>  ' +
-     '                          </div>  ';
-                    $("#newRequestHTML").html(dynamicHTML);
+     //               dynamicHTML = '   <div>  ' +
+     //'                               <div class="form-group">  ' +
+     //'                                   <div class="col-md-4">  ' +
+     //'                                       <label class="control-label">Current Shift:</label>  ' +
+     //'                                   </div>  ' +
+     //'                                   <div class="col-md-8 no-padding">  ' +
+     //'                                       <div class="col-md-12 no-padding">  ' +
+     //'                                           <select class="form-control" id="newRequestCurrentShift">  ' +
+     //'                                               <option value selected disabled></option>  ' +
+     //'                                               <option value="Mon">Mon</option>  ' +
+     //'                                               <option value="Tues">Tues</option>  ' +
+     //'                                           </select>  ' +
+     //'                                       </div>  ' +
+     //'     ' +
+     //'                                   </div>  ' +
+     //'                               </div>  ' +
+     //'                           </div>  ' +
+     //'     ' +
+     //'                           <div>  ' +
+     //'                               <div class="form-group">  ' +
+     //'                                   <div class="col-md-4">  ' +
+     //'                                       <label class="control-label">Employee to Trade:</label>  ' +
+     //'                                   </div>  ' +
+     //'                                   <div class="col-md-8 no-padding">  ' +
+     //'                                       <div class="col-md-12 no-padding">  ' +
+     //'                                           <select class="form-control" id="newRequestEmployeeToTrade">  ' +
+     //'                                               <option value selected disabled></option>  ' +
+     //'                                               <option value="Ahmad">Ahmad</option>  ' +
+     //'                                               <option value="Adam">Adam</option>  ' +
+     //'                                           </select>  ' +
+     //'                                       </div>  ' +
+     //'     ' +
+     //'                                   </div>  ' +
+     //'                               </div>  ' +
+     //'                           </div>  ' +
+     //'                           <div>  ' +
+     //'                               <div class="form-group">  ' +
+     //'                                   <div class="col-md-4">  ' +
+     //'                                       <label class="control-label">Shift To Trade For:</label>  ' +
+     //'                                   </div>  ' +
+     //'                                   <div class="col-md-8 no-padding">  ' +
+     //'                                       <div class="col-md-12 no-padding">  ' +
+     //'                                           <select class="form-control" id="newRequestTradeForShift">  ' +
+     //'                                               <option value selected disabled></option>  ' +
+     //'                                               <option value="Mon">Mon (Shift Hours)</option>  ' +
+     //'                                               <option value="Tues">Tues (Shift Hours)</option>  ' +
+     //'                                           </select>  ' +
+     //'                                       </div>  ' +
+     //'     ' +
+     //'                                   </div>  ' +
+     //'                               </div>  ' +
+     //'                          </div>  ';
+                    //               $("#newRequestHTML").html(dynamicHTML);
+                    $("#changingHtml").load(url);
                     $("#timeOffRange").hide();
                 }
                 else if (requestType == "timeOff") {
@@ -219,6 +220,14 @@
                     $("#timeOffRange").hide();
                 }
 
+            });
+
+            $(document).on("change", "#Users", function () {
+                var selectedUserValue = $("#Users").val();
+                console.log(selectedUserValue);
+                var url = $("#TradableShifts").data("request-url");
+                console.log(url);
+                $("#TradableShifts").load(url, { userId: selectedUserValue });
             });
 
 

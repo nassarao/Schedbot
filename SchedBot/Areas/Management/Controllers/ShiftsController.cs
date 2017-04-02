@@ -13,8 +13,10 @@ using SchedBot.Areas.Management.Models;
 
 namespace SchedBot.Areas.Management.Controllers
 {
+        [Authorize]
     public class ShiftsController : Controller
     {
+
         private SchedBotContext db = new SchedBotContext();
         ScheduleManager sm = new ScheduleManager();
 

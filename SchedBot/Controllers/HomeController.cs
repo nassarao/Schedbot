@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace SchedBot.Controllers
 {
+    [Authorize]
 
     public class HomeController : Controller
     {

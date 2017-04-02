@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace SchedBot.Areas.Management.Controllers
 {
+    [Authorize]
+
     public class SchedulesController : Controller
     {
         private SchedBotContext db = new SchedBotContext();

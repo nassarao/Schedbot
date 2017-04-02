@@ -1,0 +1,26 @@
+﻿@model SchedBot.Areas.Management.Models.RequestViewModel
+<div class="form-group">
+
+    <div class="col-md-4">
+
+        <label class="control-label">Shift To Trade For:</label>
+
+    </div>
+    <div class="col-md-8 no-padding">
+
+        <div class="col-md-12 no-padding">
+            @if (Model.OtherUserShifts != null)
+            {
+
+                @Html.DropDownListFor(model => Model.OtherUserShifts, Model.OtherUserShifts, new { @class = "form-Control" });
+            }
+            else
+            {
+                <select class="form-control" id="newRequestTradeForShift">
+
+
+                </select>
+            }
+        </div>
+    </div>
+</div>

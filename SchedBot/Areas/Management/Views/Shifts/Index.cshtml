@@ -1,5 +1,5 @@
 @model  SchedBot.Areas.Management.Models.ShiftsIndexModel
-
+@using SchedBot.Helpers;
 @{
     ViewBag.Title = "Shifts";
     ViewBag.Current = "Shifts";
@@ -46,8 +46,8 @@
 
                             <td class="text-center col-md-2">@shift.JobRole.Name</td>
                             <td class="text-center col-md-2">@shift.Day</td>
-                            <td class="text-center col-md-2">@shift.Start</td>
-                            <td class="text-center col-md-2">@shift.End</td>
+                            <td class="text-center col-md-2">@Helper.TimeSpanToString(shift.Start)</td>
+                            <td class="text-center col-md-2">@Helper.TimeSpanToString(shift.End)</td>
                             <td class="text-center col-md-1">@shift.Type</td>
                             @if (shift.Active)
                             {
@@ -63,7 +63,7 @@
                                 <span class="btn-group btn-group-xs">
 
                                     <button class="btn btn-outline blue-steel editShift" id="editShift"><i class="fa fa-edit"></i></button>
-                                    <button class="btn btn-outline red deleteShift" data-target="#shiftDeleteModal" data-toggle="modal" data-id="@shift.ShiftID" data-shiftname="@shift.JobRole.Name" data-shiftstarttime="@shift.Start" data-shiftendtime="@shift.End" data-shiftday="@shift.Day"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-outline red deleteShift" data-target="#shiftDeleteModal" data-toggle="modal" data-id="@shift.ShiftID" data-shiftname="@shift.JobRole.Name" data-shiftstarttime="@Helper.TimeSpanToString(shift.Start)" data-shiftendtime="@Helper.TimeSpanToString( shift.End)" data-shiftday="@shift.Day"><i class="fa fa-trash"></i></button>
                                 </span>
                             </td>
                         </tr>

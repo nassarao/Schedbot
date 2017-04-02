@@ -12,6 +12,8 @@ using SchedbotDTOs;
 
 namespace SchedBot.Areas.Management.Controllers
 {
+    [Authorize]
+
     public class AvailabilitiesController : Controller
     {
         private SchedBotContext db = new SchedBotContext();
