@@ -376,10 +376,6 @@
     <Content Include="Content\images\loading-spinner-default.gif" />
     <Content Include="Content\images\loading-spinner-grey.gif" />
     <Content Include="Content\images\loading.gif" />
-    <Content Include="Content\images\logo-big-white.png" />
-    <Content Include="Content\images\logo-big.png" />
-    <Content Include="Content\images\logo-default.png" />
-    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\menu-toggler.png" />
     <Content Include="Content\images\photo1.jpg" />
     <Content Include="Content\images\photo2.jpg" />
