@@ -40,7 +40,7 @@
                             @if (req.RequestType == "Time Off")
                             {
                             <td class="col-md-2">@req.RequestType </td>
-                            <td>@req.SendingUser.FirstName</td>
+                            <td>@req.SendingUser.FirstName @req.SendingUser.LastName</td>
                             <td>@req.Status</td>
                             <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest"><i class="fa fa-2x fa-check"></i></a></td>
                             <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest"><i class="fa fa-2x fa-times"></i></a></td>

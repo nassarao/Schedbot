@@ -63,7 +63,7 @@
     <!-- *************************************** Add Modal ************************************************ -->
     <div class="modal fade" id="addEmployeeModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->@using (Html.BeginForm("Create","Users", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            <!-- Modal content-->@using (Html.BeginForm("Create","Users", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="addEmployeeForm" })) {
             <div class="modal-content">
                 <div class="modal-header"> @*
                     <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>*@
@@ -77,17 +77,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name" }) </div>
-                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name", required="required" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name", required="required" }) </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel", @maxlength = "10" }) </div>
                                 <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address" }) </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City" }) </div>
-                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State", @maxlength = "2" }) </div>
-                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code", @type = "text", @maxlength = "5"}) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City", required = "required" }) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State", @maxlength = "2", required = "required" }) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code", @type = "text", @maxlength = "5", required = "required" }) </div>
                             </div>
                         </div>
                     </div>
