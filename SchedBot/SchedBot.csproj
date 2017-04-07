@@ -233,6 +233,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="Migrations\201611230225072_InitialCreate.cs" />
@@ -322,6 +323,14 @@
     <Compile Include="Migrations\201703122143388_UserShiftSchedules.cs" />
     <Compile Include="Migrations\201703122143388_UserShiftSchedules.Designer.cs">
       <DependentUpon>201703122143388_UserShiftSchedules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704022141573_tradeShiftIds.cs" />
+    <Compile Include="Migrations\201704022141573_tradeShiftIds.Designer.cs">
+      <DependentUpon>201704022141573_tradeShiftIds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704022156014_NullableDatesRequests.cs" />
+    <Compile Include="Migrations\201704022156014_NullableDatesRequests.Designer.cs">
+      <DependentUpon>201704022156014_NullableDatesRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -533,7 +542,9 @@
     <Content Include="Areas\Management\Views\Schedules\ScheduleTablePartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\tradeDetailsModalPartial.cshtml" />
     <Content Include="Areas\Management\Views\Requests\tradePartial.cshtml" />
+    <Content Include="Areas\Management\Views\Requests\TradableShiftsPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Schedbot.pubxml" />
+    <None Include="Properties\PublishProfiles\SchedBotTest.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar.js" />
     <Content Include="Scripts\calendar.min.js" />
@@ -828,6 +839,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703122143388_UserShiftSchedules.resx">
       <DependentUpon>201703122143388_UserShiftSchedules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704022141573_tradeShiftIds.resx">
+      <DependentUpon>201704022141573_tradeShiftIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704022156014_NullableDatesRequests.resx">
+      <DependentUpon>201704022156014_NullableDatesRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

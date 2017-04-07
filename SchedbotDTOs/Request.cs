@@ -18,8 +18,11 @@ namespace SchedbotDTOs
 
         public string RequestType{ get; set; }
 
-        public DateTime StartTimeOff { get; set; }
-        public DateTime EndTimeOff { get; set; }
+        public int OriginalShiftId { get; set; }
+        public int TradingShiftId { get; set; }
+
+        public DateTime? StartTimeOff { get; set; }
+        public DateTime? EndTimeOff { get; set; }
 
         //Foreign Key
         public int SendingUserId { get; set; }
