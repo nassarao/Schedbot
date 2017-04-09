@@ -195,6 +195,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Migrations\201704092222465_RenamedColumns.cs" />
+    <Compile Include="Migrations\201704092222465_RenamedColumns.Designer.cs">
+      <DependentUpon>201704092222465_RenamedColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequestDetailsViewModel.cs" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-datepicker3.min.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -223,9 +228,17 @@
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Areas\Management\Models\CalanderScheduleViewModel.cs" />
-    <Compile Include="Migrations\201704092033441_AddedForeignKeyToRequests.cs" />
-    <Compile Include="Migrations\201704092033441_AddedForeignKeyToRequests.Designer.cs">
-      <DependentUpon>201704092033441_AddedForeignKeyToRequests.cs</DependentUpon>
+    <Compile Include="Migrations\201704092114317_something.cs" />
+    <Compile Include="Migrations\201704092114317_something.Designer.cs">
+      <DependentUpon>201704092114317_something.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704092119095_removedVirtual.cs" />
+    <Compile Include="Migrations\201704092119095_removedVirtual.Designer.cs">
+      <DependentUpon>201704092119095_removedVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704092122599_removedVirtual2.cs" />
+    <Compile Include="Migrations\201704092122599_removedVirtual2.Designer.cs">
+      <DependentUpon>201704092122599_removedVirtual2.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\SchedulesIndexModel.cs" />
     <Compile Include="Areas\Management\Models\ShiftsIndexModel.cs" />
@@ -846,8 +859,17 @@
     <EmbeddedResource Include="Migrations\201704022156014_NullableDatesRequests.resx">
       <DependentUpon>201704022156014_NullableDatesRequests.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704092033441_AddedForeignKeyToRequests.resx">
-      <DependentUpon>201704092033441_AddedForeignKeyToRequests.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704092114317_something.resx">
+      <DependentUpon>201704092114317_something.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704092119095_removedVirtual.resx">
+      <DependentUpon>201704092119095_removedVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704092122599_removedVirtual2.resx">
+      <DependentUpon>201704092122599_removedVirtual2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704092222465_RenamedColumns.resx">
+      <DependentUpon>201704092222465_RenamedColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

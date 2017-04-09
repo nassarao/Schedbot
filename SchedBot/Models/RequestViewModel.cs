@@ -1,4 +1,5 @@
-﻿using SchedbotDTOs;
+﻿using SchedBot.Models.Requests;
+using SchedbotDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace SchedBot.Models
     public class RequestViewModel
     {
 
-        public List<Request> Requests{ get; set; }
+        public List<RequestDetailsViewModel> Requests{ get; set; }
+        //public List<Request> Requests { get; set; }
+
 
         public string RequestType { get; set; }
 

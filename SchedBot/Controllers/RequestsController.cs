@@ -23,12 +23,15 @@ namespace SchedBot.Controllers
     {
         private SchedBotContext db = new SchedBotContext();
 
+        
         // GET: Management/Requests
         public async Task<ActionResult> Index()
         {
+           
+
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.Include(x => x.OriginalShift).Include(x => x.OriginalShift).ToList();
-            vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
+            vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
+            //vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
 
             return View(vm);
         }
@@ -83,8 +86,8 @@ namespace SchedBot.Controllers
                 req.Status = "Manager Approved";
             if(req.RequestType == "Trade")
             {
-                int orignalId = req.OriginalShiftId;
-                int tradingId = req.TradingShiftId;
+                int orignalId = req.OriginalUSSId;
+                int tradingId = req.TradingUSSId;
                 User_Shift_Schedule original = db.UserShiftSchedules.FirstOrDefault(x => x.Id == orignalId);
                 User_Shift_Schedule trading = db.UserShiftSchedules.FirstOrDefault(x => x.Id == tradingId);
                 original.UserId = tradingId;
@@ -133,8 +136,8 @@ namespace SchedBot.Controllers
 
                 request.RequestType = "Trade";
                 request.ReceivingUserId = int.Parse(collection.Get("Users"));
-                request.OriginalShiftId = int.Parse(collection.Get("UserShifts"));
-                request.TradingShiftId = int.Parse(collection.Get("OtherUserShifts"));
+                request.OriginalUSSId = int.Parse(collection.Get("UserShifts"));
+                request.TradingUSSId = int.Parse(collection.Get("OtherUserShifts"));
             }
             else if (requestType == "timeOff")
             {
