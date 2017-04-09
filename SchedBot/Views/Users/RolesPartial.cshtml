@@ -11,7 +11,10 @@
                     <div class="form-group">
                         <div class="col-md-12 margin-bottom-15">
                             <label class="col-md-9">Roles:</label>
-                            <div class="col-md-3"><button class="btn btn-xs btn-outline blue-steel" type="button" id="updateRoles" name="updateRoles"><i class="fa fa-plus"></i> Update Roles</button></div>
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <div class="col-md-3"><button class="btn btn-xs btn-outline blue-steel" type="button" id="updateRoles" name="updateRoles"><i class="fa fa-plus"></i> Update Roles</button></div>
+                            }
                         </div>
                         <div class="col-md-12">
                             <div id='updateRoles' class='modal fade in' data-toggle="modal" data-target="#updateRolesModal">

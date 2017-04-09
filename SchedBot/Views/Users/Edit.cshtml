@@ -9,8 +9,16 @@
 <!-- ******************************************************* REAL HTML BELOW *************************************************************-->
 
 @{
-    ViewBag.Title = "SchedBot - Employee Details";
-    ViewBag.Current = "Employees";
+    if (User.IsInRole("Manager"))
+    {
+        ViewBag.Current = "Employees";
+        ViewBag.Title = "SchedBot - Employee Details";
+    }
+    else
+    {
+        ViewBag.Current = "My Profile";
+        ViewBag.Title = "SchedBot - My Profile";
+    }
 }
 
 <link href="~/Content/bootstrap-tagsinput.css" />
