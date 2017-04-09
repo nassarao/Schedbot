@@ -3,24 +3,30 @@
 <table id ="schedTable" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = "Management"})" class="table table-hover table-striped">
     <thead>
         <tr>
-            <th class="col-md-2">Employee</th>
-            <th class="col-md-2">Day</th>
-            <th class="col-md-2">Time Start</th>
-            <th class="col-md-2">Time End</th>
-            <th class="col-md-2">Shift Role</th>
-            <th class="col-md-2 text-center">Actions</th>
+            <th>Employee</th>
+            <th>Day</th>
+            <th>Time Start</th>
+            <th >Time End</th>
+            <th >Shift Role</th>
+            @if (User.IsInRole("Manager"))
+            {
+                <th class="col-md-2 text-center">Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var scheduledShift in Model)
         {
         <tr>
-            <td class="col-md-2">@(scheduledShift.User.FirstName + " " + scheduledShift.User.LastName)</td>
-            <td class="col-md-2">@(scheduledShift.Shift.Day)</td>
-            <td class="col-md-2">@(Helper.TimeSpanToString(scheduledShift.Shift.Start))</td>
-            <td class="col-md-2">@(Helper.TimeSpanToString(scheduledShift.Shift.End))</td>
-            <td class="col-md-2">@(scheduledShift.Shift.JobRole.Name)</td>
-            <td class="col-md-2 text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+            <td>@(scheduledShift.User.FirstName + " " + scheduledShift.User.LastName)</td>
+            <td>@(scheduledShift.Shift.Day)</td>
+            <td>@(Helper.TimeSpanToString(scheduledShift.Shift.Start))</td>
+            <td>@(Helper.TimeSpanToString(scheduledShift.Shift.End))</td>
+            <td>@(scheduledShift.Shift.JobRole.Name)</td>
+            @if (User.IsInRole("Manager"))
+            {
+                <td class="text-center"><span class="btn-group btn-group-xs"><button class="btn btn-outline blue-sharp"><i class="fa fa-edit"></i></button><button class="btn btn-outline red"><i class="fa fa-trash"></i></button></span></td>
+            }
         </tr>
         }
     </tbody>

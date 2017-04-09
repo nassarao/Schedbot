@@ -47,8 +47,13 @@
                                     {
                                         <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.SendingUser.FirstName" data-lastName="@req.SendingUser.LastName" data-startTimeOff="@req.StartTimeOff" data-endTimeOff="@req.EndTimeOff" data-requestReason="@req.Reason" data-requestStatus="@req.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
-                                
-                            
+                                    @if (req.RequestType == "Trade")
+                                    {
+                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.SendingUser.FirstName" data-senderLastName="@req.SendingUser.LastName" data-senderShiftDay="@req.StartTimeOff" data-senderShiftStart="@req.OriginalShiftId" data-senderShiftEnd="@req.OriginalShiftId" data-receiveFirstName="@req.EndTimeOff" data-receiveLastName="@req.OriginalShiftId" data-receiveShiftDay="@req.OriginalShiftId" data-receiveShiftStart="@req.OriginalShiftId" data-receiveShiftEnd="@req.OriginalShiftId" data-requestReason="@req.Reason" data-requestStatus="@req.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+
+                                    }
+
+
                             </tr>
                         }
                     </tbody>
@@ -114,6 +119,32 @@
             $('#requestReason').html(reason);
 
         });
+
+
+
+        $(".viewTradeDetails").click(function () {
+            var senderFirstName = $(this).data("senderfirstname");
+            var senderLastName = $(this).data("senderlastname");
+            var receiverFirstName = $(this).data("receivefirstname");
+            var receiverLastName = $(this).data("receivelastname");
+            var senderShiftDay = $(this).data('sendershiftday');
+            var senderShiftStart = $(this).data('sendershiftstart');
+            var senderShiftEnd = $(this).data('sendershiftend');
+            var receiverShiftStart = $(this).data('receiveshiftstart');
+            var receiverShiftEnd = $(this).data('receiveshiftend');
+            var receiverShiftDay = $(this).data('receiveshiftday');
+            var status = $(this).data('requeststatus');
+            var reason = $(this).data('requestreason');
+
+            console.log(startTime, endTime, status, reason);
+            $('#employeeName').html(firstName + " " + lastName);
+            $('#requestTimeSpan').html(startTime + " - " + endTime);
+            $('#requestStatus').html(status);
+            $('#requestReason').html(reason);
+
+        });
+
+
 
 
 
