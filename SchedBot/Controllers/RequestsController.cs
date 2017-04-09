@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity;
 using System.Text;
 using SchedBot.Helpers;
 
-namespace SchedBot.Areas.Management.Controllers
+namespace SchedBot.Controllers
 {
     [Authorize]
 
@@ -101,6 +101,7 @@ namespace SchedBot.Areas.Management.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult> DenyRequest(int requestId, string reason)
         {
             Request req = db.Requests.FirstOrDefault(x => x.RequestId == requestId);
@@ -150,46 +151,7 @@ namespace SchedBot.Areas.Management.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Management/Requests/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Request request = await db.Requests.FindAsync(id);
-            if (request == null)
-            {
-                return HttpNotFound();
-            }
-            return View(request);
-        }
 
-        // GET: Management/Requests/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Request request = await db.Requests.FindAsync(id);
-            if (request == null)
-            {
-                return HttpNotFound();
-            }
-            return View(request);
-        }
-
-        // POST: Management/Requests/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Request request = await db.Requests.FindAsync(id);
-            db.Requests.Remove(request);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
