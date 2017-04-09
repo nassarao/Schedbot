@@ -17,7 +17,7 @@ using Microsoft.Owin.Security;
 using SchedBot.Models;
 
 
-namespace SchedBot.Areas.Management.Controllers
+namespace SchedBot.Controllers
 {
     [Authorize]
 
@@ -27,6 +27,7 @@ namespace SchedBot.Areas.Management.Controllers
         ScheduleManager sm = new ScheduleManager();
 
         // GET: Management/Users
+        [Authorize(Roles ="Manager")]
         public async Task<ActionResult> Index()
         {
             UserIndexViewModel userIndexVM = new UserIndexViewModel();
@@ -34,26 +35,6 @@ namespace SchedBot.Areas.Management.Controllers
             return View(userIndexVM);
         }
 
-        // GET: Management/Users/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = await db.Users.FindAsync(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // GET: Management/Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Management/Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -190,24 +171,11 @@ namespace SchedBot.Areas.Management.Controllers
             return View(user);
         }
 
-        // GET: Management/Users/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = await db.Users.FindAsync(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
 
         // POST: Management/Users/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost , ActionName("Delete")]
         // [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Manager")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             User user = await db.Users.FindAsync(id);
@@ -216,6 +184,7 @@ namespace SchedBot.Areas.Management.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
+        [Authorize(Roles ="Manager")]
         public async Task<ActionResult> SaveRoles(FormCollection collection)
         {
             int UserId = int.Parse(collection["user.UserId"]);

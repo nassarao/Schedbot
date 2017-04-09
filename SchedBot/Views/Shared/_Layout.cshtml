@@ -227,7 +227,7 @@
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "Requests" ? "nav-item active open" : "nav-item") ">
-                        <a href="@Url.Action("Index", "Requests", new { area = "Management" })" class="nav-link nav-toggle">
+                        <a href="@Url.Action("Index", "Requests", new { area = "" })" class="nav-link nav-toggle">
                             <i class="icon-shuffle"></i>
                             <span class="title">Requests</span>
                             @if (ViewBag.Current == "Requests")
@@ -238,7 +238,7 @@
                         </a>
                     </li>
                     <li class="@(ViewBag.Current == "Employees" ? "nav-item active open" : "nav-item") ">
-                        <a href="@Url.Action("Index", "Users", new { area = "Management" })" class="nav-link nav-toggle">
+                        <a href="@Url.Action("Index", "Users", new { area = "" })" class="nav-link nav-toggle">
                             <i class="icon-users"></i>
                             <span class="title">Employees</span>
                             @if (ViewBag.Current == "Employees")

@@ -12,7 +12,7 @@ using SchedbotDTOs;
 
 namespace SchedBot.Areas.Management.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Manager")]
 
     public class JobRolesController : Controller
     {

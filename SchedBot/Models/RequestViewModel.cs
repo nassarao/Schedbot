@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SchedBot.Areas.Management.Models
+namespace SchedBot.Models
 {
     public class RequestViewModel
     {

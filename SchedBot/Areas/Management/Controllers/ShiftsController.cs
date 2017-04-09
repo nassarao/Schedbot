@@ -13,7 +13,7 @@ using SchedBot.Areas.Management.Models;
 
 namespace SchedBot.Areas.Management.Controllers
 {
-        [Authorize]
+        [Authorize(Roles = "Manager")]
     public class ShiftsController : Controller
     {
 

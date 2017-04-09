@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using SchedBot;
 using SchedbotDTOs;
 
-namespace SchedBot.Areas.Management.Controllers
+namespace SchedBot.Controllers
 {
     [Authorize]
 

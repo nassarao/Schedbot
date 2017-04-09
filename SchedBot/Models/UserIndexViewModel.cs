@@ -5,7 +5,7 @@ using System.Web;
 using SchedbotDTOs;
 using SchedBot.Models;
 
-namespace SchedBot.Areas.Management.Models
+namespace SchedBot.Models
 {
     public class UserIndexViewModel
     {
