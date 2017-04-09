@@ -7,13 +7,13 @@ namespace SchedBot.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedForeignKeyToRequests : IMigrationMetadata
+    public sealed partial class removedVirtual2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedForeignKeyToRequests));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(removedVirtual2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704092033441_AddedForeignKeyToRequests"; }
+            get { return "201704092122599_removedVirtual2"; }
         }
         
         string IMigrationMetadata.Source

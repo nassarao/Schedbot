@@ -37,15 +37,15 @@
                         @foreach (var req in Model.Requests)
                         {
                             <tr>
-                                <td class="col-md-2">@req.RequestType </td>
-                                <td>@req.SendingUser.FirstName @req.SendingUser.LastName</td>
-                                <td>@req.Status</td>
-                               
+                                <td class="col-md-2">@req.requestDTO.RequestType </td>
+                                <td>@req.sending.FirstName @req.sending.LastName</td>
+                                <td>@req.requestDTO.Status</td>
+                              
                                     <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest"><i class="fa fa-2x fa-check"></i></a></td>
                                     <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest"><i class="fa fa-2x fa-times"></i></a></td>
-                                    @if (req.RequestType == "Time Off")
+                                    @if (req.requestDTO.RequestType == "Time Off")
                                     {
-                                        <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.SendingUser.FirstName" data-lastName="@req.SendingUser.LastName" data-startTimeOff="@req.StartTimeOff" data-endTimeOff="@req.EndTimeOff" data-requestReason="@req.Reason" data-requestStatus="@req.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+                                        <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
                                     @if (req.RequestType == "Trade")
                                     {
