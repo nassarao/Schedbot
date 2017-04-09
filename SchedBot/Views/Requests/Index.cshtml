@@ -47,8 +47,13 @@
                                     {
                                         <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
-                                
-                            
+                                    @if (req.requestDTO.RequestType == "Trade")
+                                    {
+                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.ScheduleId" data-senderShiftStart="@req.original.ScheduleId" data-senderShiftEnd="@req.original.ScheduleId" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.ScheduleId" data-receiveShiftStart="@req.trading.ScheduleId" data-receiveShiftEnd="@req.trading.ScheduleId" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+
+                                    }
+
+
                             </tr>
                         }
                     </tbody>
@@ -114,6 +119,32 @@
             $('#requestReason').html(reason);
 
         });
+
+
+
+        $(".viewTradeDetails").click(function () {
+            var senderFirstName = $(this).data("senderfirstname");
+            var senderLastName = $(this).data("senderlastname");
+            var receiverFirstName = $(this).data("receivefirstname");
+            var receiverLastName = $(this).data("receivelastname");
+            var senderShiftDay = $(this).data('sendershiftday');
+            var senderShiftStart = $(this).data('sendershiftstart');
+            var senderShiftEnd = $(this).data('sendershiftend');
+            var receiverShiftStart = $(this).data('receiveshiftstart');
+            var receiverShiftEnd = $(this).data('receiveshiftend');
+            var receiverShiftDay = $(this).data('receiveshiftday');
+            var status = $(this).data('requeststatus');
+            var reason = $(this).data('requestreason');
+
+            //console.log(startTime, endTime, status, reason);
+            //$('#employeeName').html(firstName + " " + lastName);
+            //$('#requestTimeSpan').html(startTime + " - " + endTime);
+            //$('#requestStatus').html(status);
+            //$('#requestReason').html(reason);
+
+        });
+
+
 
 
 
