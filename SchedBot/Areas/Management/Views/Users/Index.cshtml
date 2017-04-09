@@ -78,14 +78,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.FirstName , new { @class = "form-control", placeholder="First Name", required="required" }) </div>
-                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name", required="required" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.LastName, new { @class = "form-control", placeholder = "Last Name", required = "required" }) </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel", @maxlength = "10" }) </div>
-                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @type="tel", @maxlength = "10", @minlength="10", required = "required" }) </div>
+                                <div class="col-md-6"> @Html.TextBoxFor(x => x.NewUser.Address, new { @class = "form-control", placeholder = "Address", required = "required" }) </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City", required = "required" }) </div>
+                                <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.City, new { @class = "form-control", placeholder = "City", @required = "required" }) </div>
                                 <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.State, new { @class = "form-control", placeholder = "State", @maxlength = "2", required = "required" }) </div>
                                 <div class="col-md-4"> @Html.TextBoxFor(x => x.NewUser.ZipCode, new { @class = "form-control", placeholder = "Zip Code", @type = "text", @maxlength = "5", required = "required" }) </div>
                             </div>
@@ -99,11 +99,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"> @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email" }) </div>
+                                <div class="col-md-12"> @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", @placeholder = "Employee Email Address", @type = "email", required = "required" }) </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", @placeholder = "Password" }) </div>
-                                <div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" }) </div>
+                                <div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.Password, new { @class = "form-control", @placeholder = "Password", required = "required", pattern= "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$" }) </div>
+                                < div class="col-md-6"> @Html.PasswordFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", required = "required", pattern= "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$" }) </div>
                             </div>
                         </div>
                     </div> @*
@@ -182,7 +182,7 @@
         $('#employeeName').html("<b>" + firstName + " " + lastName + "</b>");
     });
     $('#btnContinueDelete').click(function () {
-        //window.location = "Delete/" + item_to_delete;
+
         $.ajax({
             url: '@Url.Action("Delete", "Users")'
             , type: "POST"
@@ -191,21 +191,7 @@
             }
             , success: function (response) {
                 $('#basic').modal('toggle');
-                // alert("Successfully deleted user: " + name);
-                //swal("Employee Deleted", "You successfully deleted " + name, "success")
-                //swal({
-                //    title: "Success!"
-                //    , text: "You successfully deleted " + name + " from the list of employees"
-                //    , type: "success"
-                //    , showCancelButton: false
-                //    , confirmButtonText: "Ok"
-                //    , closeOnConfirm: false
-                //    , closeOnCancel: false
-                //}, function (isConfirm) {
-                //    if (isConfirm) {
-                //        location.reload();
-                //    }
-                //});
+                
 
                 swal({
                     title: 'Success!',
