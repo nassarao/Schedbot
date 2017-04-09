@@ -12,6 +12,8 @@ namespace SchedBot.Models.Requests
         public User_Shift_Schedule trading { get; set; }
         public Request requestDTO { get; set; }
         public User sending { get; set; }
+        public string OriginalPrettyShiftDateTime { get; set; }
+        public string TradingPrettyShiftDateTime { get; set; }
 
         public User receiving { get; set; }
 
@@ -22,7 +24,8 @@ namespace SchedBot.Models.Requests
             trading = db.UserShiftSchedules.Include("Shift").Include("Schedule").FirstOrDefault(x => x.Id == re.TradingUSSId);
             sending = db.Users.FirstOrDefault(x => x.UserId == re.SendingUserId);
             receiving = db.Users.FirstOrDefault(x => x.UserId == re.ReceivingUserId);
-
         }
+
+        
     }
 }
