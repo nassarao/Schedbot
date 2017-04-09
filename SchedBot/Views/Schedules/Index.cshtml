@@ -1,4 +1,4 @@
-@model SchedBot.Areas.Management.Models.SchedulesIndexModel
+@model SchedBot.Models.SchedulesIndexModel
 @{
     ViewBag.Title = "SchedBot - Schedules";
     ViewBag.Current = "Schedules";
@@ -87,15 +87,18 @@
                     </div>
                     <div class="col-md-2 col-sm-6 col-xs-12 form-group">
                     <div class="col-md-2 col-sm-6 col-xs-12">
-                        <button name="viewSchedBtn" id="viewSchedBtn" type="button" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = "Management"})" class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i>&nbsp; View Schedule</button>
+                        <button name="viewSchedBtn" id="viewSchedBtn" type="button" data-request-url="@Url.Action("LoadScheduleTable","Schedules",new { Area = ""})" class="btn btn-outline yellow-lemon"><i class="fa fa-search"></i>&nbsp; View Schedule</button>
                     </div>
                     </div>
+                    @if (User.IsInRole("Manager"))
+                    {
                     <div class="col-md-2 col-sm-6 col-xs-12 form-group">
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <button class="btn btn-outline grey-mint" type="button" name="finalizeScheduleBtn" id="finalizeScheduleBtn"><i class="fa fa-calendar-check-o" hidden></i> &nbsp; Finalize Schedule</button>
                             @*<button class="btn green-meadow btn-outline sbold" id="newScheduledShift" type="button"><i class="fa fa-plus"></i>&nbsp; Add and Assign Shift</button>*@
                         </div>
                         </div>
+                    }
 </form>
             </div>
             @Html.Partial("ScheduleTablePartial", Model.UserShiftScheduleDTOs)

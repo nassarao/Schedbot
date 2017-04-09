@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SchedBot.Areas.Management.Models
+namespace SchedBot.Models
 {
     public class SchedulesIndexModel
     {

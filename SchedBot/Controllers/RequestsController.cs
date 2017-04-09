@@ -78,8 +78,9 @@ namespace SchedBot.Controllers
         public async Task<ActionResult> ApproveRequest(int requestId)
         {
             Request req = db.Requests.FirstOrDefault(x => x.RequestId == requestId);
-            
-            req.Status = "Approved";
+            req.Status = "Employee Approved";
+            if(User.IsInRole("Manager"))
+                req.Status = "Manager Approved";
             if(req.RequestType == "Trade")
             {
                 int orignalId = req.OriginalShiftId;
@@ -105,7 +106,10 @@ namespace SchedBot.Controllers
         public async Task<ActionResult> DenyRequest(int requestId, string reason)
         {
             Request req = db.Requests.FirstOrDefault(x => x.RequestId == requestId);
-            req.Status = "Denied";
+            req.Status = "Employee Denied";
+
+            if (User.IsInRole("Manager"))
+                req.Status = "Manager Denied";
             req.Reason = reason;
             db.Entry(req).State = EntityState.Modified;
             await db.SaveChangesAsync();

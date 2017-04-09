@@ -4,14 +4,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SchedBot;
 using SchedbotDTOs;
-using SchedBot.Areas.Management.Models;
 using System.Threading.Tasks;
+using SchedBot.Models;
 
-namespace SchedBot.Areas.Management.Controllers
+namespace SchedBot.Controllers
 {
     [Authorize]
 
@@ -19,7 +17,7 @@ namespace SchedBot.Areas.Management.Controllers
     {
         private SchedBotContext db = new SchedBotContext();
 
-       
+
 
         public ActionResult CreateSchedule()
         {
@@ -77,7 +75,7 @@ namespace SchedBot.Areas.Management.Controllers
 
         }
 
-      
+
 
         // GET: Management/Schedules/Details/5
         public ActionResult Details(int? id)
