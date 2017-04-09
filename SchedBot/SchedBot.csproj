@@ -223,6 +223,10 @@
     <Compile Include="Areas\Management\Controllers\User_JobRoleController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Areas\Management\Models\CalanderScheduleViewModel.cs" />
+    <Compile Include="Migrations\201704092033441_AddedForeignKeyToRequests.cs" />
+    <Compile Include="Migrations\201704092033441_AddedForeignKeyToRequests.Designer.cs">
+      <DependentUpon>201704092033441_AddedForeignKeyToRequests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\SchedulesIndexModel.cs" />
     <Compile Include="Areas\Management\Models\ShiftsIndexModel.cs" />
     <Compile Include="Models\UserEditViewModel.cs" />
@@ -841,6 +845,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704022156014_NullableDatesRequests.resx">
       <DependentUpon>201704022156014_NullableDatesRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704092033441_AddedForeignKeyToRequests.resx">
+      <DependentUpon>201704092033441_AddedForeignKeyToRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,5 +31,9 @@ namespace SchedbotDTOs
         public int ReceivingUserId { get; set; }
         public virtual User ReceivingUser { get; set; }
 
+        public virtual Shift OriginalShift { get; set; }
+        public virtual Shift TradingShift{ get; set; }
+
+
     }
 }
