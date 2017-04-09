@@ -27,7 +27,7 @@ namespace SchedBot.Controllers
         public async Task<ActionResult> Index()
         {
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.ToList();
+            vm.Requests = db.Requests.Include(x => x.OriginalShift).Include(x => x.OriginalShift).ToList();
             vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
 
             return View(vm);
