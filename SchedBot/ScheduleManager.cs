@@ -47,7 +47,7 @@ namespace SchedBot
             };
             await ScheduleFinalized?.Invoke(this, args);
         }
-        
+
         public void DropAndCreateFutureSchedule()
         {
             Schedule future = db.Schedules.FirstOrDefault(x => x.Flag == Schedule.Flags.NotFinal);
@@ -58,7 +58,7 @@ namespace SchedBot
             }
 
             CreateSchedule();
-            
+
         }
 
         public void CreateSchedule()
@@ -102,7 +102,7 @@ namespace SchedBot
             foreach (Shift shift in dayShifts)
             {
                 shiftAssigned = false;
-                if( shift.ShiftID == 20 )
+                if (shift.ShiftID == 20)
                 {
 
                 }
@@ -128,7 +128,7 @@ namespace SchedBot
         {
             foreach (User_JobRole user in uj)
             {
-              
+
                 //Determine if they are avilabe to work this shift
                 int av = GetUserAvilabilty(i, user);
 
@@ -138,7 +138,7 @@ namespace SchedBot
                     if (uj.IndexOf(user) >= uj.Count - 1)
                     {
                         AssignEmptyUserToShift(unAssignedUser, sched, shift);
-                         break;
+                        break;
                     }
                 }
                 else
@@ -146,8 +146,10 @@ namespace SchedBot
                     //
                     bool isAvailable = true;
                     isAvailable = VerifyShiftsDontOverLap(userDayShifts, shift, user, isAvailable);
+                    bool hasRequestedOff = false;
+                    hasRequestedOff = VerifyHasRequestedOff(shift, user, i, sched);
 
-                    if (isAvailable)
+                    if (isAvailable && !hasRequestedOff)
                     {
                         //Getting length of a shift
                         double shiftHours, usercurrentHours;
@@ -175,11 +177,14 @@ namespace SchedBot
                         }
 
                     }
-                    else 
+                    if (uj.IndexOf(user) >= uj.Count - 1)
+                    {
                         AssignEmptyUserToShift(unAssignedUser, sched, shift);
+                    }
 
                 }
             }
+
         }
 
         private static void PopulateRoleUserDictionary(List<User_JobRole> ujs, IDictionary<int, List<User_JobRole>> roleUserDic)
@@ -226,6 +231,55 @@ namespace SchedBot
             }
 
             return isAvailable;
+        }
+
+        private bool VerifyHasRequestedOff(Shift shift, User_JobRole user, int i, Schedule sched)
+        {
+            if (user.UserId == 12)
+            {
+
+            }
+            DateTime day = sched.StartDate.AddDays(i);
+
+            List<Request> userRequests = db.Requests.Where(x => x.SendingUserId == user.UserId && x.RequestType == "Time Off" && x.Status == "Manager Approved").ToList();
+            foreach (Request request in userRequests)
+            {
+                TimeSpan reStart = request.StartTimeOff.Value.TimeOfDay;
+                TimeSpan reEnd = request.EndTimeOff.Value.TimeOfDay;
+
+
+                for (DateTime date = request.StartTimeOff.Value.Date; date.Date <= request.EndTimeOff.Value.Date; date = date.AddDays(1))
+                {
+                    if (date == day.Date)
+                    {
+                        //This means he request off this day 
+                        if (reStart < shift.Start)
+                        {
+                            if (reEnd > shift.End)
+                                return true;
+                            if (reEnd > shift.Start)
+                                return true;
+                        }
+                        else
+                        {
+                            if (shift.End > reStart)
+                                return true;
+                        }
+                    }
+
+                }
+
+
+                //if ((request.StartTimeOff.Value.Date < day.Date) && (day.Date < request.EndTimeOff.Value.Date))
+                //{
+                //    return true;
+                //}
+                //else
+                //{
+                //}
+
+            }
+            return false;
         }
 
         private void AssignEmptyUserToShift(User unAssignedUser, Schedule sched, Shift shift)

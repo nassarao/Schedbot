@@ -23,11 +23,11 @@ namespace SchedBot.Controllers
     {
         private SchedBotContext db = new SchedBotContext();
 
-        
+
         // GET: Management/Requests
         public async Task<ActionResult> Index()
         {
-           
+
 
             RequestViewModel vm = new RequestViewModel();
             vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
@@ -82,9 +82,9 @@ namespace SchedBot.Controllers
         {
             Request req = db.Requests.FirstOrDefault(x => x.RequestId == requestId);
             req.Status = "Employee Approved";
-            if(User.IsInRole("Manager"))
+            if (User.IsInRole("Manager"))
                 req.Status = "Manager Approved";
-            if(req.RequestType == "Trade")
+            if (req.RequestType == "Trade")
             {
                 int orignalId = req.OriginalUSSId;
                 int tradingId = req.TradingUSSId;
@@ -94,14 +94,17 @@ namespace SchedBot.Controllers
                 trading.UserId = orignalId;
                 db.Entry(original).State = EntityState.Modified;
                 db.Entry(trading).State = EntityState.Modified;
+                await db.SaveChangesAsync();
 
             }
-            else
+            if (req.RequestType == "Time Off")
             {
-                //todo:update schedule here
+                await db.SaveChangesAsync();
+                ScheduleManager sm = new ScheduleManager();
+                sm.DropAndCreateFutureSchedule();
+
             }
-            await  db.SaveChangesAsync();
-          return  RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
