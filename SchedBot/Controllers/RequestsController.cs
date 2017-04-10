@@ -27,11 +27,17 @@ namespace SchedBot.Controllers
         // GET: Management/Requests
         public async Task<ActionResult> Index()
         {
-
-
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
-            //vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
+            if (User.IsInRole("Manager"))
+                vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
+            else {
+                string acctId = User.Identity.GetUserId();
+                User loggedIn = db.Users.FirstOrDefault(x => x.AccountId == acctId);
+
+                vm.Requests = db.Requests.Where(x => x.SendingUserId == loggedIn.UserId || x.ReceivingUserId == loggedIn.UserId).ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
+            }
+
+
 
             return View(vm);
         }
@@ -88,10 +94,14 @@ namespace SchedBot.Controllers
             {
                 int orignalId = req.OriginalUSSId;
                 int tradingId = req.TradingUSSId;
+
                 User_Shift_Schedule original = db.UserShiftSchedules.FirstOrDefault(x => x.Id == orignalId);
                 User_Shift_Schedule trading = db.UserShiftSchedules.FirstOrDefault(x => x.Id == tradingId);
-                original.UserId = tradingId;
-                trading.UserId = orignalId;
+
+                int originalUserId = original.UserId;
+                int tradingUserId = trading.UserId;
+                original.UserId = tradingUserId;
+                trading.UserId = originalUserId;
                 db.Entry(original).State = EntityState.Modified;
                 db.Entry(trading).State = EntityState.Modified;
                 await db.SaveChangesAsync();
