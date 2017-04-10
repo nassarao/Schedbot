@@ -23,15 +23,23 @@ namespace SchedBot.Controllers
     {
         private SchedBotContext db = new SchedBotContext();
 
-        
+
         // GET: Management/Requests
         public async Task<ActionResult> Index()
         {
-           
-
             RequestViewModel vm = new RequestViewModel();
-            vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
-            //vm.Requests.ForEach(x => x.SendingUser = db.Users.Find(x.SendingUserId) ?? null);
+            string acctId = User.Identity.GetUserId();
+            User loggedIn = db.Users.FirstOrDefault(x => x.AccountId == acctId);
+            vm.loggedInUserId = loggedIn.UserId;
+            if (User.IsInRole("Manager"))
+                vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
+            else
+            {
+
+                vm.Requests = db.Requests.Where(x => x.SendingUserId == loggedIn.UserId || x.ReceivingUserId == loggedIn.UserId).ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
+            }
+
+
 
             return View(vm);
         }
@@ -82,26 +90,33 @@ namespace SchedBot.Controllers
         {
             Request req = db.Requests.FirstOrDefault(x => x.RequestId == requestId);
             req.Status = "Employee Approved";
-            if(User.IsInRole("Manager"))
+            if (User.IsInRole("Manager"))
                 req.Status = "Manager Approved";
-            if(req.RequestType == "Trade")
+            if (req.RequestType == "Trade")
             {
                 int orignalId = req.OriginalUSSId;
                 int tradingId = req.TradingUSSId;
+
                 User_Shift_Schedule original = db.UserShiftSchedules.FirstOrDefault(x => x.Id == orignalId);
                 User_Shift_Schedule trading = db.UserShiftSchedules.FirstOrDefault(x => x.Id == tradingId);
-                original.UserId = tradingId;
-                trading.UserId = orignalId;
+
+                int originalUserId = original.UserId;
+                int tradingUserId = trading.UserId;
+                original.UserId = tradingUserId;
+                trading.UserId = originalUserId;
                 db.Entry(original).State = EntityState.Modified;
                 db.Entry(trading).State = EntityState.Modified;
+                await db.SaveChangesAsync();
 
             }
-            else
+            if (req.RequestType == "Time Off")
             {
-                //todo:update schedule here
+                await db.SaveChangesAsync();
+                ScheduleManager sm = new ScheduleManager();
+                sm.DropAndCreateFutureSchedule();
+
             }
-            await  db.SaveChangesAsync();
-          return  RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

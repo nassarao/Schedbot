@@ -13,8 +13,14 @@
         <div class="col-md-8 no-padding">
 
             <div class="col-md-12 no-padding">
-
+                @if (Model.UserShifts != null)
+                {
                @Html.DropDownListFor(model => model.UserShifts, Model.UserShifts, new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.DropDownList("",new List<SelectListItem>, new {@class = "form-control"})
+                }
 
             </div>
 
