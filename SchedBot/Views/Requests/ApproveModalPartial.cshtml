@@ -2,7 +2,7 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        @using (Html.BeginForm("Register", "Account", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("", "", new { area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,7 +15,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary pull-right" value="Approve Request" />
+                    <input type="button" class="btn btn-primary pull-right approveRequestConfirmBtn" value="Approve Request" />
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal" style="margin-right: 15px;">Cancel</button>
                 </div>
             </div>

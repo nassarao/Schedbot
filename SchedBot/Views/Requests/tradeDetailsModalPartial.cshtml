@@ -18,10 +18,10 @@
                                 <i class="col-md-12 col-sm-12 fa fa-5x fa-user text-center"></i>
                             </div>
                             <div class="col-md-12" style="margin-top:25px;">
-                                <label class="control-label text-center"> <b>Send Employee</b> </label>
+                                <label class="control-label text-center"> <b id="sendingUser">Send Employee</b> </label>
                             </div>
                             <div class="col-md-12">
-                                <label class="control-label"><b>Shift:</b> </label><span>&nbsp; 11/29/2016 <br /> 10:30AM - 4:30PM</span>
+                                <label class="control-label"><b>Shift:</b> </label>&nbsp;<span id="originalDate">11/29/2016</span> <br /> <span id="originalTimes">10:30AM - 4:30PM</span>
                             </div>
                         </div>
                     
@@ -34,20 +34,26 @@
                                 <i class="col-md-12 col-sm-12 fa fa-5x fa-user text-center"></i>
                             </div>
                             <div class="col-md-12" style="margin-top:25px;">
-                                <label class="control-label text-center"><b>Receive Employee</b> </label>
+                                <label class="control-label text-center"><b id="receivingUser">Receive Employee</b> </label>
                             </div>
                             <div class="col-md-12">
-                                <label class="control-label"><b>Shift:</b> </label><span>&nbsp; 11/28/2016 <br /> 4:00PM - 9:00PM</span>
+                                <label class="control-label"><b>Shift:</b> </label>&nbsp;<span id="tradingDate">11/28/2016</span> <br /> <span id="tradingTimes">4:00PM - 9:00PM</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-top:25px;">
                         <div class="col-md-12">
+                            <label class="control-label"><b>Trade Status:</b> </label>
+                        </div>
+                        <div class="col-md-12">
+                            <span id="tradeStatus"></span>
+                        </div>
+                        <div class="col-md-12">
                             <label class="control-label"><b>Trade Reason:</b> </label>
                         </div>
                         <div class="col-md-12">
-                            <span>I have a presentation on my senior design project Monday night.</span>
+                            <span id="tradeReason">I have a presentation on my senior design project Monday night.</span>
                         </div>
                     </div>
 

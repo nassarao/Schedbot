@@ -1,4 +1,5 @@
 @model SchedBot.Models.RequestViewModel
+@using SchedBot.Helpers;
 
 @{
     ViewBag.Title = "Requests";
@@ -41,15 +42,15 @@
                                 <td>@req.sending.FirstName @req.sending.LastName</td>
                                 <td>@req.requestDTO.Status</td>
                               
-                                    <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest"><i class="fa fa-2x fa-check"></i></a></td>
-                                    <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest"><i class="fa fa-2x fa-times"></i></a></td>
+                                    <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
+                                    <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
                                     @if (req.requestDTO.RequestType == "Time Off")
                                     {
                                         <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
                                     @if (req.requestDTO.RequestType == "Trade")
                                     {
-                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.ScheduleId" data-senderShiftStart="@req.original.ScheduleId" data-senderShiftEnd="@req.original.ScheduleId" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.ScheduleId" data-receiveShiftStart="@req.trading.ScheduleId" data-receiveShiftEnd="@req.trading.ScheduleId" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.GetDateTimeOfShift().ToShortDateString()" data-senderShiftStart="@Helper.TimeSpanToString(req.original.Shift.Start)" data-senderShiftEnd="@Helper.TimeSpanToString(req.original.Shift.End)" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.GetDateTimeOfShift().ToShortDateString()" data-receiveShiftStart="@Helper.TimeSpanToString(req.trading.Shift.Start)" data-receiveShiftEnd="@Helper.TimeSpanToString(req.trading.Shift.End)" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
 
                                     }
 
@@ -136,11 +137,15 @@
             var status = $(this).data('requeststatus');
             var reason = $(this).data('requestreason');
 
-            //console.log(startTime, endTime, status, reason);
-            //$('#employeeName').html(firstName + " " + lastName);
-            //$('#requestTimeSpan').html(startTime + " - " + endTime);
-            //$('#requestStatus').html(status);
-            //$('#requestReason').html(reason);
+
+            $('#sendingUser').html(senderFirstName + " " + senderLastName);
+            $('#receivingUser').html(receiverFirstName + " " + receiverLastName);
+            $('#originalDate').html(senderShiftDay);
+            $('#tradingDate').html(receiverShiftDay);
+            $('#originalTimes').html(senderShiftStart + " - " + senderShiftEnd);
+            $('#tradingTimes').html(receiverShiftStart + " - " + receiverShiftEnd);
+            $('#tradeStatus').html(status);
+            $('#tradeReason').html(reason);
 
         });
 
@@ -155,19 +160,96 @@
 
         });
 
-        $('#requestApprove').click(function () {
+        var itemToApprove;
+        $('.approveRequest').click(function () {
 
-            console.info("made inside new request click");
+            itemToApprove = $(this).data("requestid")
             $('#requestApproveModal').modal('show');
 
         });
 
-        $('#requestDeny').click(function () {
+        $(".approveRequestConfirmBtn").click(function () {
 
-            console.info("made inside new request click");
+            $.ajax({
+                url: '@Url.Action("ApproveRequest", "Requests")'
+            , type: "POST"
+                , data: {
+                    requestId: itemToApprove
+            }
+            , success: function (response) {
+                $('#requestApproveModal').modal('toggle');
+
+
+                swal({
+                    title: 'Success!',
+                    text: "You successfully approved this request!",
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                }).then(function () {
+                    location.reload();
+                })
+
+            }
+            , error: function (response) {
+                $('#requestApproveModal').modal('toggle');
+                console.log(response);
+                sweetAlert("Oops...", "Something went wrong!", "error");
+            }
+        });
+
+
+        });
+
+
+        var itemToDeny;
+        $('.denyRequest').click(function () {
+
+            itemToDeny = $(this).data("requestid")
             $('#requestDenyModal').modal('show');
 
         });
+
+
+
+        $(".denyRequestConfirmBtn").click(function () {
+
+            var denyReason = $(".denyReason").val();
+            console.log("Deny Reason", denyReason);
+
+            $.ajax({
+            url: '@Url.Action("DenyRequest", "Requests")'
+            , type: "POST"
+                , data: {
+                    requestId: itemToDeny,
+                    reason: denyReason
+            }
+            , success: function (response) {
+                $('#requestDenyModal').modal('toggle');
+
+
+                swal({
+                    title: 'Success!',
+                    text: "You successfully denied this request!",
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK'
+                }).then(function () {
+                    location.reload();
+                })
+
+            }
+            , error: function (response) {
+                $('#requestDenyModal').modal('toggle');
+                console.log(response);
+                sweetAlert("Oops...", "Something went wrong!", "error");
+            }
+        });
+
+
+        });
+
+
 
         $('#requestDetails').click(function () {
 
@@ -189,59 +271,7 @@
             var dynamicHTML = {};
             var url = $("#changingHtml").data("request-url");
             if (requestType == "trade") {
-                //               dynamicHTML = '   <div>  ' +
-                //'                               <div class="form-group">  ' +
-                //'                                   <div class="col-md-4">  ' +
-                //'                                       <label class="control-label">Current Shift:</label>  ' +
-                //'                                   </div>  ' +
-                //'                                   <div class="col-md-8 no-padding">  ' +
-                //'                                       <div class="col-md-12 no-padding">  ' +
-                //'                                           <select class="form-control" id="newRequestCurrentShift">  ' +
-                //'                                               <option value selected disabled></option>  ' +
-                //'                                               <option value="Mon">Mon</option>  ' +
-                //'                                               <option value="Tues">Tues</option>  ' +
-                //'                                           </select>  ' +
-                //'                                       </div>  ' +
-                //'     ' +
-                //'                                   </div>  ' +
-                //'                               </div>  ' +
-                //'                           </div>  ' +
-                //'     ' +
-                //'                           <div>  ' +
-                //'                               <div class="form-group">  ' +
-                //'                                   <div class="col-md-4">  ' +
-                //'                                       <label class="control-label">Employee to Trade:</label>  ' +
-                //'                                   </div>  ' +
-                //'                                   <div class="col-md-8 no-padding">  ' +
-                //'                                       <div class="col-md-12 no-padding">  ' +
-                //'                                           <select class="form-control" id="newRequestEmployeeToTrade">  ' +
-                //'                                               <option value selected disabled></option>  ' +
-                //'                                               <option value="Ahmad">Ahmad</option>  ' +
-                //'                                               <option value="Adam">Adam</option>  ' +
-                //'                                           </select>  ' +
-                //'                                       </div>  ' +
-                //'     ' +
-                //'                                   </div>  ' +
-                //'                               </div>  ' +
-                //'                           </div>  ' +
-                //'                           <div>  ' +
-                //'                               <div class="form-group">  ' +
-                //'                                   <div class="col-md-4">  ' +
-                //'                                       <label class="control-label">Shift To Trade For:</label>  ' +
-                //'                                   </div>  ' +
-                //'                                   <div class="col-md-8 no-padding">  ' +
-                //'                                       <div class="col-md-12 no-padding">  ' +
-                //'                                           <select class="form-control" id="newRequestTradeForShift">  ' +
-                //'                                               <option value selected disabled></option>  ' +
-                //'                                               <option value="Mon">Mon (Shift Hours)</option>  ' +
-                //'                                               <option value="Tues">Tues (Shift Hours)</option>  ' +
-                //'                                           </select>  ' +
-                //'                                       </div>  ' +
-                //'     ' +
-                //'                                   </div>  ' +
-                //'                               </div>  ' +
-                //'                          </div>  ';
-                //               $("#newRequestHTML").html(dynamicHTML);
+
                 $("#changingHtml").load(url);
                 $("#timeOffRange").hide();
             }
