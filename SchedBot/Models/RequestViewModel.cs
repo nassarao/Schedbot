@@ -16,7 +16,7 @@ namespace SchedBot.Models
 
 
         public string RequestType { get; set; }
-
+        public int loggedInUserId { get; set; }
         public List<SelectListItem> Users { get; set; }
         public List<SelectListItem> ReqTypes { get; set; }
         public List<SelectListItem> UserShifts { get; set; }

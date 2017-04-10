@@ -28,11 +28,13 @@ namespace SchedBot.Controllers
         public async Task<ActionResult> Index()
         {
             RequestViewModel vm = new RequestViewModel();
+            string acctId = User.Identity.GetUserId();
+            User loggedIn = db.Users.FirstOrDefault(x => x.AccountId == acctId);
+            vm.loggedInUserId = loggedIn.UserId;
             if (User.IsInRole("Manager"))
                 vm.Requests = db.Requests.ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
-            else {
-                string acctId = User.Identity.GetUserId();
-                User loggedIn = db.Users.FirstOrDefault(x => x.AccountId == acctId);
+            else
+            {
 
                 vm.Requests = db.Requests.Where(x => x.SendingUserId == loggedIn.UserId || x.ReceivingUserId == loggedIn.UserId).ToList().Select(x => new Models.Requests.RequestDetailsViewModel(x, db)).ToList();
             }
