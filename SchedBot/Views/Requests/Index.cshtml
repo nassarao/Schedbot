@@ -41,15 +41,47 @@
                                 <td class="col-md-2">@req.requestDTO.RequestType </td>
                                 <td>@req.sending.FirstName @req.sending.LastName</td>
                                 <td>@req.requestDTO.Status</td>
-                              
-                                    <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
-                                    <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
+
+
+
                                     @if (req.requestDTO.RequestType == "Time Off")
                                     {
-                                        <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="font-dark viewTimeOffDetails" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+                                        String timeOffApproveClass = "approveRequest";
+                                        String timeOffDenyClass = "denyRequest";
+                                        if (req.requestDTO.Status != "Pending" || !User.IsInRole("Manager"))
+                                        {
+                                            timeOffApproveClass = timeOffApproveClass + " disabled-link font-grey";
+                                            timeOffDenyClass = timeOffDenyClass + " disabled-link font-grey";
+                                        }
+                                        else
+                                        {
+                                            timeOffApproveClass = timeOffApproveClass + " font-dark";
+                                            timeOffDenyClass = timeOffDenyClass + " font-dark";
+                                        }
+                                                <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="@timeOffApproveClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
+                                                <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="@timeOffDenyClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
+                                                <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="viewTradeDetails font-dark" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
                                     @if (req.requestDTO.RequestType == "Trade")
                                     {
+                                        String tradeApproveClass = "approveRequest";
+                                        String tadeDenyClass = "denyRequest";
+                                        String signedInUser = User.Identity.Name;
+
+                                        if (req.requestDTO.Status == "Pending")
+                                        {
+                                            //only trade recipient should have buttons
+                                            tradeApproveClass = tradeApproveClass + " disabled-link font-grey";
+                                        }
+                                        else if(req.requestDTO.Status == "Employee Approved")
+                                        {
+                                            //only manager should have buttons
+                                        }
+                                        {
+                                            tradeApproveClass = tradeApproveClass + " font-dark";
+                                        }
+                                        <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="font-dark approveRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
+                                        <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="font-dark denyRequest" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
                                         <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.GetDateTimeOfShift().ToShortDateString()" data-senderShiftStart="@Helper.TimeSpanToString(req.original.Shift.Start)" data-senderShiftEnd="@Helper.TimeSpanToString(req.original.Shift.End)" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.GetDateTimeOfShift().ToShortDateString()" data-receiveShiftStart="@Helper.TimeSpanToString(req.trading.Shift.Start)" data-receiveShiftEnd="@Helper.TimeSpanToString(req.trading.Shift.End)" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
 
                                     }
