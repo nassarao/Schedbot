@@ -58,7 +58,7 @@ namespace SchedBot.Controllers
                     db.Users.Add(vm.NewUser);
                     await db.SaveChangesAsync();
 
-                    return RedirectToAction("Edit", "Users", new { id = vm.NewUser.UserId, area = "Management" });
+                    return RedirectToAction("Edit", "Users", new { id = vm.NewUser.UserId, area = "" });
                 }
                 else
                 {
