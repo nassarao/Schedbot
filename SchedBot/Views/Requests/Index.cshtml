@@ -61,7 +61,7 @@
                                         }
                                                 <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="@timeOffApproveClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
                                                 <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="@timeOffDenyClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
-                                                <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="viewTradeDetails font-dark" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+                                                <td class="col-md-1 text-center"><a href="#" id="viewTimeOffDetails" class="viewTimeOffDetails font-dark" data-toggle="modal" data-target="#timeOffDetailsModal" data-firstName="@req.sending.FirstName" data-lastName="@req.sending.LastName" data-startTimeOff="@req.requestDTO.StartTimeOff" data-endTimeOff="@req.requestDTO.EndTimeOff" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status" data-denyExplanation="@req.requestDTO.StatusExplanation"><i class="fa fa-2x fa-commenting-o"></i></a></td>
                                     }
                                     @if (req.requestDTO.RequestType == "Trade")
                                     {
@@ -104,7 +104,7 @@
                                         }
                                         <td class="col-md-1 text-center"><a href="#" id="requestApprove" class="@tradeApproveClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-check"></i></a></td>
                                         <td class="col-md-1 text-center"><a href="#" id="requestDeny" class="@tradeDenyClass" data-requestId="@req.requestDTO.RequestId"><i class="fa fa-2x fa-times"></i></a></td>
-                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.GetDateTimeOfShift().ToShortDateString()" data-senderShiftStart="@Helper.TimeSpanToString(req.original.Shift.Start)" data-senderShiftEnd="@Helper.TimeSpanToString(req.original.Shift.End)" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.GetDateTimeOfShift().ToShortDateString()" data-receiveShiftStart="@Helper.TimeSpanToString(req.trading.Shift.Start)" data-receiveShiftEnd="@Helper.TimeSpanToString(req.trading.Shift.End)" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status"><i class="fa fa-2x fa-commenting-o"></i></a></td>
+                                        <td class="col-md-1 text-center"><a href="#" id="viewTradeDetails" class="font-dark viewTradeDetails" data-toggle="modal" data-target="#tradeDetailsModal" data-senderFirstName="@req.sending.FirstName" data-senderLastName="@req.sending.LastName" data-senderShiftDay="@req.original.GetDateTimeOfShift().ToShortDateString()" data-senderShiftStart="@Helper.TimeSpanToString(req.original.Shift.Start)" data-senderShiftEnd="@Helper.TimeSpanToString(req.original.Shift.End)" data-receiveFirstName="@req.receiving.FirstName" data-receiveLastName="@req.receiving.LastName" data-receiveShiftDay="@req.trading.GetDateTimeOfShift().ToShortDateString()" data-receiveShiftStart="@Helper.TimeSpanToString(req.trading.Shift.Start)" data-receiveShiftEnd="@Helper.TimeSpanToString(req.trading.Shift.End)" data-requestReason="@req.requestDTO.Reason" data-requestStatus="@req.requestDTO.Status" data-denyExplanation="@req.requestDTO.StatusExplanation"><i class="fa fa-2x fa-commenting-o"></i></a></td>
 
                                     }
 
@@ -166,13 +166,20 @@
             var endTime = $(this).data('endtimeoff');
             var status = $(this).data('requeststatus');
             var reason = $(this).data('requestreason');
+            var denyReason = $(this).data('denyexplanation');
 
             console.log(startTime, endTime, status, reason);
             $('#employeeName').html(firstName + " " + lastName);
             $('#requestTimeSpan').html(startTime + " - " + endTime);
             $('#requestStatus').html(status);
             $('#requestReason').html(reason);
-
+            if (denyReason) {
+                $('#denyReason').html(denyReason);
+            }
+            else {
+                $('#denyReasonDiv').hide();
+                $('#denyLabel').hide()
+            }
         });
 
 
@@ -190,6 +197,8 @@
             var receiverShiftDay = $(this).data('receiveshiftday');
             var status = $(this).data('requeststatus');
             var reason = $(this).data('requestreason');
+            var denyReason = $(this).data('denyexplanation');
+            console.log("Deny reason", denyReason);
 
 
             $('#sendingUser').html(senderFirstName + " " + senderLastName);
@@ -200,7 +209,13 @@
             $('#tradingTimes').html(receiverShiftStart + " - " + receiverShiftEnd);
             $('#tradeStatus').html(status);
             $('#tradeReason').html(reason);
-
+            if (denyReason) {
+                $('#denyReason').html(denyReason);
+            }
+            else {
+                $('#denyReasonDiv').hide();
+                $('#denyLabel').hide()
+            }
         });
 
 
