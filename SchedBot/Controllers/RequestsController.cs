@@ -128,7 +128,7 @@ namespace SchedBot.Controllers
 
             if (User.IsInRole("Manager"))
                 req.Status = "Manager Denied";
-            req.Reason = reason;
+            req.StatusExplanation = reason;
             db.Entry(req).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
